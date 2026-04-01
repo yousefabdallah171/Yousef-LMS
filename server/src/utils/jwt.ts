@@ -1,9 +1,12 @@
+import { randomUUID } from 'node:crypto'
 import jwt from 'jsonwebtoken'
 import type { SignOptions } from 'jsonwebtoken'
 
 export type AccessTokenPayload = {
   sub: string
   role: 'admin' | 'student'
+  name?: string
+  email?: string
 }
 
 export type RefreshTokenPayload = {
@@ -21,8 +24,13 @@ function getJwtSecret() {
   return secret
 }
 
-export function signAccessToken(userId: string, role: 'admin' | 'student') {
-  return jwt.sign({ role }, getJwtSecret(), {
+export function signAccessToken(
+  userId: string,
+  role: 'admin' | 'student',
+  name?: string,
+  email?: string,
+) {
+  return jwt.sign({ role, name, email }, getJwtSecret(), {
     subject: userId,
     expiresIn: (process.env.JWT_ACCESS_EXPIRY || '15m') as SignOptions['expiresIn'],
   })
@@ -31,6 +39,7 @@ export function signAccessToken(userId: string, role: 'admin' | 'student') {
 export function signRefreshToken(userId: string) {
   return jwt.sign({ type: 'refresh' }, getJwtSecret(), {
     subject: userId,
+    jwtid: randomUUID(),
     expiresIn: (process.env.JWT_REFRESH_EXPIRY || '7d') as SignOptions['expiresIn'],
   })
 }
