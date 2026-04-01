@@ -7,8 +7,13 @@ import {
   setAuthTokens,
 } from './tokenStore'
 
+const apiVersion = (import.meta.env.VITE_API_VERSION || 'v1').replace(/^\/+|\/+$/g, '')
+const configuredApiUrl = import.meta.env.VITE_API_URL?.trim()
+
 const apiClient = axios.create({
-  baseURL: '/api/v1',
+  baseURL: configuredApiUrl
+    ? new URL(`/api/${apiVersion}`, configuredApiUrl).toString()
+    : `/api/${apiVersion}`,
 })
 
 let refreshRequest: Promise<string | null> | null = null

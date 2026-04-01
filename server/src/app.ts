@@ -30,7 +30,12 @@ export function createApp() {
   app.use('/api/v1/auth', authRateLimiter)
   app.use('/api/v1', apiRouter)
 
-  app.use((err: unknown, _req: express.Request, res: express.Response) => {
+  app.use((
+    err: unknown,
+    _req: express.Request,
+    res: express.Response,
+    _next: express.NextFunction,
+  ) => {
     if (process.env.NODE_ENV !== 'test') {
       console.error(err)
     }
