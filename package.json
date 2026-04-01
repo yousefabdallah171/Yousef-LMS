@@ -18,7 +18,7 @@
     "type-check": "npm run type-check --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "format": "prettier --write .",
-    "test": "vitest run --passWithNoTests",
+    "test": "npm run test --workspaces --if-present",
     "docker:build": "docker compose build",
     "docker:up": "docker compose up --build",
     "docker:down": "docker compose down",
