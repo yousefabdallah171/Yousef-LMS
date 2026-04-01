@@ -1,0 +1,129 @@
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  display: grid;
+  gap: 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+}
+
+.hero-card,
+.status-card,
+.command-card {
+  background: var(--color-surface-high);
+  border: 1px solid var(--color-ghost-border);
+  border-radius: var(--radius-modal);
+  box-shadow: var(--shadow-ambient);
+  backdrop-filter: var(--blur-glass);
+}
+
+.hero-card {
+  padding: 32px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--color-surface-low);
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.hero-card h1,
+.command-card h2,
+.status-card h2 {
+  margin: 0;
+}
+
+.hero-card h1 {
+  margin-top: 16px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.hero-card p,
+.status-card p,
+.command-card li {
+  color: var(--color-muted);
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  padding: 12px 18px;
+  border-radius: var(--radius-button);
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.button-primary {
+  background: var(--gradient-primary);
+  color: #ffffff;
+}
+
+.button-secondary {
+  background: transparent;
+  border-color: var(--color-ghost-border);
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.status-card,
+.command-card {
+  padding: 24px;
+}
+
+.command-card ul {
+  margin: 16px 0 0;
+  padding: 0 20px 0 0;
+}
+
+code {
+  font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+}
+
+@media (max-width: 900px) {
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding-top: 24px;
+  }
+
+  .hero-card,
+  .status-card,
+  .command-card {
+    padding: 20px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

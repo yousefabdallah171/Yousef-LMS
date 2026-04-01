@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#ffdad6",
+              "surface-container-lowest": "#080e1d",
+              "secondary-fixed-dim": "#89ceff",
+              "outline": "#958da1",
+              "inverse-on-surface": "#2a3040",
+              "on-tertiary-fixed-variant": "#743400",
+              "background": "#0d1322",
+              "on-primary-fixed": "#250059",
+              "tertiary-container": "#8f4200",
+              "on-secondary-container": "#00344e",
+              "on-primary-container": "#dac5ff",
+              "on-tertiary": "#522300",
+              "surface-container-high": "#242a3a",
+              "on-tertiary-container": "#ffc19e",
+              "tertiary-fixed": "#ffdbc8",
+              "on-tertiary-fixed": "#321300",
+              "on-surface": "#dde2f8",
+              "inverse-primary": "#7331df",
+              "error": "#ffb4ab",
+              "primary-container": "#6d28d9",
+              "on-primary-fixed-variant": "#5b00c5",
+              "primary": "#d3bbff",
+              "error-container": "#93000a",
+              "tertiary-fixed-dim": "#ffb68b",
+              "surface-variant": "#2f3445",
+              "surface-container": "#191f2f",
+              "secondary": "#89ceff",
+              "on-surface-variant": "#ccc3d7",
+              "surface-container-low": "#151b2b",
+              "on-secondary-fixed-variant": "#004c6e",
+              "on-secondary-fixed": "#001e2f",
+              "on-secondary": "#00344d",
+              "surface-bright": "#33394a",
+              "secondary-container": "#00a2e6",
+              "primary-fixed": "#ebddff",
+              "inverse-surface": "#dde2f8",
+              "surface-tint": "#d3bbff",
+              "on-primary": "#3f008d",
+              "on-background": "#dde2f8",
+              "surface-container-highest": "#2f3445",
+              "surface": "#0d1322",
+              "on-error": "#690005",
+              "secondary-fixed": "#c9e6ff",
+              "tertiary": "#ffb68b",
+              "primary-fixed-dim": "#d3bbff",
+              "outline-variant": "#4a4455",
+              "surface-dim": "#0d1322"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(47, 52, 69, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(211, 187, 255, 0.15);
+        }
+        body {
+            background-color: #0d1322;
+            color: #dde2f8;
+        }
+    </style>
+</head>
+<body class="font-body antialiased min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-[#0d1322]/80 backdrop-blur-md font-['Inter'] antialiased text-slate-200 shadow-[0_8px_32px_rgba(109,40,217,0.08)]">
+<div class="flex flex-row-reverse justify-between items-center px-8 h-20 w-full">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-bold tracking-tight text-white">Yousef LMS</span>
+</div>
+<div class="hidden md:flex flex-row-reverse items-center gap-8">
+<a class="text-slate-400 hover:text-slate-100 transition-all duration-300" href="#">الرئيسية</a>
+<a class="text-slate-400 hover:text-slate-100 transition-all duration-300" href="#">مسارات التعلم</a>
+<a class="text-slate-400 hover:text-slate-100 transition-all duration-300" href="#">المجتمع</a>
+<a class="text-slate-400 hover:text-slate-100 transition-all duration-300" href="#">المدونة</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-white/5 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined text-slate-300">notifications</span>
+</button>
+<button class="p-2 hover:bg-white/5 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined text-slate-300">grid_view</span>
+</button>
+<div class="h-10 w-10 rounded-full border border-primary-container overflow-hidden">
+<img alt="الملف الشخصي للمستخدم" data-alt="professional portrait of a middle eastern male developer with clean haircut and glasses, soft studio lighting, tech background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqjebvzkr_tBhYn5S5kGymKPLdB76kFaH-WHL_sGJfm0oIzNIoBm-NqWKwrz1eUe4YgHtLJniDlVLRzTKUAbDDU3oq2DWTgG8xbvI4szgcm-APXdJsLW2HqFXtfc2p8epjF0d8w3qGrHMHLXnh-efQdyKXfLJKgbZVukBiMIT6PQfMJp2cIWrZ3Z4XpczKU501Hf0cE4WpYgc8He4FeJpGI5cxvjgRW60IqvIdMVRu-oyeUrJzq_0AcJqeY32AZEhRR35UMYOz3qnG"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-4">
+<div class="max-w-[760px] mx-auto space-y-8">
+<!-- Breadcrumbs / Header -->
+<div class="flex items-center justify-between">
+<div>
+<h1 class="text-3xl font-bold text-on-surface mb-2">تأكيد عملية الدفع</h1>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="text-sm">سلة المشتريات</span>
+<span class="material-symbols-outlined text-xs">chevron_left</span>
+<span class="text-sm">الدفع</span>
+<span class="material-symbols-outlined text-xs">chevron_left</span>
+<span class="text-sm font-semibold text-primary">رفع إيصال الدفع</span>
+</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant hover:text-white transition-colors group">
+<span class="material-symbols-outlined group-active:translate-x-1 transition-transform">arrow_forward</span>
+<span class="font-medium">العودة للدفع</span>
+</button>
+</div>
+<!-- Course Summary Card -->
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center gap-6">
+<div class="w-32 h-20 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="high-tech programming workspace with neon purple lighting, dual monitors displaying complex code and data visualizations" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTi3tiKN2PKmUv9StsbwHp-vUokKERLg1zxRjEy_XCbs7HgNxsb5Jm5C8-WP6fin3RU3HjVsZVhls1l8ts0zo03sVggxwPEvWCfO4DGUPspuxVr3ir0EkyMODtD2OfPR61nQcN1hgPJ0BfMi4uck9fcZSaWy0LXgFW1AkvaqKkROgOKKfPqxeVyOdLmAUcZmhUH0JB2uUXXh0xwoAmcjw5lZiIGj4Y1HJwOBMgkr_e2Mhj7ezRq5AG5NiToIWnPu51YNNVN0Pkr0ki"/>
+</div>
+<div class="flex-grow">
+<h3 class="text-lg font-bold text-on-surface">دورة تطوير تطبيقات الويب المتكاملة - Full Stack Web Development</h3>
+<p class="text-secondary font-semibold text-xl mt-1">1,500 EGP</p>
+</div>
+<div class="bg-primary/10 px-4 py-2 rounded-lg border border-primary/20">
+<span class="text-primary text-sm font-bold">بانتظار الإيصال</span>
+</div>
+</div>
+<!-- Main Upload Section -->
+<div class="bg-surface-container-high rounded-xl overflow-hidden shadow-2xl">
+<div class="p-8 space-y-8">
+<div class="text-center space-y-2">
+<h2 class="text-2xl font-bold text-white">إثبات الدفع</h2>
+<p class="text-on-surface-variant">يرجى رفع لقطة شاشة لإتمام التحويل أو ملف PDF الخاص بالإيصال</p>
+</div>
+<!-- Upload Zone -->
+<div class="relative group cursor-pointer">
+<div class="border-2 border-dashed border-outline-variant group-hover:border-primary transition-colors rounded-2xl p-12 flex flex-col items-center justify-center bg-surface-container-highest/30 space-y-4">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">cloud_upload</span>
+</div>
+<div class="text-center">
+<p class="text-lg font-semibold text-white">اسحب الملف هنا أو اضغط للاختيار</p>
+<p class="text-sm text-on-surface-variant mt-1">JPG, PNG, PDF (الحد الأقصى 5 ميجابايت)</p>
+</div>
+</div>
+<input class="absolute inset-0 opacity-0 cursor-pointer" type="file"/>
+</div>
+<!-- Preview / Progress State -->
+<div class="space-y-4">
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div>
+<p class="text-sm font-medium text-white">payment_receipt_jan_2024.pdf</p>
+<p class="text-xs text-on-surface-variant">2.4 MB</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full hover:bg-error/10 hover:text-error text-on-surface-variant flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-medium px-1">
+<span class="text-secondary">75% مكتمل</span>
+<span class="text-on-surface-variant">يتم الرفع...</span>
+</div>
+<div class="h-2 w-full bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[75%] rounded-full transition-all duration-500 shadow-[0_0_12px_rgba(14,165,233,0.4)]"></div>
+</div>
+</div>
+</div>
+<!-- Note -->
+<div class="bg-primary-container/20 border border-primary/20 p-4 rounded-xl flex gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-sm text-primary-fixed-dim leading-relaxed">تستغرق عملية المراجعة اليدوية للطلب ما بين 12 إلى 24 ساعة عمل. سيتم تفعيل الدورة فور التأكد من صحة التحويل.</p>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="bg-surface-container-highest/50 px-8 py-6 flex items-center justify-between gap-4">
+<button class="px-8 py-4 bg-primary-container text-on-primary font-bold rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 shadow-lg shadow-primary/20">
+                        إرسال الطلب
+                        <span class="material-symbols-outlined">send</span>
+</button>
+<button class="px-6 py-4 text-on-surface-variant hover:text-white font-medium transition-colors border border-transparent hover:border-outline-variant rounded-lg">
+                        العودة للتعليمات
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-12 border-t border-white/5 bg-[#0d1322] font-['Inter'] text-sm text-slate-500">
+<div class="flex flex-col md:flex-row-reverse justify-between items-center max-w-7xl mx-auto px-8 gap-6">
+<div class="font-bold text-slate-200">يوسف LMS</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-slate-500 hover:text-white transition-colors" href="#">الشروط والأحكام</a>
+<a class="text-slate-500 hover:text-white transition-colors" href="#">سياسة الخصوصية</a>
+<a class="text-slate-500 hover:text-white transition-colors" href="#">مركز المساعدة</a>
+<a class="text-slate-500 hover:text-white transition-colors" href="#">اتصل بنا</a>
+</div>
+<div class="opacity-80 hover:opacity-100 transition-opacity">© 2024 يوسف LMS. جميع الحقوق محفوظة.</div>
+</div>
+</footer>
+</body></html>

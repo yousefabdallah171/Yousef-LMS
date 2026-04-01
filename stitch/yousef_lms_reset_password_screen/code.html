@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1322; /* Surface Dim from Design System */
+        }
+        .glass-panel {
+            background: rgba(25, 31, 47, 0.6); /* Surface Container */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-secondary-fixed-variant": "#004c6e",
+                "tertiary-container": "#8f4200",
+                "inverse-primary": "#7331df",
+                "secondary-container": "#00a2e6",
+                "on-primary": "#3f008d",
+                "secondary": "#89ceff",
+                "on-surface": "#dde2f8",
+                "surface-container-high": "#242a3a",
+                "outline-variant": "#4a4455",
+                "on-tertiary": "#522300",
+                "surface-bright": "#33394a",
+                "outline": "#958da1",
+                "on-error-container": "#ffdad6",
+                "primary": "#d3bbff",
+                "inverse-surface": "#dde2f8",
+                "surface-variant": "#2f3445",
+                "surface-tint": "#d3bbff",
+                "primary-container": "#6d28d9",
+                "on-tertiary-container": "#ffc19e",
+                "on-surface-variant": "#ccc3d7",
+                "on-background": "#dde2f8",
+                "surface-dim": "#0d1322",
+                "secondary-fixed-dim": "#89ceff",
+                "on-secondary-container": "#00344e",
+                "error-container": "#93000a",
+                "on-tertiary-fixed-variant": "#743400",
+                "on-secondary": "#00344d",
+                "on-primary-container": "#dac5ff",
+                "on-primary-fixed-variant": "#5b00c5",
+                "on-tertiary-fixed": "#321300",
+                "tertiary-fixed-dim": "#ffb68b",
+                "tertiary": "#ffb68b",
+                "surface": "#0d1322",
+                "primary-fixed": "#ebddff",
+                "inverse-on-surface": "#2a3040",
+                "surface-container-lowest": "#080e1d",
+                "background": "#0d1322",
+                "surface-container": "#191f2f",
+                "surface-container-highest": "#2f3445",
+                "error": "#ffb4ab",
+                "tertiary-fixed": "#ffdbc8",
+                "secondary-fixed": "#c9e6ff",
+                "surface-container-low": "#151b2b",
+                "on-secondary-fixed": "#001e2f",
+                "on-primary-fixed": "#250059",
+                "on-error": "#690005",
+                "primary-fixed-dim": "#d3bbff"
+              },
+              fontFamily: {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+      </script>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6 selection:bg-primary-container selection:text-white">
+<!-- Top Navigation Anchor (Shared Component Mapping) -->
+<header class="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50">
+<button aria-label="Toggle dark mode" class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all duration-300">
+<span class="material-symbols-outlined text-2xl">dark_mode</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-[440px] z-10">
+<!-- Auth Card -->
+<div class="glass-panel rounded-xl p-10 shadow-2xl relative overflow-hidden group">
+<!-- Asymmetric Glow Accent -->
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-primary-container opacity-20 blur-[80px] rounded-full pointer-events-none"></div>
+<!-- Logo Area (Top Right) -->
+<div class="flex justify-start mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<span class="text-2xl font-bold tracking-tighter text-on-surface">Luminescent Void</span>
+</div>
+</div>
+<!-- Header -->
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-on-surface mb-3 tracking-tight">تعيين كلمة مرور جديدة</h1>
+<p class="text-on-surface-variant leading-relaxed">يرجى اختيار كلمة مرور قوية وفريدة لحماية حسابك.</p>
+</div>
+<!-- Form -->
+<form class="space-y-6">
+<!-- New Password Field -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-on-surface text-right" for="new_password">كلمة المرور الجديدة</label>
+<div class="relative group">
+<input aria-required="true" class="w-full h-12 bg-surface-container-high border-none rounded-xl px-4 pl-12 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container transition-all duration-200" id="new_password" placeholder="••••••••" type="password"/>
+<button aria-label="Show password" class="absolute left-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<!-- Strength Indicator (Segmented) -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs font-medium">
+<span class="text-secondary">قوية جداً</span>
+<span class="text-on-surface-variant">قوة كلمة المرور</span>
+</div>
+<div class="flex gap-1.5 h-1.5">
+<div class="flex-1 rounded-full bg-error h-full"></div>
+<div class="flex-1 rounded-full bg-tertiary h-full"></div>
+<div class="flex-1 rounded-full bg-secondary h-full"></div>
+<div class="flex-1 rounded-full bg-secondary h-full shadow-[0_0_8px_rgba(137,206,255,0.4)]"></div>
+</div>
+</div>
+<!-- Confirm Password Field -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-on-surface text-right" for="confirm_password">تأكيد كلمة المرور الجديدة</label>
+<div class="relative">
+<input aria-required="true" class="w-full h-12 bg-surface-container-high border-none rounded-xl px-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container transition-all duration-200" id="confirm_password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Action Button (Signature Gradient) -->
+<button class="w-full h-14 bg-gradient-to-br from-primary-container to-[#5B21B6] text-on-primary-container font-bold text-lg rounded-xl shadow-xl shadow-primary-container/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 mt-4" type="submit">
+                    حفظ كلمة المرور
+                </button>
+<!-- Footer Link -->
+<div class="pt-4 text-center">
+<a class="text-secondary hover:text-secondary-fixed text-sm font-medium transition-colors inline-flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform">arrow_forward</span>
+                        العودة إلى تسجيل الدخول
+                    </a>
+</div>
+</form>
+</div>
+<!-- System Status / Feedback Toast (AI Style Annotation) -->
+<div class="mt-8 flex items-center justify-center">
+<div class="glass-panel border-t border-outline-variant/15 px-4 py-2 rounded-full flex items-center gap-3">
+<span class="flex h-2 w-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-xs text-on-surface-variant font-medium">نظام الحماية نشط</span>
+</div>
+</div>
+</main>
+<!-- Visual Embellishment: Background Shapes -->
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-container/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-secondary/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+</body></html>

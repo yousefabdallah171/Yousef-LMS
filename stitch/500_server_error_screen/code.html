@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#2f3445",
+              "surface-container": "#191f2f",
+              "on-background": "#dde2f8",
+              "secondary-fixed": "#c9e6ff",
+              "surface-container-high": "#242a3a",
+              "on-primary-fixed-variant": "#5b00c5",
+              "on-secondary-fixed": "#001e2f",
+              "inverse-primary": "#7331df",
+              "surface-bright": "#33394a",
+              "surface-container-low": "#151b2b",
+              "on-surface-variant": "#ccc3d7",
+              "outline": "#958da1",
+              "on-tertiary-fixed": "#321300",
+              "on-secondary": "#00344d",
+              "on-primary-fixed": "#250059",
+              "on-primary-container": "#dac5ff",
+              "surface": "#0d1322",
+              "surface-container-lowest": "#080e1d",
+              "error-container": "#93000a",
+              "outline-variant": "#4a4455",
+              "on-error": "#690005",
+              "on-tertiary-container": "#ffc19e",
+              "on-tertiary": "#522300",
+              "tertiary": "#ffb68b",
+              "tertiary-fixed-dim": "#ffb68b",
+              "primary-fixed": "#ebddff",
+              "tertiary-container": "#8f4200",
+              "secondary-container": "#00a2e6",
+              "primary-container": "#6d28d9",
+              "primary-fixed-dim": "#d3bbff",
+              "on-error-container": "#ffdad6",
+              "on-surface": "#dde2f8",
+              "surface-dim": "#0d1322",
+              "tertiary-fixed": "#ffdbc8",
+              "error": "#ffb4ab",
+              "surface-container-highest": "#2f3445",
+              "on-secondary-fixed-variant": "#004c6e",
+              "inverse-on-surface": "#2a3040",
+              "secondary-fixed-dim": "#89ceff",
+              "inverse-surface": "#dde2f8",
+              "on-primary": "#3f008d",
+              "surface-tint": "#d3bbff",
+              "on-secondary-container": "#00344e",
+              "background": "#0d1322",
+              "on-tertiary-fixed-variant": "#743400",
+              "primary": "#d3bbff",
+              "secondary": "#89ceff"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0d1322;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface overflow-hidden">
+<!-- TopAppBar Mapping -->
+<header class="fixed top-0 w-full z-50 bg-gradient-to-b from-[#0d1322] to-transparent shadow-[0_32px_64px_rgba(109,40,217,0.08)] flex flex-row-reverse justify-between items-center px-8 py-4 backdrop-blur-xl">
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold tracking-tight text-slate-50">Luminescent Void</span>
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:text-white transition-colors duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="min-h-screen flex items-center justify-center px-6 relative">
+<!-- Abstract Background Glows -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-container/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-secondary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- Error Card (The Panel) -->
+<div class="relative z-10 w-full max-w-[520px] bg-surface-container-high rounded-xl p-10 text-center shadow-2xl border border-outline-variant/15 backdrop-blur-sm">
+<!-- Warning Icon Section -->
+<div class="flex justify-center mb-8">
+<div class="w-20 h-20 rounded-full bg-[#F59E0B]/10 flex items-center justify-center relative">
+<div class="absolute inset-0 rounded-full border-2 border-[#F59E0B]/20 animate-pulse"></div>
+<span class="material-symbols-outlined text-[#F59E0B] text-4xl" data-icon="report">report</span>
+</div>
+</div>
+<!-- Typography Content -->
+<div class="space-y-4 mb-10">
+<h1 class="text-3xl font-extrabold text-on-surface tracking-tight leading-tight">
+                    عذراً، حدث خطأ غير متوقع
+                </h1>
+<p class="text-slate-400 text-lg leading-relaxed max-w-md mx-auto">
+                    نحن نعمل على إصلاح المشكلة حالياً. يرجى المحاولة مرة أخرى بعد قليل.
+                </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-4">
+<button class="w-full py-4 bg-gradient-to-br from-primary-container to-[#6D28D9]/80 text-white font-bold rounded-lg shadow-lg hover:shadow-primary-container/20 transition-all duration-300 active:scale-95">
+                    إعادة المحاولة
+                </button>
+<button class="w-full py-4 bg-transparent border border-outline-variant/30 text-on-surface font-medium rounded-lg hover:bg-surface-container-highest transition-all duration-300 active:scale-95">
+                    العودة للرئيسية
+                </button>
+</div>
+<!-- Subtle Support Note -->
+<div class="mt-12 flex items-center justify-center gap-2 pt-8 border-t border-outline-variant/10">
+<span class="material-symbols-outlined text-slate-500 text-sm" data-icon="support_agent">support_agent</span>
+<p class="text-slate-500 text-sm">
+                    هل تحتاج إلى مساعدة؟ <a class="text-primary-container hover:underline transition-all" href="#">تواصل مع الدعم الفني</a>
+</p>
+</div>
+</div>
+<!-- Decorative Metadata (Editorial Element) -->
+<div class="absolute bottom-12 right-12 hidden lg:block">
+<div class="flex flex-col items-end opacity-20 rotate-90 origin-right">
+<span class="text-xs font-mono uppercase tracking-[0.4em] text-on-surface">System Status: Interrupted</span>
+<span class="text-[8px] font-mono text-on-surface mt-1">ERR_CODE: 0X500_INTERNAL_LVM_CORE</span>
+</div>
+</div>
+</main>
+<!-- Visual Texture Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay">
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+</div>
+</body></html>

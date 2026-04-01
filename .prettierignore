@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+coverage/
+package-lock.json
+client/package-lock.json
+server/package-lock.json
+shared/package-lock.json
+*.log
