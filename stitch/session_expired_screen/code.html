@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>انتهت جلسة العمل | Luminescent Void</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#2f3445",
+              "background": "#0d1322",
+              "secondary-container": "#00a2e6",
+              "tertiary-fixed-dim": "#ffb68b",
+              "surface-container-low": "#151b2b",
+              "primary-fixed": "#ebddff",
+              "surface-container-high": "#242a3a",
+              "on-secondary": "#00344d",
+              "error-container": "#93000a",
+              "secondary-fixed": "#c9e6ff",
+              "surface-container-highest": "#2f3445",
+              "on-tertiary-fixed": "#321300",
+              "on-background": "#dde2f8",
+              "inverse-primary": "#7331df",
+              "on-primary-fixed": "#250059",
+              "error": "#ffb4ab",
+              "on-surface": "#dde2f8",
+              "tertiary-fixed": "#ffdbc8",
+              "tertiary-container": "#8f4200",
+              "surface-tint": "#d3bbff",
+              "primary": "#d3bbff",
+              "inverse-surface": "#dde2f8",
+              "tertiary": "#ffb68b",
+              "surface-container": "#191f2f",
+              "on-tertiary": "#522300",
+              "surface-dim": "#0d1322",
+              "secondary": "#89ceff",
+              "on-primary": "#3f008d",
+              "surface-container-lowest": "#080e1d",
+              "on-primary-container": "#dac5ff",
+              "surface": "#0d1322",
+              "on-tertiary-container": "#ffc19e",
+              "outline": "#958da1",
+              "on-secondary-fixed": "#001e2f",
+              "on-surface-variant": "#ccc3d7",
+              "secondary-fixed-dim": "#89ceff",
+              "on-error": "#690005",
+              "surface-bright": "#33394a",
+              "on-secondary-container": "#00344e",
+              "inverse-on-surface": "#2a3040",
+              "on-primary-fixed-variant": "#5b00c5",
+              "on-error-container": "#ffdad6",
+              "primary-fixed-dim": "#d3bbff",
+              "primary-container": "#6d28d9",
+              "outline-variant": "#4a4455",
+              "on-secondary-fixed-variant": "#004c6e",
+              "on-tertiary-fixed-variant": "#743400"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0d1322; /* Surface/Base as per North Star */
+            font-family: 'Inter', sans-serif;
+        }
+        .luminescent-blur {
+            background: radial-gradient(circle at 50% 50%, rgba(109, 40, 217, 0.15) 0%, rgba(13, 19, 34, 0) 70%);
+        }
+        .glass-panel {
+            background: rgba(47, 52, 69, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(149, 141, 161, 0.1);
+        }
+    </style>
+</head>
+<body class="text-on-background antialiased min-h-screen flex items-center justify-center overflow-hidden">
+<!-- Background Ambience -->
+<div class="fixed inset-0 luminescent-blur pointer-events-none"></div>
+<!-- Main Container -->
+<main class="relative z-10 w-full max-w-[480px] px-6">
+<!-- Top Navigation Anchor (Manual Suppression: Logic check - Transactional Screen) -->
+<!-- Navigation is suppressed per the Shell Visibility & Relevance rule for task-focused pages -->
+<div class="flex flex-col items-center text-center">
+<!-- Icon Badge -->
+<div class="mb-10 relative">
+<div class="absolute inset-0 bg-primary-container/20 blur-2xl rounded-full"></div>
+<div class="relative w-24 h-24 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant/30 shadow-[0px_32px_64px_rgba(109,40,217,0.12)]">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="lock_clock">lock_clock</span>
+</div>
+</div>
+<!-- Content -->
+<div class="space-y-4 mb-12">
+<h1 class="text-4xl md:text-5xl font-bold tracking-tight text-on-surface font-headline">
+                    انتهت جلسة العمل
+                </h1>
+<p class="text-lg text-outline leading-relaxed max-w-[400px] mx-auto font-body">
+                    يرجى تسجيل الدخول مرة أخرى لمواصلة رحلتك التعليمية.
+                </p>
+</div>
+<!-- Action Area -->
+<div class="w-full space-y-4">
+<!-- Primary Action -->
+<button class="w-full h-14 bg-gradient-to-br from-primary-container to-primary-container/80 text-on-primary-container font-bold text-lg rounded-xl shadow-[0px_16px_32px_rgba(109,40,217,0.2)] hover:shadow-[0px_16px_40px_rgba(109,40,217,0.3)] transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="login">login</span>
+                    تسجيل الدخول
+                </button>
+<!-- Secondary Action -->
+<button class="w-full h-14 text-on-surface hover:text-primary transition-colors duration-300 font-medium flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl" data-icon="home">home</span>
+                    العودة للرئيسية
+                </button>
+</div>
+<!-- Muted Note -->
+<div class="mt-12 flex items-center gap-2 text-outline/60 text-sm glass-panel py-3 px-6 rounded-full border border-outline-variant/10">
+<span class="material-symbols-outlined text-lg" data-icon="history">history</span>
+<span>سيتم استعادة حالتك الحالية بعد تسجيل الدخول مباشرة.</span>
+</div>
+</div>
+</main>
+<!-- Footer Aesthetic Detail -->
+<footer class="fixed bottom-8 left-0 right-0 text-center opacity-20 flex flex-col items-center">
+<div class="text-xs tracking-widest text-on-background font-label uppercase">Luminescent Void</div>
+<div class="w-12 h-px bg-primary-container mt-2"></div>
+</footer>
+<!-- Imagery Placeholder (Abstract Aesthetic) -->
+<div class="fixed top-[-10%] right-[-10%] w-[40%] h-[40%] opacity-10 pointer-events-none">
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;q=80&amp;w=1000')] bg-cover bg-center rounded-full mix-blend-screen" data-alt="abstract artistic render of flowing deep purple and blue silk fabric with soft cinematic lighting and bokeh effects"></div>
+</div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[30%] h-[30%] opacity-10 pointer-events-none">
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;q=80&amp;w=1000')] bg-cover bg-center rounded-full mix-blend-screen" data-alt="glowing neural network visualization with ethereal points of light and thin geometric lines on a black void background"></div>
+</div>
+</body></html>

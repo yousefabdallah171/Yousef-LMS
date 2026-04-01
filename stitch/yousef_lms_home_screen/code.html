@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#7331df",
+              "error-container": "#93000a",
+              "on-surface-variant": "#ccc3d7",
+              "surface-dim": "#0d1322",
+              "on-tertiary-fixed-variant": "#743400",
+              "primary-fixed": "#ebddff",
+              "on-error": "#690005",
+              "surface-variant": "#2f3445",
+              "outline-variant": "#4a4455",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed": "#321300",
+              "surface-container-lowest": "#080e1d",
+              "tertiary-fixed-dim": "#ffb68b",
+              "secondary": "#89ceff",
+              "on-tertiary": "#522300",
+              "on-background": "#dde2f8",
+              "surface-bright": "#33394a",
+              "secondary-fixed-dim": "#89ceff",
+              "on-primary-container": "#dac5ff",
+              "outline": "#958da1",
+              "on-primary": "#3f008d",
+              "on-primary-fixed-variant": "#5b00c5",
+              "on-primary-fixed": "#250059",
+              "background": "#0d1322",
+              "secondary-container": "#00a2e6",
+              "tertiary": "#ffb68b",
+              "inverse-surface": "#dde2f8",
+              "inverse-on-surface": "#2a3040",
+              "primary": "#d3bbff",
+              "surface-container": "#191f2f",
+              "primary-container": "#6d28d9",
+              "on-secondary-fixed": "#001e2f",
+              "on-secondary-container": "#00344e",
+              "surface-tint": "#d3bbff",
+              "surface-container-high": "#242a3a",
+              "surface": "#0d1322",
+              "on-surface": "#dde2f8",
+              "tertiary-container": "#8f4200",
+              "surface-container-low": "#151b2b",
+              "tertiary-fixed": "#ffdbc8",
+              "secondary-fixed": "#c9e6ff",
+              "primary-fixed-dim": "#d3bbff",
+              "on-secondary": "#00344d",
+              "error": "#ffb4ab",
+              "surface-container-highest": "#2f3445",
+              "on-tertiary-container": "#ffc19e",
+              "on-secondary-fixed-variant": "#004c6e"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #0d1322;
+        font-family: 'Inter', sans-serif;
+      }
+      .glass-card {
+        background: rgba(47, 52, 69, 0.4);
+        backdrop-filter: blur(12px);
+      }
+      .glow-shadow {
+        box-shadow: 0 0 40px -10px rgba(109, 40, 217, 0.3);
+      }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0d1322]/60 backdrop-blur-xl shadow-2xl shadow-violet-900/10">
+<nav class="flex flex-row-reverse justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<!-- Brand -->
+<div class="text-2xl font-bold bg-gradient-to-tr from-violet-600 to-violet-400 bg-clip-text text-transparent">
+                Luminescent Void
+            </div>
+<!-- Navigation Links -->
+<div class="hidden md:flex flex-row-reverse gap-8 items-center">
+<a class="font-['Inter'] font-medium text-sm text-slate-400 hover:text-slate-100 transition-colors" href="#">الدروس</a>
+<a class="font-['Inter'] font-medium text-sm text-slate-400 hover:text-slate-100 transition-colors" href="#">المسارات</a>
+<a class="font-['Inter'] font-medium text-sm text-slate-400 hover:text-slate-100 transition-colors" href="#">المجتمع</a>
+<a class="font-['Inter'] font-medium text-sm text-slate-400 hover:text-slate-100 transition-colors" href="#">الأسعار</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-slate-400 hover:opacity-80 transition-opacity">dark_mode</button>
+<button class="bg-primary-container text-white px-6 py-2 rounded-xl text-sm font-bold scale-95 duration-200 transition-transform hover:scale-100">
+                    ابدأ الآن
+                </button>
+</div>
+</nav>
+</header>
+<main class="pt-24 overflow-hidden">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="text-right">
+<h1 class="text-6xl md:text-7xl font-extrabold tracking-tight leading-tight mb-8">
+                    تعلم البرمجة والذكاء الاصطناعي <span class="text-primary block mt-2">مع الأفضل</span>
+</h1>
+<p class="text-on-surface-variant text-xl leading-relaxed max-w-2xl ml-auto mb-12">
+                    انضم إلى منصة يوسف LMS وابدأ رحلتك التعليمية اليوم مع دروس تطبيقية ومشاريع حقيقية. تجربة تعليمية فريدة مصممة لتنقلك من الصفر إلى الاحتراف.
+                </p>
+<div class="flex flex-row-reverse gap-6">
+<button class="bg-primary-container text-white px-10 py-4 rounded-xl font-bold text-lg glow-shadow hover:scale-105 transition-transform">
+                        تصفح الدورات
+                    </button>
+<button class="bg-secondary-container/20 border border-secondary-container/30 text-secondary-container px-10 py-4 rounded-xl font-bold text-lg hover:bg-secondary-container/30 transition-colors">
+                        شاهد الدروس المجانية
+                    </button>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -top-20 -left-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]"></div>
+<div class="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary/10 rounded-full blur-[100px]"></div>
+<div class="relative glass-card rounded-3xl p-4 border border-white/5 overflow-hidden group">
+<img alt="Coding Interface Mockup" class="rounded-2xl w-full h-auto object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700" data-alt="Modern abstract software engineering dashboard with dark glass panels, floating 3D code elements, and neon violet glowing accents on a dark workspace background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYKOzRdhQ6dZUu639F7M8vlimt13Jfx96QQrshb-G7vwWzTxLuu__LL2WFFUMBd_lgPS-zk5NAa56SLWXj5Zv0M9OfJkO0qP1mJ4ks6m7rR_gnCUCXs04p6fWgS_CskMqSDDmSw7RbnYIu7b0i1akwJReq-cNR_k_vJ_kjRdyHAv949VtVs1TyJMKDh46VecSXVyYkIrwUWIOlNYzxgGgT_YgoCdOX2zQcfQ52CKVQWhQwwGeXbhwrAdJRaPgmesoUv3wvA3Kz42De"/>
+</div>
+</div>
+</section>
+<!-- Trust Stats -->
+<section class="bg-surface-container-low py-12">
+<div class="max-w-7xl mx-auto px-8 flex flex-wrap justify-center md:justify-between gap-12 items-center">
+<div class="text-center md:text-right">
+<div class="text-4xl font-black text-primary">+١٠,٠٠٠</div>
+<div class="text-on-surface-variant text-sm mt-1 uppercase tracking-widest">طالب مسجل</div>
+</div>
+<div class="h-12 w-px bg-white/5 hidden md:block"></div>
+<div class="text-center md:text-right">
+<div class="text-4xl font-black text-secondary">+٥٠</div>
+<div class="text-on-surface-variant text-sm mt-1 uppercase tracking-widest">دورة احترافية</div>
+</div>
+<div class="h-12 w-px bg-white/5 hidden md:block"></div>
+<div class="text-center md:text-right">
+<div class="text-4xl font-black text-white">٤.٩/٥</div>
+<div class="text-on-surface-variant text-sm mt-1 uppercase tracking-widest">تقييم المنصة</div>
+</div>
+</div>
+</section>
+<!-- Featured Courses -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<div class="flex justify-between items-end mb-16">
+<button class="text-primary font-bold flex items-center gap-2 hover:translate-x-[-4px] transition-transform">
+<span>عرض كل الدورات</span>
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-4xl font-bold">الدورات المميزة</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Course Card 1 -->
+<div class="bg-surface-container-high rounded-3xl overflow-hidden hover:translate-y-[-8px] transition-transform duration-300">
+<div class="relative h-56">
+<img alt="Python Masters" class="w-full h-full object-cover" data-alt="Close up of high-end laptop showing complex Python code in a dark editor with soft purple light reflection on the keys" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5Y4LCNUr23-d2M7F8yAnfsoFslsi_GB2wuOiBVXh5MAt9rFzRXVRz0PeTAZaSMrdGxBxpsjHG2NzFCQPqOlqThHhze_ffkTmXJSKwnmrFbSuZ9C2OAVrXpfzm5p92F9HfUOOeBAZXXq_9nm1lx5R5KNozt_CVAmagGMK8cKNa4xHlumtnWJOAhcTpgTWOQ_sd1KyT6TJeQUh_L0nTh7qCDxmWLLZ7VKv8A7RA2gxF65nv_oJwDC5VMvA3zVgMH-bLyJLv6YUm3-kq"/>
+<span class="absolute top-4 right-4 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-full">٥ دروس مجانية</span>
+</div>
+<div class="p-8 text-right">
+<h3 class="text-2xl font-bold mb-4">احتراف بايثون والذكاء الاصطناعي</h3>
+<p class="text-on-surface-variant mb-6 line-clamp-2">تعلم لغة بايثون من الصفر وصولاً إلى بناء نماذج تعلم الآلة المتطورة باستخدام مكتبات عالمية.</p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
+<span class="text-2xl font-bold text-white">$١٩٩</span>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span>٤٨ درس</span>
+<span class="material-symbols-outlined text-sm">menu_book</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-surface-container-high rounded-3xl overflow-hidden hover:translate-y-[-8px] transition-transform duration-300">
+<div class="relative h-56">
+<img alt="AI Specialist" class="w-full h-full object-cover" data-alt="Elegant 3D rendering of glowing neural network nodes connected by lines of light in a deep void space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHrALDnHFkzhfOGHWx5fL5rDoJnvmZENUyoVgYjC_6ff70aDIDLJHEF6enoH0uxiJUWFbOrvu-NsWrHelI1YYwCRC5JT9BmYKsZtU655cUtuU3EVaZAH9zwdgi5gjG1sTRmv3BY-83ebNyYrDPmXoerZbSk0Akt2dB1I0swlGgK-m4lkp0OV-7CTuk6mS1SERYczKIfvjg9Yay9JogtaW7j5l6X3p997bLU0wenQ13txj0O7jR-B63CbRv4nZB4UnT1waBIk5bNoXW"/>
+<span class="absolute top-4 right-4 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-full">٥ دروس مجانية</span>
+</div>
+<div class="p-8 text-right">
+<h3 class="text-2xl font-bold mb-4">تطوير واجهات المستخدم الحديثة</h3>
+<p class="text-on-surface-variant mb-6 line-clamp-2">بناء واجهات تفاعلية سريعة باستخدام React و Tailwind CSS مع التركيز على تجربة المستخدم.</p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
+<span class="text-2xl font-bold text-white">$١٤٩</span>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span>٣٦ درس</span>
+<span class="material-symbols-outlined text-sm">menu_book</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="bg-surface-container-high rounded-3xl overflow-hidden hover:translate-y-[-8px] transition-transform duration-300">
+<div class="relative h-56">
+<img alt="Cybersecurity" class="w-full h-full object-cover" data-alt="Conceptual image of data security with a glowing transparent padlock icon floating over binary code on a dark blue background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSInYXaxiWymZ2x2dtVA_nSTJXoL5mgqcKmH3exXLK_tp15fWE6EQEho--fugzm5USC3XMCppLRAlb_qbYcA_-wW40MVPBHSLIDeqnjDn5RwbTrmFizwEB2TVPXvbSlSc_fzaVwFy5ndOs8oiY0pn5A75BuXYaJmOY8CkddxG8ZsOBeP4ZxNS6vHbxBw0L8URxLUIgToM5Yf88tDdj1BW77D3x-uhBe22uJUn1m6DXYdEQF6_5Kauz9l5d6AcL7F21X00y6Oxki4Nd"/>
+<span class="absolute top-4 right-4 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-full">٥ دروس مجانية</span>
+</div>
+<div class="p-8 text-right">
+<h3 class="text-2xl font-bold mb-4">أساسيات الأمن السيبراني</h3>
+<p class="text-on-surface-variant mb-6 line-clamp-2">تعرف على كيفية حماية الأنظمة واكتشاف الثغرات الأمنية من خلال تطبيقات عملية واقعية.</p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
+<span class="text-2xl font-bold text-white">$٢٤٩</span>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span>٥٢ درس</span>
+<span class="material-symbols-outlined text-sm">menu_book</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Section -->
+<section class="bg-surface-container-low py-32">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-20">
+<h2 class="text-4xl font-bold mb-6">رحلة تعلمك تبدأ من هنا</h2>
+<p class="text-on-surface-variant">ثلاث خطوات بسيطة تفصلك عن مهارة جديدة تفتح لك آفاق المستقبل</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+<div class="text-center group">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center mx-auto mb-8 border border-white/5 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">search</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">تصفح</h3>
+<p class="text-on-surface-variant">استكشف مكتبتنا الضخمة من الدورات المتخصصة في أحدث تقنيات البرمجة والذكاء الاصطناعي.</p>
+</div>
+<div class="text-center group">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center mx-auto mb-8 border border-white/5 group-hover:border-secondary/50 transition-colors">
+<span class="material-symbols-outlined text-4xl text-secondary" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">ادفع</h3>
+<p class="text-on-surface-variant">نظام دفع آمن ومرن مع إمكانية الوصول الفوري للمحتوى فور إتمام عملية الاشتراك.</p>
+</div>
+<div class="text-center group">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center mx-auto mb-8 border border-white/5 group-hover:border-white/50 transition-colors">
+<span class="material-symbols-outlined text-4xl text-white" style="font-variation-settings: 'FILL' 1;">school</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">تعلم</h3>
+<p class="text-on-surface-variant">ابدأ بمشاهدة الدروس وتطبيق المشاريع العملية مع دعم فني متواصل خلال رحلتك.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Instructor Spotlight -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<div class="bg-surface-container-highest rounded-[3rem] p-12 lg:p-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="order-2 lg:order-1 relative">
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+<img alt="Yousef - Instructor" class="rounded-3xl w-full h-[500px] object-cover relative z-10" data-alt="Portrait of a professional middle-eastern man in his late 30s with short hair and a neat beard, wearing a dark minimal polo shirt, looking confident with soft studio lighting on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATw39MfcCtsiH3KZSS84CLyb_cZ_VIFEhapXfqdYzKiIpuAmjRp_WJjtb7Y6XSrcs9ArHa3V1gUgt8cvjQBHqRXmXxqz2ibO8diElLEux28NQCcMQpzKLGj071dyROSxBP72_Pxk7Ac5tkYbWV4tpbID38zEMAUnFFU6wqIzfAcnh-Ue89q_0i-l8l6ro-t3OdakiVSlzIejsSL5UoJyqla1NA7loFw8X_1XAczs36x5yKlnIN5jglu_UUzZKENYQDn00ROhVAFR8y"/>
+</div>
+<div class="text-right order-1 lg:order-2">
+<h4 class="text-primary font-bold tracking-widest uppercase text-sm mb-6">تعرف على المحاضر</h4>
+<h2 class="text-5xl font-black mb-8">م. يوسف الخالدي</h2>
+<p class="text-on-surface-variant text-xl leading-relaxed mb-10">
+                        مطور برمجيات أول وخبير في الذاء الاصطناعي مع خبرة تزيد عن ١٠ سنوات في بناء الأنظمة المعقدة لشركات تقنية عالمية. كرس يوسف وقته لنقل هذه الخبرة للشباب العربي بطريقة عملية ومبسطة.
+                    </p>
+<div class="flex flex-wrap flex-row-reverse gap-4 mb-10">
+<span class="bg-white/5 px-6 py-2 rounded-full text-sm font-medium border border-white/10">Full Stack Engineer</span>
+<span class="bg-white/5 px-6 py-2 rounded-full text-sm font-medium border border-white/10">AI Architecture</span>
+<span class="bg-white/5 px-6 py-2 rounded-full text-sm font-medium border border-white/10">Data Science</span>
+</div>
+<div class="flex flex-row-reverse gap-8">
+<div class="text-right">
+<div class="text-3xl font-bold text-white">+١٥٠</div>
+<div class="text-on-surface-variant text-xs">ساعة تدريبية</div>
+</div>
+<div class="h-10 w-px bg-white/10 self-center"></div>
+<div class="text-right">
+<div class="text-3xl font-bold text-white">٥٠٠٠+</div>
+<div class="text-on-surface-variant text-xs">ساعة استشارية</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<h2 class="text-4xl font-bold mb-16 text-center">قالوا عن المنصة</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-surface-container-low p-10 rounded-3xl border border-white/5 relative">
+<span class="material-symbols-outlined text-primary/20 text-6xl absolute top-6 left-6">format_quote</span>
+<p class="text-on-surface leading-relaxed mb-8 relative z-10 text-right">
+                        "أفضل استثمار قمت به في حياتي المهنية. الدروس مرتبة والنهج العملي جعلني أفهم مفاهيم كنت أراها مستحيلة من قبل."
+                    </p>
+<div class="flex flex-row-reverse items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant overflow-hidden">
+<img alt="Student" class="w-full h-full object-cover" data-alt="Headshot of a smiling young Arab professional woman in professional attire, studio portrait, soft neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5MZyldCrhfZf018z84mMC0Z_i7FYn6aAIPLVIN0vBI5HwNRjeqsfDOoDtF1Bs0Vj0VdO1z09WwbJlTELj0yIudTiOedaMCrDeseYJyTZprFCyyKLRi-kE68YhG_JHBE7ZxoHyGw-8naTqVUO0b4VUb-BZ9Ndj-RmilnCxvwiCNF_ZKWB0HvsriEQ2XlSYGjyT6XBTWvrag_yPhdreNYm6A6Da_fQgBwX-3Z30pQe4d5ekGhbppthOWGCLeb3PfvMyOTmrwFInjPAq"/>
+</div>
+<div class="text-right">
+<div class="font-bold">سارة أحمد</div>
+<div class="text-xs text-on-surface-variant">مطور واجهات</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-10 rounded-3xl border border-white/5 relative">
+<span class="material-symbols-outlined text-secondary/20 text-6xl absolute top-6 left-6">format_quote</span>
+<p class="text-on-surface leading-relaxed mb-8 relative z-10 text-right">
+                        "الدعم الفني والرد على التساؤلات في المنصة مذهل. تشعر أن المحاضر معك خطوة بخطوة في كل مشروع."
+                    </p>
+<div class="flex flex-row-reverse items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant overflow-hidden">
+<img alt="Student" class="w-full h-full object-cover" data-alt="Candid portrait of a young man with glasses laughing, natural daylight, urban background soft bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzrkV4ywrPXOibanVC4vo4nvgIN_QV2IHz_xrCcP4osU71v4HZKbTwChsQC2HxISQ4iFlS7kPdPM5zOAqSpQ04_U2UizkJzqOO9O6w1TcpWc-IoU2LnHw-QRL57GfCkHcYHYBzzPRtNVxazxCkbWsdDHBApEte_g73aGJXHvwSKbSlMmQhN2KACeX6rc3QPROX_ktJNOeO1WfxvW5a2Pj5cWwrw2yKDa4Fof9AkRFgz7-EZwK2XEefgZPoDwrIl8ji8r2k1g-h9R-X"/>
+</div>
+<div class="text-right">
+<div class="font-bold">عمر خالد</div>
+<div class="text-xs text-on-surface-variant">طالب علوم حاسب</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-10 rounded-3xl border border-white/5 relative">
+<span class="material-symbols-outlined text-white/10 text-6xl absolute top-6 left-6">format_quote</span>
+<p class="text-on-surface leading-relaxed mb-8 relative z-10 text-right">
+                        "منهجية يوسف في التعليم فريدة جداً. هو لا يعلمك الكود فقط، بل يعلمك كيف تفكر كمبرمج محترف."
+                    </p>
+<div class="flex flex-row-reverse items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant overflow-hidden">
+<img alt="Student" class="w-full h-full object-cover" data-alt="Portrait of a confident young man in a smart casual dark sweater, looking at the camera, clean corporate headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLlqiys04o6GznQCE20_TMzhAG0JFcP18gR0S-I13jK_0F1Xk544pMcXWLB3VEVL3aVoJvZeqpbNILzSME9fSBGPDRzjTXr96Tmr46KqhFebsdvcsL1zECMvDh-gzUO5ZGU6j2gzgFq-hFOwOGKSYu0mhYeCAXdJbVSMjjPlsvFdXFF7Epw5I2tuFaS0CiMHwAoyhDgu3yGiP1NJVWVOEXhs4hOHTqDiV_Tq3RVPG7u0nRN77S7Qd9tgpXINt3d6lERAVFvT29Wd44"/>
+</div>
+<div class="text-right">
+<div class="font-bold">أحمد محمود</div>
+<div class="text-xs text-on-surface-variant">مبرمج بايثون</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-white/5 bg-[#0d1322]">
+<div class="flex flex-col md:flex-row-reverse justify-between items-start w-full px-12 py-16 max-w-7xl mx-auto gap-12">
+<div class="max-w-xs text-right">
+<div class="text-xl font-bold text-slate-100 mb-4">الفراغ المضيء</div>
+<p class="font-['Inter'] text-slate-400 text-sm leading-relaxed">
+                    منصة تعليمية عربية رائدة تهدف لتمكين الجيل القادم من المبرمجين وخبراء الذكاء الاصطناعي من خلال محتوى عالي الجودة.
+                </p>
+<div class="flex flex-row-reverse gap-4 mt-8">
+<span class="material-symbols-outlined text-slate-500 hover:text-primary transition-colors cursor-pointer">public</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-primary transition-colors cursor-pointer">alternate_email</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-primary transition-colors cursor-pointer">send</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-16">
+<div class="flex flex-col gap-4 text-right">
+<h5 class="text-white font-bold text-sm mb-2">روابط سريعة</h5>
+<a class="text-slate-400 hover:text-violet-400 transition-colors text-sm" href="#">سياسة الخصوصية</a>
+<a class="text-slate-400 hover:text-violet-400 transition-colors text-sm" href="#">شروط الخدمة</a>
+<a class="text-slate-400 hover:text-violet-400 transition-colors text-sm" href="#">اتصل بنا</a>
+</div>
+<div class="flex flex-col gap-4 text-right">
+<h5 class="text-white font-bold text-sm mb-2">المجتمع</h5>
+<a class="text-slate-400 hover:text-violet-400 transition-colors text-sm" href="#">المدونة</a>
+<a class="text-slate-400 hover:text-violet-400 transition-colors text-sm" href="#">الأسئلة الشائعة</a>
+<a class="text-slate-400 hover:text-violet-400 transition-colors text-sm" href="#">منتدى الطلاب</a>
+</div>
+</div>
+</div>
+<div class="w-full py-8 border-t border-white/5 text-center">
+<p class="font-['Inter'] text-slate-500 text-xs">© 2024 الفراغ المضيء. جميع الحقوق محفوظة.</p>
+</div>
+</footer>
+<!-- FAB Suppression Check: No FAB on Home based on logic but user may want 'Chat with us' - but following rule "FABs are highly contextual... MUST ONLY render if screen's primary purpose aligns" - User didn't request FAB. -->
+</body></html>

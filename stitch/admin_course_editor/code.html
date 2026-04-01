@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yousef LMS - Course Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#ccc3d7",
+              "surface-container-low": "#151b2b",
+              "on-secondary-fixed-variant": "#004c6e",
+              "on-secondary": "#00344d",
+              "on-secondary-fixed": "#001e2f",
+              "surface-bright": "#33394a",
+              "secondary-container": "#00a2e6",
+              "primary-fixed": "#ebddff",
+              "inverse-surface": "#dde2f8",
+              "surface-tint": "#d3bbff",
+              "on-primary": "#3f008d",
+              "surface-container-highest": "#2f3445",
+              "surface": "#0d1322",
+              "on-background": "#dde2f8",
+              "on-error": "#690005",
+              "tertiary": "#ffb68b",
+              "secondary-fixed": "#c9e6ff",
+              "primary-fixed-dim": "#d3bbff",
+              "surface-dim": "#0d1322",
+              "outline-variant": "#4a4455",
+              "on-error-container": "#ffdad6",
+              "outline": "#958da1",
+              "surface-container-lowest": "#080e1d",
+              "secondary-fixed-dim": "#89ceff",
+              "on-tertiary-fixed-variant": "#743400",
+              "inverse-on-surface": "#2a3040",
+              "on-primary-fixed": "#250059",
+              "background": "#0d1322",
+              "tertiary-container": "#8f4200",
+              "on-secondary-container": "#00344e",
+              "on-tertiary": "#522300",
+              "on-primary-container": "#dac5ff",
+              "surface-container-high": "#242a3a",
+              "on-tertiary-container": "#ffc19e",
+              "tertiary-fixed": "#ffdbc8",
+              "on-tertiary-fixed": "#321300",
+              "on-surface": "#dde2f8",
+              "inverse-primary": "#7331df",
+              "error": "#ffb4ab",
+              "primary": "#d3bbff",
+              "error-container": "#93000a",
+              "primary-container": "#6d28d9",
+              "on-primary-fixed-variant": "#5b00c5",
+              "secondary": "#89ceff",
+              "tertiary-fixed-dim": "#ffb68b",
+              "surface-variant": "#2f3445",
+              "surface-container": "#191f2f"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #2f3445;
+        border-radius: 10px;
+      }
+      .glass-card {
+        background: rgba(21, 27, 43, 0.6);
+        backdrop-filter: blur(12px);
+      }
+      .tonal-transition {
+        background: linear-gradient(135deg, rgba(109, 40, 217, 0.05) 0%, rgba(13, 19, 34, 0) 100%);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container/30">
+<!-- Admin SideNavBar Shell -->
+<aside class="fixed inset-y-0 right-0 w-64 h-screen border-l border-white/5 bg-[#0d1322] font-['Inter'] rtl text-right leading-relaxed flex flex-col gap-2 p-4 z-50">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h2 class="text-xl font-bold text-white tracking-tight">Yousef LMS</h2>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">نظام إدارة التعلم</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-all duration-300 hover:bg-white/5 rounded-lg group" href="#">
+<span class="material-symbols-outlined transition-colors group-hover:text-primary">dashboard</span>
+<span class="text-sm font-medium">لوحة التحكم</span>
+</a>
+<!-- Active Tab: الدورات -->
+<a class="flex items-center gap-3 px-4 py-3 text-[#6D28D9] bg-[#6D28D9]/10 rounded-lg font-bold transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="text-sm">الدورات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-all duration-300 hover:bg-white/5 rounded-lg group" href="#">
+<span class="material-symbols-outlined transition-colors group-hover:text-primary">shopping_cart</span>
+<span class="text-sm font-medium">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-all duration-300 hover:bg-white/5 rounded-lg group" href="#">
+<span class="material-symbols-outlined transition-colors group-hover:text-primary">group</span>
+<span class="text-sm font-medium">الطلاب</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-all duration-300 hover:bg-white/5 rounded-lg group" href="#">
+<span class="material-symbols-outlined transition-colors group-hover:text-primary">forum</span>
+<span class="text-sm font-medium">التعليقات</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-white/5">
+<button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl font-bold text-sm hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                إضافة دورة جديدة
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="mr-64 min-h-screen transition-all duration-300">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 w-full z-40 border-b border-white/5 bg-[#0d1322]/60 backdrop-blur-xl flex justify-between items-center h-16 px-8 font-['Inter'] rtl text-right">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-sm">
+<span class="text-slate-500">الأدمن</span>
+<span class="material-symbols-outlined text-slate-600 text-xs">chevron_left</span>
+<span class="text-slate-500">الدورات</span>
+<span class="material-symbols-outlined text-slate-600 text-xs">chevron_left</span>
+<span class="text-white font-semibold">تعديل الدورة</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 text-lg">search</span>
+<input class="bg-surface-container-low border-none rounded-full h-9 pr-10 pl-4 text-xs w-64 focus:ring-1 focus:ring-primary-container transition-all" placeholder="بحث في النظام..." type="text"/>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-px bg-white/5 mx-2"></div>
+<button class="px-5 py-2 text-sm font-bold text-[#6D28D9] border border-[#6D28D9]/20 rounded-lg hover:bg-[#6D28D9]/5 transition-all active:scale-95">
+                    معاينة
+                </button>
+<div class="w-9 h-9 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a professional male instructor in a dark modern studio environment with purple ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVieM_eMyWOFSZPutpr9HUwt4v2sXO2J4qktaxr1lx2FQIlP3gXz1h_nDZWIfh7rtfWv2WTQaiEsYFC8hTPTLe-aUZQ0ip-Ni-Ogxyl54H18QF1dLqNR3jTYyRZYIoo-Y-pm2ItAbwFzEzD6TDCvCjhOz6xtyrLOKyLrb91W-ayzDqlNmfaHP_MK_PE-GtJlznuf63e3DBs7f2CLR8UjAOXemM5DRP0cT8YijB70ydU6MAtdfibBfnapB7jV08ezVbdbsiJSZEX_OG"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- Primary Column (75%) -->
+<div class="col-span-12 lg:col-span-9 flex flex-col gap-8">
+<!-- Course Details Card -->
+<section class="bg-surface-container-low rounded-2xl p-8 border border-white/5 tonal-transition shadow-2xl shadow-purple-900/5">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-2 h-8 bg-primary rounded-full"></div>
+<h2 class="text-2xl font-bold text-white tracking-tight">تفاصيل الدورة</h2>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 mr-1 uppercase tracking-widest">عنوان الدورة</label>
+<input class="w-full bg-surface-container-high border-none rounded-xl h-12 px-4 text-white focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all" type="text" value="احتراف تطوير تطبيقات الذكاء الاصطناعي"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 mr-1 uppercase tracking-widest">وصف الدورة</label>
+<textarea class="w-full bg-surface-container-high border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all leading-relaxed" rows="4">تعلم كيفية بناء نماذج لغوية كبيرة وتطبيقات ذكاء اصطناعي متكاملة باستخدام Python و OpenAI API من الصفر حتى الاحتراف.</textarea>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 mr-1 uppercase tracking-widest">الصورة المصغرة</label>
+<div class="w-full aspect-video bg-surface-container-high rounded-xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center gap-3 group hover:border-primary/40 transition-all cursor-pointer overflow-hidden relative">
+<div class="text-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl text-slate-500 group-hover:text-primary transition-colors">cloud_upload</span>
+<p class="text-xs text-slate-400 mt-2">اسحب الصورة هنا أو اضغط للرفع</p>
+</div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-20" data-alt="abstract neural network visualization with flowing glowing lines and particles in deep violet and indigo space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK_4iGDc7RyKPV6ZxWTG87Db5UOmolMIXmcjZOR60YUj6sMjqLG4aCwQpVxzebpuvrawv9DKYr9HWVfdJ8mJpHt-XvISTh-yXqR21H5mrozAPzyZQkxGjnrMn1_enAk2hIIrMAjB-RfOSsqTk4yII_GN8fjhhCjw06J6vkAGpMnofXC9AfFLRU3lVXxZHSHpAhpi9lRD9TJyAmy2c3LH8hJGhIbJJh_aQVKT9JrrLBnTwkpxvyyVnB3cyovJXGRgdEEk9v_vr6NdMI"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 mr-1 uppercase tracking-widest">السعر</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none rounded-xl h-12 pr-12 text-white focus:ring-2 focus:ring-primary/20 transition-all" placeholder="0.00" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+</div>
+<p class="text-[10px] text-slate-500 pr-1 italic">سيتم إضافة رسوم المعالجة تلقائياً عند الدفع.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Curriculum Builder Card -->
+<section class="bg-surface-container-low rounded-2xl p-8 border border-white/5 relative overflow-hidden">
+<div class="flex justify-between items-center mb-8">
+<div class="flex items-center gap-3">
+<div class="w-2 h-8 bg-secondary rounded-full"></div>
+<h2 class="text-2xl font-bold text-white tracking-tight">منهج الدورة</h2>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 border-2 border-[#6D28D9] text-[#6D28D9] font-bold rounded-xl hover:bg-[#6D28D9]/10 transition-all active:scale-95">
+<span class="material-symbols-outlined text-lg">add</span>
+                                إضافة قسم جديد
+                            </button>
+</div>
+<!-- Existing Section Card -->
+<div class="bg-surface-container-high rounded-2xl overflow-hidden border border-white/5">
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 cursor-grab active:cursor-grabbing">drag_indicator</span>
+<h3 class="font-bold text-white">القسم الأول: مقدمة في الذكاء الاصطناعي</h3>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</div>
+<div class="p-2 space-y-1">
+<!-- Lesson Row -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 group transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">drag_handle</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+<span class="text-sm text-slate-300">الدرس ١.١: ما هو الذكاء الاصطناعي؟</span>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+<!-- Lesson Row -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 group transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">drag_handle</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+<span class="text-sm text-slate-300">الدرس ١.٢: تاريخ التقنية وأبرز المحطات</span>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+</div>
+<div class="p-4 bg-white/5 border-t border-white/5">
+<button class="flex items-center gap-2 text-xs font-bold text-primary hover:text-primary/80 transition-colors">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                                    إضافة درس لهذا القسم
+                                </button>
+</div>
+</div>
+<!-- Progress Aesthetic behind text -->
+<div class="absolute -bottom-10 -left-10 text-[180px] font-black text-white/[0.02] pointer-events-none select-none">LMS</div>
+</section>
+</div>
+<!-- Secondary Column (25%) -->
+<aside class="col-span-12 lg:col-span-3 sticky top-24">
+<div class="bg-surface-container-low rounded-2xl border border-white/5 p-6 shadow-2xl flex flex-col gap-8">
+<!-- Status Badge -->
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">حالة النشر</span>
+<div class="px-3 py-1 bg-amber-500/10 text-amber-500 text-[10px] font-black rounded-full border border-amber-500/20 uppercase">
+                                مسودة (Draft)
+                            </div>
+</div>
+<!-- Stats List -->
+<div class="space-y-4">
+<div class="flex justify-between items-center text-sm">
+<span class="text-slate-400">إجمالي الدروس</span>
+<span class="text-white font-bold">١٢ درس</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-slate-400">مدة الدورة</span>
+<span class="text-white font-bold">٤.٥ ساعة</span>
+</div>
+<div class="h-px bg-white/5"></div>
+</div>
+<!-- Checklist -->
+<div class="space-y-4">
+<h4 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">قائمة التحقق</h4>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs text-slate-300">عنوان الدورة</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs text-slate-300">الصورة المصغرة</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-600 text-lg">circle</span>
+<span class="text-xs text-slate-500">تحديد السعر</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-600 text-lg">circle</span>
+<span class="text-xs text-slate-500">محتوى المنهج</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3 pt-4 border-t border-white/5">
+<button class="w-full py-4 bg-primary text-on-primary font-black rounded-xl hover:opacity-90 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+                                نشر الدورة الآن
+                            </button>
+<button class="w-full py-4 border border-white/10 text-white font-bold rounded-xl hover:bg-white/5 transition-all">
+                                حفظ كمسودة
+                            </button>
+</div>
+<div class="pt-4 text-center">
+<p class="text-[10px] text-slate-600">آخر تعديل: منذ دقيقتين</p>
+</div>
+</div>
+<!-- AI Tip Card -->
+<div class="mt-6 p-5 glass-card rounded-2xl border border-primary/10 relative overflow-hidden group cursor-help">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2 text-primary">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+<span class="text-[10px] font-bold uppercase">اقتراح ذكي</span>
+</div>
+<p class="text-[11px] text-slate-300 leading-relaxed italic">
+                                "لاحظنا أن وصف الدورة قصير جداً. جرب استخدام مولد المحتوى الذكي لتحسين محركات البحث وزيادة المبيعات."
+                            </p>
+</div>
+<div class="absolute -right-4 -bottom-4 w-20 h-20 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all"></div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#d3bbff",
+              "on-secondary-container": "#00344e",
+              "background": "#0d1322",
+              "on-tertiary-fixed-variant": "#743400",
+              "primary": "#d3bbff",
+              "secondary": "#89ceff",
+              "secondary-fixed-dim": "#89ceff",
+              "inverse-surface": "#dde2f8",
+              "on-primary": "#3f008d",
+              "tertiary-fixed": "#ffdbc8",
+              "error": "#ffb4ab",
+              "surface-container-highest": "#2f3445",
+              "on-secondary-fixed-variant": "#004c6e",
+              "inverse-on-surface": "#2a3040",
+              "on-error-container": "#ffdad6",
+              "on-surface": "#dde2f8",
+              "surface-dim": "#0d1322",
+              "primary-fixed-dim": "#d3bbff",
+              "secondary-container": "#00a2e6",
+              "primary-container": "#6d28d9",
+              "primary-fixed": "#ebddff",
+              "tertiary-container": "#8f4200",
+              "tertiary": "#ffb68b",
+              "tertiary-fixed-dim": "#ffb68b",
+              "on-error": "#690005",
+              "on-tertiary-container": "#ffc19e",
+              "on-tertiary": "#522300",
+              "surface": "#0d1322",
+              "surface-container-lowest": "#080e1d",
+              "error-container": "#93000a",
+              "outline-variant": "#4a4455",
+              "outline": "#958da1",
+              "on-tertiary-fixed": "#321300",
+              "on-secondary": "#00344d",
+              "on-primary-fixed": "#250059",
+              "on-primary-container": "#dac5ff",
+              "surface-container-low": "#151b2b",
+              "on-surface-variant": "#ccc3d7",
+              "on-secondary-fixed": "#001e2f",
+              "inverse-primary": "#7331df",
+              "surface-bright": "#33394a",
+              "surface-container-high": "#242a3a",
+              "on-primary-fixed-variant": "#5b00c5",
+              "surface-variant": "#2f3445",
+              "surface-container": "#191f2f",
+              "on-background": "#dde2f8",
+              "secondary-fixed": "#c9e6ff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-panel {
+        background: rgba(47, 52, 69, 0.4);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(149, 141, 161, 0.15);
+      }
+      body {
+        background-color: #0d1322;
+        color: #dde2f8;
+      }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-white">
+<!-- Shared SideNavBar -->
+<aside class="h-screen w-64 fixed right-0 top-0 overflow-y-auto bg-[#0d1322] border-l border-white/5 shadow-[32px_0_64px_rgba(109,40,217,0.08)] flex flex-col py-8 px-4 gap-y-6 z-50">
+<div class="px-2">
+<h1 class="text-xl font-bold tracking-tighter text-[#6D28D9]">Luminescent Admin</h1>
+<p class="text-xs text-slate-500 font-medium tracking-wide">Learning Portal</p>
+</div>
+<nav class="flex flex-col gap-y-1">
+<a class="flex items-center gap-x-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 transition-colors hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-x-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 transition-colors hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-sm font-medium">LMS Management</span>
+</a>
+<a class="flex items-center gap-x-3 px-4 py-3 rounded-lg bg-white/5 text-[#6D28D9] font-semibold border-r-2 border-[#6D28D9]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-sm">Students</span>
+</a>
+<a class="flex items-center gap-x-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 transition-colors hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-x-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 transition-colors hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-y-1">
+<a class="flex items-center gap-x-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 transition-colors hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-sm font-medium">Help Center</span>
+</a>
+<button class="flex items-center gap-x-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 transition-colors hover:bg-white/5 w-full text-right">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</button>
+</div>
+</aside>
+<!-- Top Navigation -->
+<header class="fixed top-0 left-0 right-64 h-16 z-40 flex justify-between items-center px-8 bg-[#0d1322]/60 backdrop-blur-xl">
+<div class="flex items-center gap-x-4">
+<nav class="flex items-center gap-x-6">
+<a class="text-slate-400 hover:text-white transition-colors font-medium text-sm" href="#">Tasks</a>
+<a class="text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-1 text-sm" href="#">Orders</a>
+<a class="text-slate-400 hover:text-white transition-colors font-medium text-sm" href="#">Notifications</a>
+</nav>
+</div>
+<div class="flex items-center gap-x-4">
+<button class="text-slate-400 hover:text-white p-2 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-primary/20">
+<img alt="User profile avatar" class="h-full w-full object-cover" data-alt="close up headshot of a professional male administrator in a modern tech office setting, soft professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxWZUFgfzk2ydAF4aGSkH5eoitL9egA7H7Knq8uUv9vRQIHEfRq1iWuyBVY2UzYqCQQiOBS3f6j5azb8RwvIbhkWjNbPgbv0g-fW689s-96-xq2nvvnz0ciEBTNGkRFbse7lV2vukqZbs3sKktsU5DXz0YaNP9lpRVmYwd3VPPrGFEC1xmEcDiZiPd_N0iLtXfNSvVVGHpONFaxeY02ULGvdwzIEWO4Hv5ub35RncYnSYrzqCjlOkQqpf61ncr9Z77-tYpH6wawEDP"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="mr-64 pt-20 p-8 min-h-screen">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-x-2 text-slate-400 mb-6 text-sm">
+<a class="hover:text-primary transition-colors" href="#">Students</a>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_left">chevron_left</span>
+<a class="hover:text-primary transition-colors" href="#">Orders</a>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_left">chevron_left</span>
+<span class="text-on-surface">Order #ORD-8821</span>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Right Column: Student & Payment Info (Primary Content) -->
+<div class="flex-1 space-y-8">
+<!-- Student Summary Card -->
+<section class="glass-panel rounded-2xl p-8 relative overflow-hidden">
+<!-- Progress Card background numeral -->
+<div class="absolute -left-4 -bottom-4 opacity-5 text-[120px] font-bold leading-none select-none">
+                        Python
+                    </div>
+<div class="relative z-10">
+<div class="flex items-center gap-x-6 mb-8">
+<div class="h-24 w-24 rounded-2xl bg-surface-container-high flex items-center justify-center border border-outline-variant/20 overflow-hidden shadow-2xl">
+<img alt="Ahmed Ali Profile" class="h-full w-full object-cover" data-alt="Professional studio portrait of a young Middle Eastern man with a friendly expression, soft lighting, neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0s0d5VYT1b3KlQJSYFWaAUc_T_O4T4LVUJT8fwI0q5heUvHti-nOPGPNI4AZGXqSYdld0c1XaGTJndwhSBQn84tAqRwcrVoAvLCcm2iODqH3Zk_t_vbnzcufEEWrzeITpiX0Is5kWSsaPixLiEmkxFZpgw7HuQSLcNTpk_FAZdPsSPSrg1gdnwvCK0JHO-XY-uEHxFS8Zy3iAaPV0rhSXgq772cYrc5LZ6F_XnoYoUbP8AONP2z-4sqHNGovO9cYkIgjTkM7dkyD5"/>
+</div>
+<div>
+<h2 class="text-3xl font-bold text-on-surface mb-1">Ahmed Ali</h2>
+<p class="text-slate-400 flex items-center gap-x-2">
+<span class="material-symbols-outlined text-sm" data-icon="mail">mail</span>
+                                    ahmed.ali@example.com
+                                </p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="text-xs text-primary font-bold tracking-widest uppercase mb-2 block">Requested Course</span>
+<h3 class="text-xl font-semibold text-on-surface">Mastering Python &amp; AI</h3>
+<p class="text-sm text-slate-400 mt-1">Full Access Bundle • Lifetime</p>
+</div>
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="text-xs text-secondary font-bold tracking-widest uppercase mb-2 block">Payment Amount</span>
+<div class="flex items-baseline gap-x-2">
+<span class="text-3xl font-bold text-on-surface">$299.00</span>
+<span class="text-sm text-slate-400">USD</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Proof Viewer -->
+<section class="glass-panel rounded-2xl p-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-on-surface flex items-center gap-x-3">
+<span class="material-symbols-outlined text-primary" data-icon="receipt_long">receipt_long</span>
+                            Payment Proof
+                        </h3>
+<button class="text-sm font-semibold text-primary hover:text-white transition-colors flex items-center gap-x-2">
+<span class="material-symbols-outlined text-base" data-icon="zoom_in">zoom_in</span>
+                            View Large
+                        </button>
+</div>
+<div class="relative group aspect-[16/10] bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 shadow-inner">
+<img alt="Payment Receipt Proof" class="w-full h-full object-cover" data-alt="High-fidelity close up of a bank transfer receipt on a dark slate background, showing professional banking details and transaction codes, clean layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeLY0wg_OvihL7JZel707vjMv6gs4e1zECWcGuF-sph-Jq0HRZGIho7biBhipGV2mGEDvT7lnotDhNaSDE84sN9zZja_Ij2jvz7Hiar2SDDykKdunjTn9DAyZcFwdtwpoYbK_5xz8SG4LSPSpVc9ohGzH78tfMBcgQAl-K9R_OcQvWldQe3V6nEOTC9QjHcy5mfBAolHsHaNivq6WGW5ho3VwgIZrCRoKHxJ3j4Sm7CbxpbWaWXvdJsuzlvz05iokMkTXCL70HJqgR"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="fullscreen">fullscreen</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Left Column: Actions & Metadata (Side Panels) -->
+<aside class="w-full lg:w-96 space-y-6">
+<!-- Action Panel -->
+<div class="glass-panel rounded-2xl p-6 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)]">
+<h4 class="text-sm font-bold text-slate-400 mb-4 tracking-wider">ORDER STATUS ACTION</h4>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-xs font-semibold text-slate-500 mr-1">Admin Note</label>
+<textarea class="w-full bg-surface-container-high border-none rounded-xl text-on-surface text-sm focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-slate-600 p-4" placeholder="Enter reason for approval or rejection..." rows="4"></textarea>
+</div>
+<div class="flex flex-col gap-3">
+<button class="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-br from-[#22C55E] to-[#16A34A] shadow-lg shadow-green-500/10 active:scale-[0.98] transition-transform flex items-center justify-center gap-x-2">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                                Approve Order
+                            </button>
+<button class="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-br from-[#EF4444] to-[#DC2626] shadow-lg shadow-red-500/10 active:scale-[0.98] transition-transform flex items-center justify-center gap-x-2">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+                                Reject Order
+                            </button>
+</div>
+</div>
+</div>
+<!-- Order Metadata -->
+<div class="glass-panel rounded-2xl p-6">
+<h4 class="text-sm font-bold text-slate-400 mb-6 tracking-wider">TIMELINE</h4>
+<div class="space-y-6">
+<div class="flex gap-x-4 relative">
+<div class="absolute right-3 top-6 bottom-0 w-px bg-outline-variant/30"></div>
+<div class="z-10 h-6 w-6 rounded-full bg-primary-container border-4 border-[#0d1322] flex-shrink-0"></div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Order Created</p>
+<p class="text-xs text-slate-500">2 hours ago • Oct 24, 2023, 10:15 AM</p>
+</div>
+</div>
+<div class="flex gap-x-4 relative">
+<div class="absolute right-3 top-6 bottom-0 w-px bg-outline-variant/30"></div>
+<div class="z-10 h-6 w-6 rounded-full bg-surface-container-highest border-4 border-[#0d1322] flex-shrink-0"></div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Proof Uploaded</p>
+<p class="text-xs text-slate-500">1 hour ago • Oct 24, 2023, 11:20 AM</p>
+</div>
+</div>
+<div class="flex gap-x-4">
+<div class="z-10 h-6 w-6 rounded-full bg-surface-container border-4 border-[#0d1322] flex-shrink-0"></div>
+<div>
+<p class="text-sm font-semibold text-slate-600">Pending Review</p>
+<p class="text-xs text-slate-700">Awaiting Admin action</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Details -->
+<div class="p-6 rounded-2xl border border-outline-variant/10 bg-surface-container-lowest/50">
+<div class="flex items-center justify-between text-xs font-mono text-slate-500 mb-2">
+<span>Transaction Hash:</span>
+<span class="text-primary/70">#TXN-992-B4</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono text-slate-500">
+<span>Client IP:</span>
+<span>192.168.1.44</span>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Contextual FAB (Hidden on detail screens as per instruction) -->
+<!-- Suppression logic applied: suppress the FAB on Settings, Profile, Details, and Transactional screens -->
+</body></html>

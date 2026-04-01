@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>يوسف LMS - مشغل الدروس</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed-variant": "#743400",
+                        "primary-fixed": "#ebddff",
+                        "tertiary-container": "#8f4200",
+                        "on-tertiary": "#522300",
+                        "tertiary-fixed-dim": "#ffb68b",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-background": "#dde2f8",
+                        "background": "#0d1322",
+                        "on-surface": "#dde2f8",
+                        "on-secondary-container": "#00344e",
+                        "surface-dim": "#0d1322",
+                        "on-primary-fixed-variant": "#5b00c5",
+                        "tertiary-fixed": "#ffdbc8",
+                        "outline": "#958da1",
+                        "surface-container": "#191f2f",
+                        "surface-container-low": "#151b2b",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "surface-bright": "#33394a",
+                        "primary": "#d3bbff",
+                        "on-surface-variant": "#ccc3d7",
+                        "on-tertiary-fixed": "#321300",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#89ceff",
+                        "surface-container-highest": "#2f3445",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#242a3a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#dac5ff",
+                        "on-primary": "#3f008d",
+                        "outline-variant": "#4a4455",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#dde2f8",
+                        "on-tertiary-container": "#ffc19e",
+                        "tertiary": "#ffb68b",
+                        "surface-variant": "#2f3445",
+                        "on-primary-fixed": "#250059",
+                        "surface": "#0d1322",
+                        "secondary-container": "#00a2e6",
+                        "inverse-on-surface": "#2a3040",
+                        "secondary": "#89ceff",
+                        "surface-container-lowest": "#080e1d",
+                        "on-secondary": "#00344d",
+                        "inverse-primary": "#7331df",
+                        "primary-container": "#6d28d9",
+                        "surface-tint": "#d3bbff",
+                        "on-secondary-fixed": "#001e2f",
+                        "primary-fixed-dim": "#d3bbff"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0d1322;
+            color: #dde2f8;
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0d1322; }
+        ::-webkit-scrollbar-thumb { background: #2f3445; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-[#0d1322] border-b border-white/10 shadow-2xl shadow-[#6D28D9]/5 docked full-width top-0 z-50 sticky font-['Inter'] rtl text-right">
+<div class="flex flex-row-reverse justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-8">
+<h1 class="text-2xl font-black text-[#6D28D9] tracking-tighter">يوسف LMS</h1>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-[#6D28D9] border-b-2 border-[#6D28D9] pb-1" href="#">الرئيسية</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">مساراتي</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">المجتمع</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:bg-white/5 p-2 rounded-full transition-all duration-300 active:scale-95">notifications</button>
+<button class="material-symbols-outlined text-slate-400 hover:bg-white/5 p-2 rounded-full transition-all duration-300 active:scale-95">settings</button>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest border border-white/10 overflow-hidden">
+<img alt="صورة الملف الشخصي للمستخدم" class="w-full h-full object-cover" data-alt="professional portrait of a young middle eastern man with short black hair and a slight smile wearing a modern dark shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2_8isXzcAXap8iLlMLntO73UEAYUsstj-FCinbvUCb5tYbISU9O1agnbTw7dSnjTsW8XwiMaPXFZAmuXy6N75xvITxVZE2PMAY6QvKi6QofkhB6tc166NVdP1klWRdAH4OF7Iws1zDtCuLqDrIGsZQvPK4_ffbMsdoFI_Zd7G-6OCV5LfeNCOCw0bRhlbet66IgfxfxRleFO96Tur0gqSfz--CPHyjYRk3hKvqXh1wjt-PoXfhSscJo9bHTCCzcj8RPob0xtWfaA2"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar (Course Navigator) -->
+<aside class="hidden md:flex flex-col h-screen overflow-y-auto w-80 fixed right-0 top-16 border-l border-white/5 bg-[#0d1322] shadow-[-10px_0_30px_rgba(0,0,0,0.5)] font-['Inter'] rtl text-right z-40">
+<div class="p-6">
+<div class="mb-6">
+<h2 class="text-lg font-bold text-white mb-1">محتوى الدورة</h2>
+<p class="text-xs text-slate-500 uppercase tracking-wider">تم إكمال ٤٠٪</p>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full mt-3 overflow-hidden">
+<div class="h-full bg-primary-container w-[40%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<!-- Nav Items -->
+<div class="group">
+<button class="flex items-center justify-between w-full px-4 py-3 bg-white/5 border-r-4 border-[#6D28D9] text-white font-semibold transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#6D28D9]" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+<span class="text-sm">المقدمة</span>
+</div>
+</button>
+<div class="pr-10 py-2 space-y-2">
+<div class="flex items-center justify-between text-xs text-primary font-medium">
+<span>مقدمة في تطوير الويب</span>
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+</div>
+<div class="flex items-center justify-between text-xs text-slate-500">
+<span>ماذا ستحتاج لهذه الدورة؟</span>
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+</div>
+</div>
+<button class="flex items-center w-full px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/5 transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">code</span>
+<span class="text-sm">أساسيات البرمجة</span>
+</div>
+<span class="material-symbols-outlined mr-auto text-xs opacity-40">lock</span>
+</button>
+<button class="flex items-center w-full px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/5 transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">تطوير الواجهات</span>
+</div>
+<span class="material-symbols-outlined mr-auto text-xs opacity-40">lock</span>
+</button>
+<button class="flex items-center w-full px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/5 transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">database</span>
+<span class="text-sm">قواعد البيانات</span>
+</div>
+<span class="material-symbols-outlined mr-auto text-xs opacity-40">lock</span>
+</button>
+<button class="flex items-center w-full px-4 py-3 text-slate-500 hover:text-slate-200 hover:bg-white/5 transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="text-sm">المشروع النهائي</span>
+</div>
+<span class="material-symbols-outlined mr-auto text-xs opacity-40">lock</span>
+</button>
+</div>
+<div class="mt-10 pt-6 border-t border-white/5">
+<button class="w-full bg-surface-container-high hover:bg-surface-container-highest text-white py-3 rounded-xl text-sm font-medium transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                        تحميل الموارد
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:mr-80 p-6 md:p-10 lg:p-12">
+<div class="max-w-6xl mx-auto space-y-10">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">تطوير الويب</a>
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span class="text-slate-300">الأساسيات</span>
+</nav>
+<!-- Video Player Section -->
+<section class="relative group">
+<div class="aspect-video w-full bg-surface-container-low rounded-2xl overflow-hidden shadow-2xl relative border border-white/5">
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all duration-500">
+<button class="h-20 w-20 rounded-full bg-primary-container/90 text-white flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all group/play">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<img class="w-full h-full object-cover" data-alt="cinematic close up of a code editor on a monitor showing javascript syntax with neon colors in a dim room with bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkXKzW9C-IOqarm-W9v_7gEQ-nlkJ7qCM2C7d3K_LyTkIk98_whn9YStnbf4VNybaVqynD1AOTMK-1Tt-CJuCl7ddEbf-D3eVI2CQmnSkBzhjFRTL_l-UFhqsl92abs84CswOYPWRBvFFGLyy60FrVXeRfuXRHq6B9ZUDg0TzEYwdOUWwaYqPt92vgjyN9t-bGRWQqpK3phRtn60TZViu-xcx4HItR93N6GPEJyklXhvq_K-NraY6zbzH5hKqeb3S0H93XrT4bnYcs"/>
+<!-- Custom Controls Overlay -->
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white cursor-pointer">play_arrow</span>
+<div class="flex-1 h-1 bg-white/20 rounded-full relative overflow-hidden">
+<div class="absolute inset-0 bg-primary-container w-[25%]"></div>
+</div>
+<span class="text-xs font-mono text-white">12:45 / 45:00</span>
+<span class="material-symbols-outlined text-white cursor-pointer">volume_up</span>
+<span class="material-symbols-outlined text-white cursor-pointer">fullscreen</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Lesson Info & Actions -->
+<section class="flex flex-col lg:flex-row justify-between items-start gap-8">
+<div class="flex-1 space-y-4">
+<h2 class="text-4xl font-bold text-white leading-tight">مقدمة في تطوير الويب</h2>
+<p class="text-slate-400 text-lg leading-relaxed max-w-3xl">
+                            في هذا الدرس، سنبدأ رحلتنا في عالم تطوير الويب. سنتعرف على كيفية عمل الإنترنت، الفرق بين الواجهة الأمامية والخلفية، وسنقوم بإعداد بيئة العمل الخاصة بنا للبدء في كتابة أول سطر برمجي.
+                        </p>
+</div>
+<div class="flex flex-row lg:flex-col gap-3 w-full lg:w-auto shrink-0">
+<button class="flex-1 lg:w-48 bg-primary-container hover:bg-primary text-on-primary-container font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary-container/10">
+                            الدرس التالي
+                            <span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="flex-1 lg:w-48 bg-surface-container-high hover:bg-surface-container-highest text-slate-200 font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">cloud_download</span>
+                            تحميل المرفقات
+                        </button>
+</div>
+</section>
+<!-- Comments & Interaction -->
+<section class="pt-10 border-t border-white/5 space-y-8">
+<div class="flex items-center justify-between">
+<h3 class="text-2xl font-bold text-white flex items-center gap-3">
+                            التعليقات
+                            <span class="bg-surface-container-highest text-primary text-xs px-2 py-1 rounded-full">١٢</span>
+</h3>
+</div>
+<!-- Post Comment -->
+<div class="bg-surface-container-low p-6 rounded-2xl border border-white/5">
+<div class="flex gap-4">
+<div class="h-10 w-10 rounded-full bg-surface-container-highest shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close up avatar of the current user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_w73ig_jv0EbMSYb0a2zkeEwMVpw426t0TpfYABSasuQcwQ3a8TDetxkkwq9YtEba1KGQ9ZcoCbm4TsthCPV5Lm3tr7BO-tLplw_fUqDE8DxwK8uWbOepkf8x0mRs5M4Mu4zTNZKCZm4jE6F4PjEFnUMQ78O5Ti1J82aXs3Z-G8ITwvR2bnsziAyeyLPCIHQflYN661yt-DmM5hYYQp2QFbFgzh0LyxHKKgl0D9r_I9nVdVM2ggk_NCR5R176wtUvZA9OS2Xa8bh7"/>
+</div>
+<div class="flex-1 space-y-4">
+<textarea class="w-full bg-surface-container-high border-none rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-primary-container/50 transition-all text-sm" placeholder="شارك برأيك أو اطرح سؤالاً حول الدرس..." rows="3"></textarea>
+<div class="flex justify-end">
+<button class="bg-primary-container hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-bold transition-all">إرسال التعليق</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Comment List (Asymmetric Grid/Bento style for feedback) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-surface-container-high/40 p-6 rounded-2xl border border-white/5 space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-500/20 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="avatar of a student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqJpoXln8Njwx-9F9Ut_wuq2QyyCdY7a_FYfMuFZcFNqsq19zQ6BPl87AI3sAEPE3e212HX9xK3eeBqvtamn9G5u_TA2IjUqJks-7s-Ei4WOhiTcRBWjcam0ZrIhFRV0aDwosWifl0Cf8WkmXzgw9KOOx5AL6TGdE-Yt81jf0YJfpaMoE8q9GbEr_XJITNknSKavaFOxwY5q8yVohrNtXxTATaFEYSQ9BtvILXh3EVtVTkw_qsKKZDRtm2zbjfL7lwq0tYiR8yHBLj"/>
+</div>
+<span class="text-sm font-bold text-slate-200">أحمد محمد</span>
+</div>
+<span class="text-xs text-slate-500">منذ ساعتين</span>
+</div>
+<p class="text-sm text-slate-400">شرح ممتاز ومبسط جداً، هل سنقوم باستخدام VS Code في هذه الدورة أم سنكتفي بالمحرر المدمج؟</p>
+<div class="flex items-center gap-4 pt-2">
+<button class="text-xs text-slate-500 flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span> ٥
+                                </button>
+<button class="text-xs text-slate-500 hover:text-white transition-colors">رد</button>
+</div>
+</div>
+<div class="bg-surface-container-high/40 p-6 rounded-2xl border border-white/5 space-y-3 lg:mt-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-emerald-500/20 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="avatar of another student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxGcnMlOK7b4hDd3dsXyCk15U1xFq3MwYQaWau3JxfFdzNBu4hRJFjhYcqIaIf0FZ_S5RTmACrLUjVBobBB0W4W6q2Rigmfgpyn6Ve6-C_5czGLsWkz4jYXIviBtQwVjEaKp1dQ7VhHpCptJrHAR2G-9Vvke1fQHdAAxv9mN3b8Otw7_YTzCnJios7qWp4JzrYpU_R5QNQJz9r3Qbdjc0AaPkq7PDQKiq_M0AB7imFOz-nP3IQUoqbGLlYVkZ3X4j81bx1-vkbWkaC"/>
+</div>
+<span class="text-sm font-bold text-slate-200">سارة علي</span>
+</div>
+<span class="text-xs text-slate-500">منذ ٥ ساعات</span>
+</div>
+<p class="text-sm text-slate-400">المقدمة شاملة جداً ومحفزة. بانتظار الدروس القادمة بفارغ الصبر!</p>
+<div class="flex items-center gap-4 pt-2">
+<button class="text-xs text-slate-500 flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span> ٣
+                                </button>
+<button class="text-xs text-slate-500 hover:text-white transition-colors">رد</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

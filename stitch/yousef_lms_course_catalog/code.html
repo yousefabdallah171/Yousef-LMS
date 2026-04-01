@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#ffb68b",
+              "on-primary-fixed": "#250059",
+              "surface-tint": "#d3bbff",
+              "on-primary": "#3f008d",
+              "secondary": "#89ceff",
+              "primary-fixed-dim": "#d3bbff",
+              "surface": "#0d1322",
+              "on-tertiary-fixed": "#321300",
+              "secondary-container": "#00a2e6",
+              "primary-fixed": "#ebddff",
+              "on-surface-variant": "#ccc3d7",
+              "on-tertiary-container": "#ffc19e",
+              "surface-dim": "#0d1322",
+              "outline-variant": "#4a4455",
+              "error-container": "#93000a",
+              "inverse-primary": "#7331df",
+              "outline": "#958da1",
+              "on-secondary-container": "#00344e",
+              "tertiary-container": "#8f4200",
+              "surface-bright": "#33394a",
+              "surface-container-high": "#242a3a",
+              "on-secondary": "#00344d",
+              "on-secondary-fixed": "#001e2f",
+              "on-tertiary-fixed-variant": "#743400",
+              "on-secondary-fixed-variant": "#004c6e",
+              "secondary-fixed-dim": "#89ceff",
+              "on-background": "#dde2f8",
+              "tertiary-fixed": "#ffdbc8",
+              "inverse-on-surface": "#2a3040",
+              "surface-container": "#191f2f",
+              "on-tertiary": "#522300",
+              "secondary-fixed": "#c9e6ff",
+              "surface-container-lowest": "#080e1d",
+              "on-primary-fixed-variant": "#5b00c5",
+              "on-error": "#690005",
+              "primary-container": "#6d28d9",
+              "primary": "#d3bbff",
+              "on-primary-container": "#dac5ff",
+              "on-surface": "#dde2f8",
+              "surface-variant": "#2f3445",
+              "surface-container-low": "#151b2b",
+              "inverse-surface": "#dde2f8",
+              "background": "#0d1322",
+              "surface-container-highest": "#2f3445",
+              "on-error-container": "#ffdad6",
+              "tertiary": "#ffb68b",
+              "error": "#ffb4ab"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0d1322; /* Surface Base */
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .course-card-glow:hover {
+        box-shadow: 0 0 20px rgba(14, 165, 233, 0.15);
+        border-color: #0EA5E9;
+      }
+    </style>
+</head>
+<body class="text-on-surface antialiased">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-[#0d1322]/60 backdrop-blur-xl border-none shadow-[0_8px_32px_rgba(109,40,217,0.08)] flex justify-between items-center px-8 py-4 max-w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter text-white">Yousef LMS</span>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Home</a>
+<a class="text-[#6D28D9] border-b-2 border-[#6D28D9] pb-1 font-semibold" href="#">Courses</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-300 hover:bg-white/5 p-2 rounded-full transition-all duration-300 active:scale-95">dark_mode</button>
+<button class="bg-[#6D28D9] text-white px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform hover:bg-[#6D28D9]/90">Dashboard</button>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 md:px-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="text-5xl md:text-6xl font-extrabold text-[#F9FAFB] tracking-tight mb-4">مكتبة الدورات</h1>
+<p class="text-lg md:text-xl text-[#94A3B8] max-w-2xl leading-relaxed">
+                اكتشف طريقك نحو الاحتراف. دورات متخصصة في هندسة البرمجيات والذكاء الاصطناعي، مصممة لنقلك من الصفر إلى سوق العمل.
+            </p>
+</header>
+<!-- Filter Bar -->
+<section class="mb-12 space-y-6">
+<div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+<div class="relative w-full md:w-96 group">
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-[#0EA5E9] transition-colors">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-xl py-3 pr-12 pl-4 text-white focus:ring-0 focus:bg-surface-container-highest transition-all outline-none" placeholder="ابحث عن دورة..." type="text"/>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<span class="text-sm text-slate-400 whitespace-nowrap">تم العثور على 12 دورة</span>
+<div class="relative flex-grow md:flex-grow-0">
+<select class="appearance-none w-full bg-surface-container-high border-none rounded-xl py-3 pr-4 pl-10 text-white focus:ring-0 cursor-pointer">
+<option>الأحدث أولاً</option>
+<option>الأعلى تقييماً</option>
+<option>السعر: من الأقل</option>
+</select>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Category Chips -->
+<div class="flex flex-wrap gap-3">
+<button class="px-5 py-2 rounded-full bg-[#6D28D9] text-white text-sm font-medium transition-all">الكل</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-slate-300 text-sm font-medium hover:bg-surface-container-highest transition-all border border-transparent hover:border-[#0EA5E9]/30">Python</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-slate-300 text-sm font-medium hover:bg-surface-container-highest transition-all border border-transparent hover:border-[#0EA5E9]/30">الذكاء الاصطناعي</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-slate-300 text-sm font-medium hover:bg-surface-container-highest transition-all border border-transparent hover:border-[#0EA5E9]/30">تطوير الويب</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-slate-300 text-sm font-medium hover:bg-surface-container-highest transition-all border border-transparent hover:border-[#0EA5E9]/30">علم البيانات</button>
+</div>
+</section>
+<!-- Course Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="group bg-[#111827] border border-[#1F2937] rounded-xl overflow-hidden transition-all duration-300 course-card-glow">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Programming interface with code" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern high-tech workspace with dual monitors showing complex code in a dark room with neon violet ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxLwxuDyyoNrLzv8ooNlV6ffM-Fbt_C585TMogdWtNWF8d2B1Ccw3URVSl3dLkNJm09M1vIO_htiDP1Q7hPs7VhCyso_sOx3k-s0WIlr7VKmNqKBg-2euvR28ughfQ3htNKNMHGG4__b9ce413_8EfUXgDRZTUTueCwdv-HiVz0owoKuhsEwEaTtqk2nBHSpwvisJzQ6Hf7r03I-nDXJTLYKRPbHClasx_lVCCKf8FSWD-_h6FI-mFWfDW_74LVkGbYyq9iYDm4cz8"/>
+<div class="absolute top-4 right-4 bg-[#6D28D9]/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full">
+                        الأكثر مبيعاً
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-block px-2 py-1 bg-[#0EA5E9]/10 text-[#0EA5E9] text-[10px] font-bold rounded uppercase tracking-wider">5 دروس مجانية</span>
+</div>
+<h3 class="text-xl font-bold text-[#F9FAFB] mb-2 group-hover:text-[#0EA5E9] transition-colors">احتراف تطوير الويب المتكامل</h3>
+<p class="text-sm text-slate-400 mb-1 font-medium">م. يوسف أحمد</p>
+<p class="text-[#94A3B8] text-sm line-clamp-1 mb-6">تعلم بناء تطبيقات ويب كاملة باستخدام React و Node.js من الصفر.</p>
+<div class="flex items-center justify-between pt-6 border-t border-[#1F2937]">
+<div class="flex flex-col">
+<span class="text-xs text-slate-500">24 درس</span>
+<span class="text-lg font-bold text-[#F9FAFB]">499 ر.س</span>
+</div>
+<button class="bg-[#6D28D9] hover:bg-[#6D28D9]/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all active:scale-95 shadow-lg shadow-[#6D28D9]/20">عرض الدورة</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-[#111827] border border-[#1F2937] rounded-xl overflow-hidden transition-all duration-300 course-card-glow">
+<div class="aspect-video relative overflow-hidden">
+<img alt="AI visualization" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Digital representation of a neural network with glowing blue nodes and connecting lines on a deep black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2iOWBATPR1h1c_ZhBSIdJZ9w0vdaI8r2J76yxBmvgZbIXY30xJIsksn3JXdb3fRsPd9AM3DGEqgChL5Vofyn1h2-txKbDsQfslN_74BmBrvTI-4oJ3xkgT_CpxYXBLY6xj47g4o9nXCc7xc08uiwuQEda4qEf9zrsQqkqeyeSXC1gVEnHKqRKr98g5mu3NIFF7UPi0vKVX6XL0D8MjPEFaUJqjVSbycDJVo1ilZ-JHqaSiPwkHnmsC_g9zUWZrpAMN3CTP9UGaJjA"/>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-block px-2 py-1 bg-[#0EA5E9]/10 text-[#0EA5E9] text-[10px] font-bold rounded uppercase tracking-wider">5 دروس مجانية</span>
+</div>
+<h3 class="text-xl font-bold text-[#F9FAFB] mb-2 group-hover:text-[#0EA5E9] transition-colors">مقدمة في الذكاء الاصطناعي</h3>
+<p class="text-sm text-slate-400 mb-1 font-medium">د. سارة خالد</p>
+<p class="text-[#94A3B8] text-sm line-clamp-1 mb-6">رحلتك الأولى في عالم تعلم الآلة والشبكات العصبية العميقة.</p>
+<div class="flex items-center justify-between pt-6 border-t border-[#1F2937]">
+<div class="flex flex-col">
+<span class="text-xs text-slate-500">18 درس</span>
+<span class="text-lg font-bold text-[#F9FAFB]">599 ر.س</span>
+</div>
+<button class="bg-[#6D28D9] hover:bg-[#6D28D9]/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all active:scale-95 shadow-lg shadow-[#6D28D9]/20">عرض الدورة</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-[#111827] border border-[#1F2937] rounded-xl overflow-hidden transition-all duration-300 course-card-glow">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Cybersecurity matrix" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Abstract green matrix code rain flowing down a black screen with silhouette of a digital padlock in the center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABC2JpcsW76J4ZIzwVPn_iWYBVyuISSFkHtri8yEJ8FHqqdDvilSZscV-GzrJHYWCDajPF9HAzcGBMXpH0fKLOFSy6jwSCRRjvYPsFnsY6DMx96RSwY5dE534Hawe4I0kU7WO1Q0hc7_HqrbEgMGHI4GYYAGMjdn655AQUXhVOZ_OKLBGQKmaOx1QoJw0iQ3GTOiQX1CcHnsI5apcf0fQD_HacIuyzX_tuBUQMoIEQFakEfbhk1uEbsJgV90vdLlaOx6ilrOedKBg8"/>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-block px-2 py-1 bg-[#0EA5E9]/10 text-[#0EA5E9] text-[10px] font-bold rounded uppercase tracking-wider">5 دروس مجانية</span>
+</div>
+<h3 class="text-xl font-bold text-[#F9FAFB] mb-2 group-hover:text-[#0EA5E9] transition-colors">أساسيات الأمن السيبراني</h3>
+<p class="text-sm text-slate-400 mb-1 font-medium">م. فهد العتيبي</p>
+<p class="text-[#94A3B8] text-sm line-clamp-1 mb-6">تعلم كيف تحمي الأنظمة والشبكات من الهجمات والاختراقات الأمنية.</p>
+<div class="flex items-center justify-between pt-6 border-t border-[#1F2937]">
+<div class="flex flex-col">
+<span class="text-xs text-slate-500">32 درس</span>
+<span class="text-lg font-bold text-[#F9FAFB]">750 ر.س</span>
+</div>
+<button class="bg-[#6D28D9] hover:bg-[#6D28D9]/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all active:scale-95 shadow-lg shadow-[#6D28D9]/20">عرض الدورة</button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-[#111827] border border-[#1F2937] rounded-xl overflow-hidden transition-all duration-300 course-card-glow">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Python code" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up shot of python source code on a screen with warm golden light highlights and deep shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-88GowaCiuY2JwcsHVEig1NochlFBbEFmptMF5-zX2sURTVBKbhiT43yxbWKzkeOwHGi7h6bMWivBVbrwimRLSwAHMheKf4AB_OVmTv_MasJTb9UfA4W7_fJ5sMaZ_NqgAuC3uDsnGTgPGccn4UPJual1Q1XfpVwDAQoEcrJuKspzwvvFVOhLPDGTt7JGTgSRDFCOX73HdnSDUg28eJxUjhfUXtwokSPWMflJFpPyBIwj2rxhLV7gHuhhwxiyZtPSQfWlYQ4KSEQL"/>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-block px-2 py-1 bg-[#0EA5E9]/10 text-[#0EA5E9] text-[10px] font-bold rounded uppercase tracking-wider">5 دروس مجانية</span>
+</div>
+<h3 class="text-xl font-bold text-[#F9FAFB] mb-2 group-hover:text-[#0EA5E9] transition-colors">بايثون للمبتدئين الشامل</h3>
+<p class="text-sm text-slate-400 mb-1 font-medium">أ. نورا سالم</p>
+<p class="text-[#94A3B8] text-sm line-clamp-1 mb-6">المدخل الأساسي لتعلم لغة البرمجة الأكثر طلباً في العالم حالياً.</p>
+<div class="flex items-center justify-between pt-6 border-t border-[#1F2937]">
+<div class="flex flex-col">
+<span class="text-xs text-slate-500">15 درس</span>
+<span class="text-lg font-bold text-[#F9FAFB]">299 ر.س</span>
+</div>
+<button class="bg-[#6D28D9] hover:bg-[#6D28D9]/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all active:scale-95 shadow-lg shadow-[#6D28D9]/20">عرض الدورة</button>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group bg-[#111827] border border-[#1F2937] rounded-xl overflow-hidden transition-all duration-300 course-card-glow">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Data visualization" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Sleek modern data dashboard on a screen with 3D bar charts and line graphs in shades of electric blue and teal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_Z8_yYHbGAqwZZVyJLepDnAW6foeqW8Uq-0iPPpN0LJhv1FDYBwYZV44f0EcDiIICgmEvchwQymZG4a_gt7QvFiGT2KhNNUSLl5HbKw3DSjYv_kwZQLpaQ9zAC2Ejw2R02Y9T-BXb8sbGgjZ0nYeoZY-FfEDUlKH488ei7rs6ri4UFL7vGCHIXwkC0aCCDKJmdCvpQ0hddUv9-ZAMeT3sScTNJi0azdD4iYb9OUs5KyNG0cbIbYqUEKHbWK47vPCgZwzg1tPFzxnV"/>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-block px-2 py-1 bg-[#0EA5E9]/10 text-[#0EA5E9] text-[10px] font-bold rounded uppercase tracking-wider">5 دروس مجانية</span>
+</div>
+<h3 class="text-xl font-bold text-[#F9FAFB] mb-2 group-hover:text-[#0EA5E9] transition-colors">تحليل البيانات باستخدام SQL</h3>
+<p class="text-sm text-slate-400 mb-1 font-medium">م. خالد منصور</p>
+<p class="text-[#94A3B8] text-sm line-clamp-1 mb-6">استخرج القيمة من البيانات الضخمة وبناء تقارير احترافية مذهلة.</p>
+<div class="flex items-center justify-between pt-6 border-t border-[#1F2937]">
+<div class="flex flex-col">
+<span class="text-xs text-slate-500">20 درس</span>
+<span class="text-lg font-bold text-[#F9FAFB]">450 ر.س</span>
+</div>
+<button class="bg-[#6D28D9] hover:bg-[#6D28D9]/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all active:scale-95 shadow-lg shadow-[#6D28D9]/20">عرض الدورة</button>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group bg-[#111827] border border-[#1F2937] rounded-xl overflow-hidden transition-all duration-300 course-card-glow">
+<div class="aspect-video relative overflow-hidden">
+<img alt="UI/UX design" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up of a designer's hand using a stylus on a tablet showing a mobile app UI design in progress" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYk4uj9f6qYEI_QVmIqZ3PovqFp0__JAQhHt9d80TyqLwVxil5uqkn93Ixey_wJ7LK8lUkmt4q3nwC0Tjfcy1UJh47J9CvYjT6h9xsYsoJo15aAml4hD_e84u_-s7FEArBOuLoHXaRro6VetiFcyFjQZawy6oi_tZzD5NvljDxaCdN5ZaP8ZdxsFP2HwFjspdQCOPSy7q_xIKTzgo5TCRkQNnRGcQQLQFsr9I50eap96GHyJAPBfJnWQRwQ3yEaKecpAXNDJ_kr2tg"/>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-block px-2 py-1 bg-[#0EA5E9]/10 text-[#0EA5E9] text-[10px] font-bold rounded uppercase tracking-wider">5 دروس مجانية</span>
+</div>
+<h3 class="text-xl font-bold text-[#F9FAFB] mb-2 group-hover:text-[#0EA5E9] transition-colors">تصميم تجربة المستخدم UI/UX</h3>
+<p class="text-sm text-slate-400 mb-1 font-medium">أ. ريم علي</p>
+<p class="text-[#94A3B8] text-sm line-clamp-1 mb-6">حول أفكارك إلى تصاميم مذهلة وسهلة الاستخدام باستخدام Figma.</p>
+<div class="flex items-center justify-between pt-6 border-t border-[#1F2937]">
+<div class="flex flex-col">
+<span class="text-xs text-slate-500">28 درس</span>
+<span class="text-lg font-bold text-[#F9FAFB]">399 ر.س</span>
+</div>
+<button class="bg-[#6D28D9] hover:bg-[#6D28D9]/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all active:scale-95 shadow-lg shadow-[#6D28D9]/20">عرض الدورة</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination (Implicitly suggested) -->
+<div class="mt-16 flex justify-center gap-4">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container-high text-white hover:bg-[#6D28D9] transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-[#6D28D9] text-white">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container-high text-white hover:bg-surface-container-highest transition-colors">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container-high text-white hover:bg-[#6D28D9] transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-[#161b2c] mt-20 w-full py-12 px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-lg font-bold text-white">Yousef LMS</span>
+<span class="font-['Inter'] text-sm text-slate-500">© 2024 Yousef LMS. All rights reserved.</span>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-[#6D28D9] transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-[#6D28D9] transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-[#6D28D9] transition-colors opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#958da1",
+              "surface-variant": "#2f3445",
+              "surface-bright": "#33394a",
+              "inverse-surface": "#dde2f8",
+              "on-primary": "#3f008d",
+              "inverse-on-surface": "#2a3040",
+              "surface-container-highest": "#2f3445",
+              "on-secondary-fixed-variant": "#004c6e",
+              "on-secondary-container": "#00344e",
+              "on-surface-variant": "#ccc3d7",
+              "outline-variant": "#4a4455",
+              "primary": "#d3bbff",
+              "background": "#0d1322",
+              "surface-container": "#191f2f",
+              "primary-fixed": "#ebddff",
+              "on-tertiary-fixed-variant": "#743400",
+              "error": "#ffb4ab",
+              "surface-tint": "#d3bbff",
+              "tertiary-container": "#8f4200",
+              "secondary": "#89ceff",
+              "inverse-primary": "#7331df",
+              "on-tertiary-fixed": "#321300",
+              "tertiary-fixed-dim": "#ffb68b",
+              "tertiary-fixed": "#ffdbc8",
+              "tertiary": "#ffb68b",
+              "primary-container": "#6d28d9",
+              "on-surface": "#dde2f8",
+              "on-primary-fixed-variant": "#5b00c5",
+              "on-tertiary": "#522300",
+              "on-primary-container": "#dac5ff",
+              "on-error": "#690005",
+              "surface-container-low": "#151b2b",
+              "surface": "#0d1322",
+              "on-primary-fixed": "#250059",
+              "surface-container-high": "#242a3a",
+              "on-tertiary-container": "#ffc19e",
+              "secondary-container": "#00a2e6",
+              "primary-fixed-dim": "#d3bbff",
+              "secondary-fixed-dim": "#89ceff",
+              "on-error-container": "#ffdad6",
+              "secondary-fixed": "#c9e6ff",
+              "on-secondary-fixed": "#001e2f",
+              "on-secondary": "#00344d",
+              "on-background": "#dde2f8",
+              "surface-dim": "#0d1322",
+              "error-container": "#93000a",
+              "surface-container-lowest": "#080e1d"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #0d1322;
+        color: #dde2f8;
+        font-family: 'Inter', sans-serif;
+      }
+      .glass-effect {
+        backdrop-filter: blur(12px);
+        background: rgba(47, 52, 69, 0.6);
+      }
+      .luminescent-glow {
+        box-shadow: 0 0 40px -10px rgba(109, 40, 217, 0.15);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SIDE NAV BAR (Admin Shell) -->
+<aside class="fixed right-0 top-0 h-full w-72 bg-[#0d1322] border-l border-white/5 shadow-[32px_0_64px_-20px_rgba(109,40,217,0.08)] flex flex-col py-8 gap-y-6 z-50 transition-all duration-300">
+<div class="px-8">
+<h1 class="text-2xl font-bold text-white bg-clip-text bg-gradient-to-tr from-[#6D28D9] to-[#6D28D9]/80">نظام التعلم الذكي</h1>
+<p class="text-slate-400 text-sm mt-1">لوحة الإدارة</p>
+</div>
+<nav class="flex-1 flex flex-col gap-y-1 mt-4">
+<a class="flex items-center gap-x-4 py-3 px-8 text-slate-400 pr-4 hover:text-white transition-all duration-300 hover:bg-[#1a2333] active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] leading-relaxed">لوحة القيادة</span>
+</a>
+<a class="flex items-center gap-x-4 py-3 px-8 text-white font-bold border-r-4 border-[#6D28D9] pr-4 bg-gradient-to-l from-[#6D28D9]/10 to-transparent hover:bg-[#1a2333] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-['Inter'] leading-relaxed">الدورات</span>
+</a>
+<a class="flex items-center gap-x-4 py-3 px-8 text-slate-400 pr-4 hover:text-white transition-all duration-300 hover:bg-[#1a2333] active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-['Inter'] leading-relaxed">الطلبات</span>
+</a>
+<a class="flex items-center gap-x-4 py-3 px-8 text-slate-400 pr-4 hover:text-white transition-all duration-300 hover:bg-[#1a2333] active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Inter'] leading-relaxed">الطلاب</span>
+</a>
+<a class="flex items-center gap-x-4 py-3 px-8 text-slate-400 pr-4 hover:text-white transition-all duration-300 hover:bg-[#1a2333] active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-['Inter'] leading-relaxed">التعليقات</span>
+</a>
+</nav>
+<div class="px-6">
+<button class="w-full bg-gradient-to-tr from-[#6D28D9] to-[#6D28D9]/80 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+<span>إضافة دورة جديدة</span>
+</button>
+</div>
+<div class="mt-auto px-8 py-4 border-t border-white/5 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="professional male portrait with confident expression in tech setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqQyABs-FnNSSR4EZ5U3qM6x0YtX-e5QdVXp4ahYAxFJYzY3oWy2NflbPTtcT6cZRPvGktf-QTbdh7S5-X8y7JcBDTQiPy85oBcBSTJ7YWFTBY7aJCjZYGt4uqm4cGS4bYPPjuoVKhDZsv98OfXlNjxUrovjYGII2bpefNf0Dd3sFS7ijWlnPb8Mh7cMDpfVWawk7ljcwJCdzB1-uYVhWzw0B59CwQkFSx7kfkVOES4bXU45C4slJHlHmbbaLHef-H7KBmVpQQDsRV"/>
+</div>
+<div>
+<p class="text-sm font-semibold text-white">يوسف أحمد</p>
+<p class="text-xs text-slate-500">المدير العام</p>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT AREA -->
+<main class="mr-72 min-h-screen flex flex-col">
+<!-- TOP NAV BAR -->
+<header class="h-20 fixed top-0 left-0 right-72 bg-[#0d1322]/60 backdrop-blur-xl z-40 flex items-center justify-between px-10 transition-all">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-extrabold text-white">لوحة التحكم</h2>
+<span class="text-slate-600">/</span>
+<span class="text-slate-400">إدارة الدورات التدريبية</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-[#6D28D9]">search</span>
+<input class="bg-surface-container-low border-none rounded-full pr-10 pl-4 py-2 w-64 text-sm focus:ring-2 focus:ring-[#6D28D9]/50 transition-all text-on-surface" placeholder="البحث عن دورة..." type="text"/>
+</div>
+<button class="text-slate-400 hover:text-white transition-opacity focus-within:ring-2 focus-within:ring-[#6D28D9]/50 p-2">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-slate-400 hover:text-white transition-opacity focus-within:ring-2 focus-within:ring-[#6D28D9]/50 p-2">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- PAGE CONTENT CANVAS -->
+<div class="mt-20 p-10 flex-1 flex flex-col gap-8">
+<!-- HEADER SECTION -->
+<div class="flex items-end justify-between">
+<div>
+<h1 class="text-4xl font-bold text-white tracking-tight">قائمة الدورات</h1>
+<p class="text-slate-400 mt-2 text-lg">إدارة وتعديل الدورات المتاحة على المنصة</p>
+</div>
+<div class="flex gap-4">
+<div class="flex bg-surface-container-low rounded-xl p-1">
+<button class="px-6 py-2 rounded-lg bg-surface-container-highest text-white text-sm font-medium transition-all">الكل</button>
+<button class="px-6 py-2 rounded-lg text-slate-500 hover:text-white text-sm font-medium transition-all">منشور</button>
+<button class="px-6 py-2 rounded-lg text-slate-500 hover:text-white text-sm font-medium transition-all">مسودة</button>
+</div>
+</div>
+</div>
+<!-- TABLE CONTAINER -->
+<div class="bg-surface-container-low rounded-2xl overflow-hidden luminescent-glow">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 text-slate-400 text-sm uppercase tracking-wider">
+<th class="px-8 py-5 font-semibold">الدورة</th>
+<th class="px-6 py-5 font-semibold">الحالة</th>
+<th class="px-6 py-5 font-semibold">الدروس</th>
+<th class="px-6 py-5 font-semibold">السعر</th>
+<th class="px-6 py-5 font-semibold">آخر تحديث</th>
+<th class="px-8 py-5 font-semibold text-left">الإجراءات</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<!-- ROW 1 -->
+<tr class="group hover:bg-white/5 transition-colors cursor-pointer">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-10 rounded-lg overflow-hidden bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="abstract code on screen with blue and purple neon lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlVUS0dosfrGgBZCC2hjeervCEa4pHDkbPoF06aAcB3iff36zycoqlyC3kY5JW2z5syKoclYLJkp5STLmGPTKA8PTTiM-hupEvczWm_GS3uKNnrH5z81e6u9hWj3NMyGnTBSMYqHQlXIPsG1AFCwpnspjtU4Fy-T5PR9vjo_5D4zJndVvuvMYqogLE3eJ9Oa-__fGAM4_1zIy19ss6lOfvG-nqEr2af52LjEU2hcCRAwucxHjstgbHB9c5tsaA8RusryuvgCZtjfr8"/>
+</div>
+<div>
+<div class="text-white font-bold text-lg leading-tight">أساسيات React المتقدمة</div>
+<div class="text-slate-500 text-xs mt-1 italic">برمجة الواجهات</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-green-500/10 text-green-400 flex items-center w-fit gap-1 border border-green-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                                    منشور
+                                </span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col">
+<span class="text-white font-medium">42 درس</span>
+<span class="text-slate-500 text-xs">12.5 ساعة</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-[#6D28D9] font-bold text-lg">99.00$</span>
+</td>
+<td class="px-6 py-6 text-slate-400 text-sm">
+                                12 أكتوبر 2023
+                            </td>
+<td class="px-8 py-6 text-left">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-[#6D28D9]/20 hover:text-[#d3bbff] text-slate-500 rounded-lg transition-all" title="تعديل">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 hover:bg-yellow-500/20 hover:text-yellow-400 text-slate-500 rounded-lg transition-all" title="إلغاء النشر">
+<span class="material-symbols-outlined text-xl">visibility_off</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 hover:text-red-400 text-slate-500 rounded-lg transition-all" title="حذف">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2 -->
+<tr class="group hover:bg-white/5 transition-colors cursor-pointer">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-10 rounded-lg overflow-hidden bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="professional software engineering setup with clean desk and multiple monitors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDus9gg5bl41ifi_Nbmt0AyGyFtX8llv1iBvxaGinuqsUPCNnDGnHn21R7g5cRSuV3oHVV7JnVjL2JCC7ubGvLBTbX8DVIT9LMloH98a4Rg2JlAbxlf_NEvSI87vDWVxTzTLpnZn1fki3C-0f0WYOGPAH5NWaVr0KI5xelmHaS69bHDW7V59pA2pHCOUktAI3jqbA1S0btwiJmyNAZ1e2r5Wrspn0FZ178nr7eX6xA-taQ27i3zwwvCbIhrW_kQ8kADYzm267E_P8yO"/>
+</div>
+<div>
+<div class="text-white font-bold text-lg leading-tight">الذكاء الاصطناعي للمبتدئين</div>
+<div class="text-slate-500 text-xs mt-1 italic">علوم البيانات</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-yellow-500/10 text-yellow-400 flex items-center w-fit gap-1 border border-yellow-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                                    مسودة
+                                </span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col">
+<span class="text-white font-medium">28 درس</span>
+<span class="text-slate-500 text-xs">8 ساعات</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-[#6D28D9] font-bold text-lg">149.00$</span>
+</td>
+<td class="px-6 py-6 text-slate-400 text-sm">
+                                05 نوفمبر 2023
+                            </td>
+<td class="px-8 py-6 text-left">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-[#6D28D9]/20 hover:text-[#d3bbff] text-slate-500 rounded-lg transition-all" title="تعديل">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 hover:bg-green-500/20 hover:text-green-400 text-slate-500 rounded-lg transition-all" title="نشر">
+<span class="material-symbols-outlined text-xl">publish</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 hover:text-red-400 text-slate-500 rounded-lg transition-all" title="حذف">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3 -->
+<tr class="group hover:bg-white/5 transition-colors cursor-pointer">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-10 rounded-lg overflow-hidden bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="vibrant neon code on dark terminal screen highlighting futuristic technology" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACAolLtRlH0QQUjF4TkG5CDnjTJ43-vNcnjPL4ZOaEMNLEn_6G8ZPsLIH3pYxcQcLQRNBmUTLzvCGhZf5lSRUWdKtJSF5yjH8yPLV-Cr20-ADsAaQ6iQG3VCml0TkvlwnU4kDfyfwwqSGayyaGSBZHlexRU9v4ApS1Z6ukDT9QJbkdhwbBuyRq8J0i0j4ktHDI-fVnRymc0a-WpMcKJDBPOK6v51fa2p4fknfGs0W1GiJK11KnBc2QGqaxSYdm3XitXEJk5xqezP56"/>
+</div>
+<div>
+<div class="text-white font-bold text-lg leading-tight">هندسة العمارة النظيفة في Node.js</div>
+<div class="text-slate-500 text-xs mt-1 italic">برمجة الخلفية</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-green-500/10 text-green-400 flex items-center w-fit gap-1 border border-green-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                                    منشور
+                                </span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col">
+<span class="text-white font-medium">55 درس</span>
+<span class="text-slate-500 text-xs">20 ساعة</span>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-[#6D28D9] font-bold text-lg">199.00$</span>
+</td>
+<td class="px-6 py-6 text-slate-400 text-sm">
+                                01 ديسمبر 2023
+                            </td>
+<td class="px-8 py-6 text-left">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-[#6D28D9]/20 hover:text-[#d3bbff] text-slate-500 rounded-lg transition-all" title="تعديل">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 hover:bg-yellow-500/20 hover:text-yellow-400 text-slate-500 rounded-lg transition-all" title="إلغاء النشر">
+<span class="material-symbols-outlined text-xl">visibility_off</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 hover:text-red-400 text-slate-500 rounded-lg transition-all" title="حذف">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4 Skeleton State (Visual cue for loading more) -->
+<tr class="opacity-50">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4 animate-pulse">
+<div class="w-16 h-10 rounded-lg bg-surface-container-highest"></div>
+<div class="space-y-2">
+<div class="h-4 w-40 bg-surface-container-highest rounded"></div>
+<div class="h-3 w-20 bg-surface-container-highest rounded"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<div class="h-6 w-20 bg-surface-container-highest rounded-full animate-pulse"></div>
+</td>
+<td class="px-6 py-6">
+<div class="space-y-2 animate-pulse">
+<div class="h-4 w-12 bg-surface-container-highest rounded"></div>
+<div class="h-3 w-16 bg-surface-container-highest rounded"></div>
+</div>
+</td>
+<td class="px-6 py-6">
+<div class="h-6 w-16 bg-surface-container-highest rounded animate-pulse"></div>
+</td>
+<td class="px-6 py-6">
+<div class="h-4 w-24 bg-surface-container-highest rounded animate-pulse"></div>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-end gap-2 animate-pulse">
+<div class="w-8 h-8 rounded bg-surface-container-highest"></div>
+<div class="w-8 h-8 rounded bg-surface-container-highest"></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- PAGINATION -->
+<div class="px-8 py-6 bg-surface-container-high/30 border-t border-white/5 flex items-center justify-between">
+<span class="text-slate-500 text-sm">عرض 1-10 من أصل 45 دورة</span>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface-container-highest text-slate-400 hover:text-white transition-all disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-[#6D28D9] text-white font-bold">1</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container-highest text-slate-400 hover:text-white transition-all">2</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container-highest text-slate-400 hover:text-white transition-all">3</button>
+<button class="p-2 rounded-lg bg-surface-container-highest text-slate-400 hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</div>
+</div>
+</div>
+<!-- SUCCESS TOAST (HIDDEN BY DEFAULT) -->
+<div class="fixed bottom-10 left-10 glass-effect border border-[#6D28D9]/30 rounded-2xl p-4 flex items-center gap-4 luminescent-glow transform translate-y-20 transition-transform duration-500 pointer-events-none">
+<div class="w-10 h-10 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm">تم بنجاح</h4>
+<p class="text-slate-400 text-xs">تم تحديث حالة الدورة بنجاح</p>
+</div>
+</div>
+</div>
+</main>
+<!-- DELETE CONFIRMATION MODAL (OVERLAY) -->
+<div class="fixed inset-0 bg-[#0d1322]/80 backdrop-blur-sm z-[100] flex items-center justify-center hidden">
+<div class="bg-surface-container rounded-3xl p-8 max-w-md w-full border border-white/5 shadow-2xl">
+<div class="w-16 h-16 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+<span class="material-symbols-outlined text-4xl">delete_forever</span>
+</div>
+<h3 class="text-2xl font-bold text-white text-center mb-2">تأكيد حذف الدورة</h3>
+<p class="text-slate-400 text-center mb-8">هل أنت متأكد أنك تريد حذف دورة <span class="text-white font-bold">"أساسيات React المتقدمة"</span>؟ لا يمكن التراجع عن هذا الإجراء.</p>
+<div class="flex gap-4">
+<button class="flex-1 py-3 bg-surface-container-highest text-white font-bold rounded-xl hover:bg-surface-bright transition-all">إلغاء</button>
+<button class="flex-1 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-500 transition-all shadow-lg shadow-red-600/20">نعم، احذف الدورة</button>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yousef LMS - إنشاء حساب جديد</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#00a2e6",
+              "on-background": "#dde2f8",
+              "tertiary-fixed-dim": "#ffb68b",
+              "secondary": "#89ceff",
+              "inverse-surface": "#dde2f8",
+              "on-tertiary-fixed": "#321300",
+              "on-secondary-container": "#00344e",
+              "on-tertiary-fixed-variant": "#743400",
+              "on-primary-fixed": "#250059",
+              "tertiary": "#ffb68b",
+              "primary": "#d3bbff",
+              "on-tertiary": "#522300",
+              "on-error": "#690005",
+              "on-secondary": "#00344d",
+              "secondary-fixed": "#c9e6ff",
+              "primary-container": "#6d28d9",
+              "on-secondary-fixed-variant": "#004c6e",
+              "outline": "#958da1",
+              "on-primary": "#3f008d",
+              "inverse-on-surface": "#2a3040",
+              "tertiary-fixed": "#ffdbc8",
+              "primary-fixed": "#ebddff",
+              "primary-fixed-dim": "#d3bbff",
+              "on-surface": "#dde2f8",
+              "error-container": "#93000a",
+              "surface-container-highest": "#2f3445",
+              "inverse-primary": "#7331df",
+              "tertiary-container": "#8f4200",
+              "surface-bright": "#33394a",
+              "on-primary-container": "#dac5ff",
+              "on-error-container": "#ffdad6",
+              "surface": "#0d1322",
+              "on-primary-fixed-variant": "#5b00c5",
+              "background": "#0d1322",
+              "surface-tint": "#d3bbff",
+              "on-secondary-fixed": "#001e2f",
+              "error": "#ffb4ab",
+              "surface-container-high": "#242a3a",
+              "surface-container": "#191f2f",
+              "on-surface-variant": "#ccc3d7",
+              "surface-dim": "#0d1322",
+              "surface-container-lowest": "#080e1d",
+              "surface-container-low": "#151b2b",
+              "secondary-fixed-dim": "#89ceff",
+              "outline-variant": "#4a4455",
+              "surface-variant": "#2f3445",
+              "on-tertiary-container": "#ffc19e"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .strength-meter-segment { height: 4px; border-radius: 2px; }
+        .glass-panel {
+            background: rgba(13, 19, 34, 0.6);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- Theme Toggle (Manual absolute placement as requested) -->
+<div class="fixed top-8 left-8 z-[100]">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+</div>
+<main class="flex flex-col md:flex-row min-h-screen">
+<!-- Left Side: Branded Value Panel (Visible on Desktop) -->
+<section class="hidden md:flex flex-1 flex-col justify-center px-16 relative overflow-hidden bg-surface-container-lowest">
+<!-- Decorative Glows -->
+<div class="absolute -top-20 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]"></div>
+<div class="relative z-10 max-w-xl">
+<div class="mb-12">
+<h2 class="text-display-lg text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+                        مستقبل <span class="text-primary">البرمجة</span> يبدأ بكلمة واحدة.
+                    </h2>
+<p class="text-body-lg text-on-surface-variant text-xl leading-relaxed">
+                        انضم إلى Yousef LMS، المنصة الرائدة لتعليم الذكاء الاصطناعي والبرمجة باللغة العربية، حيث نجمع بين التقنية والابتكار.
+                    </p>
+</div>
+<div class="space-y-8">
+<!-- Benefit Point 1 -->
+<div class="flex items-start gap-4 p-6 rounded-xl bg-surface-container-low/50 border border-outline-variant/10">
+<div class="w-12 h-12 shrink-0 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-on-surface mb-1">تحقق يدوي للمدفوعات</h3>
+<p class="text-on-surface-variant leading-relaxed">نضمن لك أمان معاملاتك عبر نظام تحقق يدوي دقيق لضمان وصولك للمحتوى بسلاسة.</p>
+</div>
+</div>
+<!-- Benefit Point 2 -->
+<div class="flex items-start gap-4 p-6 rounded-xl bg-surface-container-low/50 border border-outline-variant/10">
+<div class="w-12 h-12 shrink-0 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">translate</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-on-surface mb-1">تعليم عربي أولاً</h3>
+<p class="text-on-surface-variant leading-relaxed">محتوى تقني عميق مصمم خصيصاً للمبرمج العربي، بعيداً عن الترجمة الحرفية المعقدة.</p>
+</div>
+</div>
+</div>
+<!-- Background Image (Ambient Narrative) -->
+<div class="mt-16 opacity-40 grayscale group hover:grayscale-0 transition-all duration-700">
+<img class="rounded-2xl shadow-2xl" data-alt="Abstract cinematic visualization of flowing lines of code in deep violet and blue neon lights against a dark void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs82-UlOEtMKZwox9Pds_m-xUFPUm5KTzL9GCLwGtdCYq6B7ddpw4LIhXpFAT7vjICF3ffceUCEHMAnNa2jXc3KuhC0TRnScxXrJyiv9vqXs8CkqNWG8Uj6USRdXuvlXIkyzv5FGcaCMU_UGWhL5yOqEI2xdDkH7LtexWl-NIw5NMu9wdP8TZpAgMrYckEIC11hzr8rImwkWremFdCG1JhQ_1FYkKN5bS3XpatYsYGWDWetBfJ2fYZC-VE5LJ4SPtH-LWQzwko91Kv"/>
+</div>
+</div>
+</section>
+<!-- Right Side: Registration Card -->
+<section class="w-full md:w-[600px] lg:w-[680px] flex items-center justify-center px-6 py-12 md:py-0 bg-surface">
+<div class="w-full max-w-[480px] space-y-10">
+<!-- Logo & Heading -->
+<div class="flex flex-col items-center md:items-start space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<span class="text-2xl font-black tracking-tighter text-on-surface">Yousef LMS</span>
+</div>
+<div class="text-center md:text-right">
+<h1 class="text-4xl font-extrabold text-on-surface mb-3">إنشاء حساب جديد</h1>
+<p class="text-on-surface-variant text-lg">ابدأ رحلتك التعليمية في عالم البرمجة والذكاء الاصطناعي.</p>
+</div>
+</div>
+<!-- Registration Form -->
+<form class="space-y-6" onsubmit="return false">
+<div class="flex flex-col md:flex-row gap-4">
+<!-- First Name -->
+<div class="flex-1 space-y-2">
+<label class="block text-label-md font-semibold text-on-surface-variant px-1">الاسم الأول</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-high border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="يوسف" type="text"/>
+</div>
+<!-- Last Name -->
+<div class="flex-1 space-y-2">
+<label class="block text-label-md font-semibold text-on-surface-variant px-1">الاسم الأخير</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-high border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="علي" type="text"/>
+</div>
+</div>
+<!-- Email -->
+<div class="space-y-2">
+<label class="block text-label-md font-semibold text-on-surface-variant px-1">البريد الإلكتروني</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-high border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline text-right" dir="ltr" placeholder="name@example.com" type="email"/>
+</div>
+<!-- Password -->
+<div class="space-y-2">
+<label class="block text-label-md font-semibold text-on-surface-variant px-1">كلمة المرور</label>
+<div class="relative">
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-high border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline text-right" dir="ltr" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute left-4 top-3 text-outline cursor-pointer hover:text-on-surface">visibility</span>
+</div>
+<!-- Password Strength Meter -->
+<div class="flex gap-1.5 mt-2 px-1">
+<div class="strength-meter-segment flex-1 bg-error"></div>
+<div class="strength-meter-segment flex-1 bg-tertiary"></div>
+<div class="strength-meter-segment flex-1 bg-outline-variant"></div>
+<div class="strength-meter-segment flex-1 bg-outline-variant"></div>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">كلمة المرور متوسطة القوة</p>
+</div>
+<!-- Confirm Password -->
+<div class="space-y-2">
+<label class="block text-label-md font-semibold text-on-surface-variant px-1">تأكيد كلمة المرور</label>
+<input class="w-full h-12 px-4 rounded-lg bg-surface-container-high border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline text-right" dir="ltr" placeholder="••••••••" type="password"/>
+</div>
+<!-- Terms Checkbox -->
+<div class="flex items-start gap-3 py-2">
+<div class="flex items-center h-5">
+<input class="w-5 h-5 rounded border-outline-variant bg-surface-container-high text-primary-container focus:ring-primary focus:ring-offset-background" id="terms" type="checkbox"/>
+</div>
+<label class="text-sm text-on-surface-variant leading-relaxed" for="terms">
+                            أوافق على <a class="text-primary hover:underline font-bold" href="#">شروط الخدمة</a> و <a class="text-primary hover:underline font-bold" href="#">سياسة الخصوصية</a> الخاصة بالمنصة.
+                        </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full h-14 rounded-xl bg-gradient-to-tr from-primary-container to-[#8B5CF6] text-white font-bold text-lg shadow-xl shadow-primary-container/20 hover:scale-[1.02] active:scale-95 transition-all duration-300" type="submit">
+                        إنشاء حساب
+                    </button>
+<!-- Footer Link -->
+<div class="text-center pt-4">
+<p class="text-on-surface-variant">
+                            لديك حساب بالفعل؟ 
+                            <a class="text-primary font-bold hover:underline px-1" href="#">سجل الدخول</a>
+</p>
+</div>
+</form>
+<!-- Alternate Sign up -->
+<div class="relative py-4">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant/20"></div></div>
+<div class="relative flex justify-center text-sm"><span class="bg-surface px-4 text-outline">أو التسجيل عبر</span></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 h-12 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:bg-surface-container-high transition-colors">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr0M3o4XG878smXrM65alfncgRT_2koKGo4WH-m50plAeXmtDyABGYzLq9C3rAm2jh9Q9BS5CLLtupiKe0VMkfX2BaZPoC9xI5EXIdo0PVjlRujQaohImeGkkB1KD8OEp4_EVx2WrhM-qFZXG7Re5MPgG0wEJe3e58AT4XeoeMmi5qdBZ1ZVPwLCmoOsC-H3wtk1JToEdxv7oGhHFpVBeGrLjyHCfwB-UJtW2YtMlv8j_pd7C6TmzQfvuCxwrCschO3TsIZg8EeUJM"/>
+<span class="font-medium">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-12 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span class="font-medium">GitHub</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Background Decoration (Global) -->
+<div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent blur-sm"></div>
+</body></html>

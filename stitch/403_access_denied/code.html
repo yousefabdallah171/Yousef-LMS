@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yousef LMS - وصول غير مصرح به</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#89ceff",
+              "primary-fixed-dim": "#d3bbff",
+              "surface": "#0d1322",
+              "on-tertiary-fixed": "#321300",
+              "tertiary-fixed-dim": "#ffb68b",
+              "on-primary-fixed": "#250059",
+              "surface-tint": "#d3bbff",
+              "on-primary": "#3f008d",
+              "on-tertiary-container": "#ffc19e",
+              "surface-dim": "#0d1322",
+              "outline-variant": "#4a4455",
+              "secondary-container": "#00a2e6",
+              "primary-fixed": "#ebddff",
+              "on-surface-variant": "#ccc3d7",
+              "error-container": "#93000a",
+              "inverse-primary": "#7331df",
+              "tertiary-container": "#8f4200",
+              "surface-bright": "#33394a",
+              "outline": "#958da1",
+              "on-secondary-container": "#00344e",
+              "on-secondary": "#00344d",
+              "on-secondary-fixed": "#001e2f",
+              "on-tertiary-fixed-variant": "#743400",
+              "on-secondary-fixed-variant": "#004c6e",
+              "surface-container-high": "#242a3a",
+              "surface-container": "#191f2f",
+              "on-tertiary": "#522300",
+              "secondary-fixed": "#c9e6ff",
+              "secondary-fixed-dim": "#89ceff",
+              "on-background": "#dde2f8",
+              "tertiary-fixed": "#ffdbc8",
+              "inverse-on-surface": "#2a3040",
+              "on-surface": "#dde2f8",
+              "surface-variant": "#2f3445",
+              "surface-container-low": "#151b2b",
+              "surface-container-lowest": "#080e1d",
+              "on-primary-fixed-variant": "#5b00c5",
+              "on-error": "#690005",
+              "primary-container": "#6d28d9",
+              "primary": "#d3bbff",
+              "on-primary-container": "#dac5ff",
+              "inverse-surface": "#dde2f8",
+              "background": "#0d1322",
+              "surface-container-highest": "#2f3445",
+              "on-error-container": "#ffdad6",
+              "tertiary": "#ffb68b",
+              "error": "#ffb4ab"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #0d1322; /* Surface base */
+        font-family: 'Inter', sans-serif;
+      }
+      .luminescent-glow {
+        background: radial-gradient(circle at center, rgba(109, 40, 217, 0.15) 0%, transparent 70%);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation Shell (Suppressing full nav for focused task) -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl shadow-2xl shadow-violet-900/10 flex flex-row-reverse justify-between items-center px-8 h-20 w-full">
+<!-- Logo / Brand (RIGHT ALIGNED for RTL) -->
+<div class="flex items-center gap-3">
+<span class="text-2xl font-bold tracking-tighter text-slate-50">Luminescent Void</span>
+<div class="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl" data-icon="cloud_done">cloud_done</span>
+</div>
+</div>
+<!-- Utility Actions (LEFT ALIGNED) -->
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors active:scale-95 duration-200 text-slate-400 hover:text-violet-400">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center px-6 relative overflow-hidden">
+<!-- Ambient Background Decoration -->
+<div class="absolute inset-0 luminescent-glow pointer-events-none"></div>
+<div class="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute -bottom-40 -right-40 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full"></div>
+<!-- 403 Card -->
+<div class="z-10 w-full max-w-[520px] bg-surface-container-low/80 backdrop-blur-md border border-outline-variant/15 rounded-xl p-10 md:p-12 text-center shadow-2xl shadow-black/40">
+<!-- Lock Icon Badge -->
+<div class="mb-8 inline-flex items-center justify-center">
+<div class="relative">
+<div class="absolute inset-0 bg-primary-container blur-2xl opacity-20 rounded-full scale-150"></div>
+<div class="relative w-24 h-24 rounded-full bg-surface-container-highest flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="lock_outline">lock_outline</span>
+</div>
+</div>
+</div>
+<!-- Typography Content -->
+<div class="space-y-4 mb-10">
+<h1 class="text-3xl md:text-4xl font-bold text-slate-50 tracking-tight">
+                    وصول غير مصرح به
+                </h1>
+<p class="text-lg text-outline leading-relaxed px-2">
+                    عذراً، ليس لديك الصلاحيات الكافية للوصول إلى هذه الصفحة. يرجى العودة إلى لوحة التحكم الخاصة بك.
+                </p>
+</div>
+<!-- Action Cluster -->
+<div class="flex flex-col gap-4">
+<!-- Primary Action -->
+<button class="w-full h-14 bg-gradient-to-br from-primary-container to-[#5B21B6] text-white font-semibold text-lg rounded-xl flex items-center justify-center gap-3 shadow-lg shadow-primary-container/20 hover:shadow-primary-container/40 active:scale-[0.98] transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    العودة إلى لوحة التحكم
+                </button>
+<!-- Secondary Action -->
+<button class="w-full h-12 text-secondary font-medium hover:text-white transition-colors flex items-center justify-center gap-2 group">
+<span class="material-symbols-outlined text-xl transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+                    الرجوع للخلف
+                </button>
+</div>
+<!-- Decorative Meta Data (Subtle AI Feel) -->
+<div class="mt-12 pt-8 border-t border-outline-variant/10 flex justify-between items-center text-[10px] uppercase tracking-widest text-outline/50 font-medium">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>ERROR_CODE: 403_ACCESS_FORBIDDEN</span>
+</div>
+<div>LVM_SECURE_NODE_01</div>
+</div>
+</div>
+</main>
+<!-- Footer Decoration (No Nav Shell per instructions) -->
+<footer class="h-10 w-full px-8 flex items-center justify-center opacity-30">
+<p class="text-[10px] text-outline tracking-widest uppercase">© 2024 Yousef LMS • Luminescent Void Experience</p>
+</footer>
+</body></html>

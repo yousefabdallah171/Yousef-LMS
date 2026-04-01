@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>إدارة التعليقات - Yousef LMS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#2f3445",
+              "primary": "#d3bbff",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#4a4455",
+              "on-tertiary-fixed": "#321300",
+              "on-secondary-fixed": "#001e2f",
+              "surface-container-lowest": "#080e1d",
+              "on-primary-container": "#dac5ff",
+              "on-primary-fixed-variant": "#5b00c5",
+              "secondary": "#89ceff",
+              "on-surface": "#dde2f8",
+              "on-error": "#690005",
+              "tertiary-container": "#8f4200",
+              "primary-fixed": "#ebddff",
+              "on-surface-variant": "#ccc3d7",
+              "inverse-on-surface": "#2a3040",
+              "surface-tint": "#d3bbff",
+              "on-tertiary-container": "#ffc19e",
+              "on-secondary-container": "#00344e",
+              "secondary-fixed-dim": "#89ceff",
+              "primary-container": "#6d28d9",
+              "tertiary": "#ffb68b",
+              "on-primary-fixed": "#250059",
+              "inverse-primary": "#7331df",
+              "surface-container": "#191f2f",
+              "error-container": "#93000a",
+              "on-primary": "#3f008d",
+              "surface-container-low": "#151b2b",
+              "surface-dim": "#0d1322",
+              "tertiary-fixed": "#ffdbc8",
+              "surface-variant": "#2f3445",
+              "surface": "#0d1322",
+              "background": "#0d1322",
+              "on-secondary": "#00344d",
+              "primary-fixed-dim": "#d3bbff",
+              "on-secondary-fixed-variant": "#004c6e",
+              "outline": "#958da1",
+              "on-tertiary-fixed-variant": "#743400",
+              "inverse-surface": "#dde2f8",
+              "secondary-fixed": "#c9e6ff",
+              "surface-bright": "#33394a",
+              "surface-container-high": "#242a3a",
+              "error": "#ffb4ab",
+              "secondary-container": "#00a2e6",
+              "on-tertiary": "#522300",
+              "tertiary-fixed-dim": "#ffb68b",
+              "on-background": "#dde2f8"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- Shared SideNavBar Shell -->
+<aside class="fixed inset-y-0 right-0 w-64 h-full bg-[#0d1322] shadow-[32px_0_64px_-20px_rgba(109,40,217,0.08)] flex flex-col py-8 px-4 z-50">
+<div class="flex flex-row-reverse items-center gap-3 mb-10 px-2">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h1 class="text-2xl font-bold text-white leading-none">نظام التعلم</h1>
+<p class="text-xs text-slate-500 mt-1 uppercase tracking-widest">لوحة التحكم</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex flex-row-reverse items-center gap-3 text-slate-400 px-4 py-3 hover:text-white transition-colors hover:bg-white/5 rounded-lg active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">لوحة القيادة</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-3 text-slate-400 px-4 py-3 hover:text-white transition-colors hover:bg-white/5 rounded-lg active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-medium">الدورات</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-3 text-slate-400 px-4 py-3 hover:text-white transition-colors hover:bg-white/5 rounded-lg active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-medium">الطلبات</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-3 text-slate-400 px-4 py-3 hover:text-white transition-colors hover:bg-white/5 rounded-lg active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-medium">الطلاب</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-3 bg-[#6D28D9]/10 text-[#6D28D9] font-bold px-4 py-3 rounded-lg active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span class="font-medium">التعليقات</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 border-t border-white/5 pt-6">
+<a class="flex flex-row-reverse items-center gap-3 text-slate-400 px-4 py-3 hover:text-white transition-colors hover:bg-white/5 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">الإعدادات</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-3 text-slate-400 px-4 py-3 hover:text-white transition-colors hover:bg-white/5 rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">تسجيل الخروج</span>
+</a>
+</div>
+</aside>
+<!-- Shared TopNavBar Shell -->
+<header class="fixed top-0 right-64 left-0 h-16 bg-[#0d1322]/60 backdrop-blur-xl flex flex-row-reverse justify-between items-center px-8 z-40">
+<div class="flex flex-row-reverse items-center gap-4">
+<div class="relative flex flex-row-reverse items-center gap-3 bg-surface-container-high px-4 py-2 rounded-full cursor-pointer hover:bg-surface-container-highest transition-colors">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Close-up portrait of a professional Arab man with a short beard and neat hairstyle in a studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA29-FJeUOM28_2LTIuMqyKWuUgJ-XVUxSdWFRuZKqXonGbhwjdzz9IS_V-XSUfG-ecE18vYWyAOl4tWSrVs53zrer0dXPOi9JHsyX3oBYsatBIylJUZ_Cz84YuXujJVdErimxW6-aziSBXJ-gDtVFhHPMhewDqC64c82uw8juq8yZuyhNLAeums3VGN3n9R3dqMuFF-pfa1q9I3qdF_FCMB4BZo6Ehxxe-IpnUTT9o7S2XMX8dbuDHRtSyT87xaXiQqaeSz5pK4QXz"/>
+<div class="text-right">
+<p class="text-sm font-bold text-white leading-tight">المشرف</p>
+<p class="text-[10px] text-slate-400 leading-none">مدير النظام</p>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="flex-1 max-w-md">
+<div class="relative flex items-center bg-surface-container-low px-4 py-2 rounded-xl group focus-within:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-slate-400 mr-2">search</span>
+<input class="bg-transparent border-none text-sm text-on-surface focus:ring-0 w-full placeholder:text-slate-500 text-right" placeholder="بحث في التعليقات..." type="text"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="mr-64 pt-24 px-8 pb-12">
+<!-- Page Header Section -->
+<div class="mb-10">
+<div class="flex flex-row justify-between items-end mb-8">
+<div class="space-y-1">
+<h2 class="text-3xl font-bold tracking-tight text-white font-headline">إدارة التعليقات</h2>
+<p class="text-slate-400 text-lg">مراجعة وتدقيق تعليقات الطلاب عبر جميع الدورات التدريبية.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">download</span>
+                        تصدير التقرير
+                    </button>
+</div>
+</div>
+<!-- Filter Tabs -->
+<div class="flex gap-2 p-1 bg-surface-container-low rounded-xl w-fit">
+<button class="px-6 py-2 rounded-lg bg-surface-container-highest text-white font-semibold text-sm transition-all shadow-sm">
+                    الكل (124)
+                </button>
+<button class="px-6 py-2 rounded-lg text-slate-400 hover:text-white font-semibold text-sm transition-all">
+                    قيد المراجعة (12)
+                </button>
+<button class="px-6 py-2 rounded-lg text-error hover:bg-error/10 font-semibold text-sm transition-all flex items-center gap-2">
+                    مبلغ عنه (5)
+                    <span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-surface-container-low rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
+<div class="overflow-x-auto">
+<table class="w-full text-right">
+<thead>
+<tr class="bg-white/5 border-b border-white/5">
+<th class="px-6 py-4 text-slate-400 font-semibold text-sm uppercase tracking-wider">الطالب</th>
+<th class="px-6 py-4 text-slate-400 font-semibold text-sm uppercase tracking-wider">الدورة والدرس</th>
+<th class="px-6 py-4 text-slate-400 font-semibold text-sm uppercase tracking-wider">التعليق</th>
+<th class="px-6 py-4 text-slate-400 font-semibold text-sm uppercase tracking-wider">التاريخ</th>
+<th class="px-6 py-4 text-slate-400 font-semibold text-sm uppercase tracking-wider">الحالة</th>
+<th class="px-6 py-4 text-slate-400 font-semibold text-sm uppercase tracking-wider text-left">الإجراءات</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<!-- Row 1 -->
+<tr class="hover:bg-white/[0.02] transition-colors group">
+<td class="px-6 py-5 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full border-2 border-white/10 object-cover" data-alt="Young professional man with glasses and casual attire looking confident in a workspace background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGyrTZ2PXCcznNacbpsRuD9oBboK07q4ivbch8Rt-MvY7MIghNUkdHMeN-6NZpU2znZBPOqNOauGw8Ymew2x7M6R_XNPxX4FlGmJXERrmzr3iqn0c8vKm0n7s_Jnf-I7iKqbxJ1THB0_c8aOhL40OVc_XqWjuIL22qJG2CKCtQfkZbpDZWCZrZCikmegPKH00JSy8UeWO-wxzv89qZ3or3nqULMOa6kMyiyFg8bHA_Eamos8NtuTP5l_99rgFkSBd6x1vqws77MQ32"/>
+<div>
+<div class="text-white font-bold">يوسف شريف</div>
+<div class="text-xs text-slate-500">yousef@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-primary font-medium text-sm">تطوير تطبيقات الويب</div>
+<div class="text-slate-400 text-xs">مقدمة في React</div>
+</td>
+<td class="px-6 py-5 max-w-xs">
+<p class="text-slate-200 text-sm line-clamp-1">هذا الدرس رائع جداً، هل يمكنك شرح المزيد عن Hook useEffect؟ لقد واجهت بعض التحديات...</p>
+</td>
+<td class="px-6 py-5 whitespace-nowrap text-slate-400 text-sm">12 أكتوبر 2023</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-green-500/10 text-green-500 border border-green-500/20 uppercase tracking-tighter">آمن</span>
+</td>
+<td class="px-6 py-5 text-left">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors rounded-lg hover:bg-primary/5">
+<span class="material-symbols-outlined text-xl">open_in_full</span>
+</button>
+<button class="flex items-center gap-1 px-3 py-1.5 text-error hover:bg-error/10 transition-all rounded-lg text-sm font-bold border border-transparent hover:border-error/20">
+<span class="material-symbols-outlined text-lg">delete</span>
+                                        حذف
+                                    </button>
+</div>
+</td>
+</tr>
+<!-- Row 2 (Flagged) -->
+<tr class="hover:bg-white/[0.02] transition-colors group bg-error/5">
+<td class="px-6 py-5 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full border-2 border-white/10 object-cover" data-alt="Young woman with a bright smile and artistic glasses, dressed in professional business attire with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMKKLwrllfexXHrJO2ADEX10-24YkESfu7bCYSxsBLeoGM1yzrkr1eikcHzXEUO_ghjPcPJOraUHXS392HUXrjYI3Z0aGOQfCJXqIIixqaY6yJP8MKjnSsDA8uR9gKjalLP7ZfM_ryRBot9eq_3Ly1rSSz_5E-bJV9hOX2IZwEzGCH_Y4GXfpMm8EMyrBkCVGTB5tQN23GAv1TVVyZcDe9-3NXFTkcxMswFFJuUNqk_KZb1C4e0v11EImAk3-0Gajzy6LetCI-otFl"/>
+<div>
+<div class="text-white font-bold">سارة محمود</div>
+<div class="text-xs text-slate-500">sara.m@email.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-primary font-medium text-sm">أساسيات بايثون</div>
+<div class="text-slate-400 text-xs">الجمل الشرطية</div>
+</td>
+<td class="px-6 py-5 max-w-xs">
+<p class="text-error font-medium text-sm line-clamp-1 italic">محتوى هذا التعليق يحتوي على روابط خارجية غير مصرح بها للترويج...</p>
+</td>
+<td class="px-6 py-5 whitespace-nowrap text-slate-400 text-sm">11 أكتوبر 2023</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-error/10 text-error border border-error/20 flex items-center gap-1 w-fit">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">flag</span>
+                                    مبلغ عنه
+                                </span>
+</td>
+<td class="px-6 py-5 text-left">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors rounded-lg hover:bg-primary/5">
+<span class="material-symbols-outlined text-xl">open_in_full</span>
+</button>
+<button class="flex items-center gap-1 px-4 py-2 bg-error text-white shadow-lg shadow-error/20 transition-all rounded-lg text-sm font-bold active:scale-95">
+<span class="material-symbols-outlined text-lg">delete</span>
+                                        حذف فوراً
+                                    </button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-white/[0.02] transition-colors group">
+<td class="px-6 py-5 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full border-2 border-white/10 object-cover" data-alt="Modern profile photo of a male programmer in a hoodie with a subtle tech-inspired background lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn7hku1mJ7SyEOqCyaLjnhHxVV7q3mf6zm4GBLwefG8KgYKJJjZI29eu4WBnQfBtG4kN5acckGVmZUMt6S3r7NjseYMoV7UWY5fo2gBQj_eaJP2q-0gf9Onw0LX-hGM8VEeVI57-Dd2C6j5P54QGi1_HVqi39EFYEhXrscXilwaSIluydwV7c_InYKEvKG5XUGKeSP7wKUMzrbA6Hv4x3X3rPziHB3XvQ5cYlKLoEyq2JiqfLXToPc75aZYlF7oVmg-JoU4L9HtnGO"/>
+<div>
+<div class="text-white font-bold">أحمد علي</div>
+<div class="text-xs text-slate-500">ahmed.dev@gmail.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-primary font-medium text-sm">الذكاء الاصطناعي</div>
+<div class="text-slate-400 text-xs">تعلم الآلة بالبايثون</div>
+</td>
+<td class="px-6 py-5 max-w-xs">
+<p class="text-slate-200 text-sm line-clamp-1">شكراً لك يا هندسة، الشرح مبسط جداً وأخيراً فهمت الـ Neural Networks بطريقة عملية...</p>
+</td>
+<td class="px-6 py-5 whitespace-nowrap text-slate-400 text-sm">10 أكتوبر 2023</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-500/10 text-slate-400 border border-slate-500/20 uppercase tracking-tighter">انتظار</span>
+</td>
+<td class="px-6 py-5 text-left">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors rounded-lg hover:bg-primary/5">
+<span class="material-symbols-outlined text-xl">open_in_full</span>
+</button>
+<button class="flex items-center gap-1 px-3 py-1.5 text-error hover:bg-error/10 transition-all rounded-lg text-sm font-bold border border-transparent hover:border-error/20">
+<span class="material-symbols-outlined text-lg">delete</span>
+                                        حذف
+                                    </button>
+</div>
+</td>
+</tr>
+<!-- Reusing rows for visual depth (Row 4-10 placeholder logic) -->
+<tr class="hover:bg-white/[0.02] transition-colors group opacity-80">
+<td class="px-6 py-5 whitespace-nowrap"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-surface-container-highest animate-pulse"></div><div class="space-y-1"><div class="w-24 h-4 bg-surface-container-highest rounded"></div><div class="w-16 h-3 bg-surface-container-highest rounded"></div></div></div></td>
+<td class="px-6 py-5"><div class="w-32 h-4 bg-surface-container-highest rounded mb-1"></div><div class="w-20 h-3 bg-surface-container-highest rounded"></div></td>
+<td class="px-6 py-5"><div class="w-full h-4 bg-surface-container-highest rounded"></div></td>
+<td class="px-6 py-5"><div class="w-20 h-4 bg-surface-container-highest rounded"></div></td>
+<td class="px-6 py-5"><div class="w-12 h-6 bg-surface-container-highest rounded-full"></div></td>
+<td class="px-6 py-5"><div class="w-full flex justify-end gap-2"><div class="w-8 h-8 bg-surface-container-highest rounded"></div><div class="w-20 h-8 bg-surface-container-highest rounded"></div></div></td>
+</tr>
+<!-- Simulating more rows -->
+<tr class="hover:bg-white/[0.02] transition-colors group opacity-60">
+<td class="px-6 py-5 whitespace-nowrap"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-surface-container-highest"></div><div class="space-y-1"><div class="w-24 h-4 bg-surface-container-highest rounded"></div><div class="w-16 h-3 bg-surface-container-highest rounded"></div></div></div></td>
+<td class="px-6 py-5"><div class="w-32 h-4 bg-surface-container-highest rounded mb-1"></div><div class="w-20 h-3 bg-surface-container-highest rounded"></div></td>
+<td class="px-6 py-5"><div class="w-full h-4 bg-surface-container-highest rounded"></div></td>
+<td class="px-6 py-5"><div class="w-20 h-4 bg-surface-container-highest rounded"></div></td>
+<td class="px-6 py-5"><div class="w-12 h-6 bg-surface-container-highest rounded-full"></div></td>
+<td class="px-6 py-5"><div class="w-full flex justify-end gap-2"><div class="w-8 h-8 bg-surface-container-highest rounded"></div><div class="w-20 h-8 bg-surface-container-highest rounded"></div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 bg-white/[0.02] flex items-center justify-between border-t border-white/5">
+<p class="text-sm text-slate-500">إظهار <span class="font-bold text-white">1 - 10</span> من أصل <span class="font-bold text-white">124</span> تعليق</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-white/10 text-slate-400 hover:bg-white/5 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary-container text-white font-bold text-sm">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-white/10 text-slate-400 hover:bg-white/5 font-bold text-sm">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-white/10 text-slate-400 hover:bg-white/5 font-bold text-sm">3</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-white/10 text-slate-400 hover:bg-white/5">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State Preview (Hidden usually) -->
+<div class="hidden mt-12 flex flex-col items-center text-center py-20 bg-surface-container-low rounded-2xl border-2 border-dashed border-white/5">
+<div class="w-20 h-20 rounded-full bg-slate-900 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-slate-600">forum</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2">لا توجد تعليقات للمراجعة</h3>
+<p class="text-slate-500 max-w-sm mx-auto">سيتم عرض التعليقات الجديدة هنا بمجرد وصولها من الطلاب في دوراتك التدريبية.</p>
+</div>
+</main>
+<!-- FAB Suppression Logic: Not rendering FAB on moderation/dashboard screen per instructions -->
+<div class="fixed bottom-8 left-8 z-50">
+<!-- Floating Support or Quick Action (Optional but adds premium feel) -->
+<button class="w-14 h-14 rounded-full bg-surface-container-highest border border-white/10 shadow-2xl flex items-center justify-center text-primary-fixed-dim hover:scale-110 active:scale-95 transition-all group">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<div class="absolute right-full mr-4 px-3 py-1.5 rounded-lg bg-surface-container-highest text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-xl">
+                مساعد الذكاء الاصطناعي للمراجعة
+            </div>
+</button>
+</div>
+</body></html>
