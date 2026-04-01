@@ -6,3 +6,175 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum UserRole {
+  ADMIN
+  STUDENT
+}
+
+enum CourseStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum OrderStatus {
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id                   String          @id @default(uuid()) @db.Uuid
+  name                 String          @db.VarChar(100)
+  email                String          @unique @db.VarChar(255)
+  passwordHash         String          @map("password_hash") @db.VarChar(255)
+  role                 UserRole        @default(STUDENT)
+  createdAt            DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt            DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  orders               Order[]         @relation("StudentOrders")
+  reviewedOrders       Order[]         @relation("ReviewedOrders")
+  enrollments          Enrollment[]
+  comments             Comment[]
+  refreshTokens        RefreshToken[]
+  auditLogs            AuditLog[]
+  lessonProgress       LessonProgress[]
+
+  @@map("users")
+}
+
+model Course {
+  id          String        @id @default(uuid()) @db.Uuid
+  slug        String        @unique @db.VarChar(255)
+  title       String        @db.VarChar(255)
+  description String
+  thumbnailUrl String       @map("thumbnail_url") @db.VarChar(500)
+  price       Decimal       @db.Decimal(10, 2)
+  status      CourseStatus  @default(DRAFT)
+  createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)
+  sections    Section[]
+  orders      Order[]
+  enrollments Enrollment[]
+
+  @@index([status])
+  @@map("courses")
+}
+
+model Section {
+  id         String   @id @default(uuid()) @db.Uuid
+  courseId   String   @map("course_id") @db.Uuid
+  title      String   @db.VarChar(255)
+  orderIndex Int      @map("order_index")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons    Lesson[]
+
+  @@unique([courseId, orderIndex])
+  @@map("sections")
+}
+
+model Lesson {
+  id            String           @id @default(uuid()) @db.Uuid
+  sectionId     String           @map("section_id") @db.Uuid
+  title         String           @db.VarChar(255)
+  videoUrl      String           @map("video_url") @db.VarChar(500)
+  description   String?
+  orderIndex    Int              @map("order_index")
+  isFreePreview Boolean          @default(false) @map("is_free_preview")
+  createdAt     DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  section       Section          @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  comments      Comment[]
+  lessonProgress LessonProgress[]
+
+  @@index([sectionId])
+  @@index([orderIndex])
+  @@unique([sectionId, orderIndex])
+  @@map("lessons")
+}
+
+model Order {
+  id              String       @id @default(uuid()) @db.Uuid
+  studentId       String       @map("student_id") @db.Uuid
+  courseId        String       @map("course_id") @db.Uuid
+  proofUrl        String       @map("proof_url") @db.VarChar(500)
+  status          OrderStatus  @default(PENDING_REVIEW)
+  rejectionReason String?      @map("rejection_reason")
+  reviewedAt      DateTime?    @map("reviewed_at") @db.Timestamptz(6)
+  reviewedBy      String?      @map("reviewed_by") @db.Uuid
+  createdAt       DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  student         User         @relation("StudentOrders", fields: [studentId], references: [id], onDelete: Restrict)
+  course          Course       @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  reviewer        User?        @relation("ReviewedOrders", fields: [reviewedBy], references: [id], onDelete: Restrict)
+  enrollment      Enrollment?
+
+  @@index([status])
+  @@index([studentId])
+  @@index([courseId])
+  @@map("orders")
+}
+
+model Enrollment {
+  id         String   @id @default(uuid()) @db.Uuid
+  studentId  String   @map("student_id") @db.Uuid
+  courseId   String   @map("course_id") @db.Uuid
+  orderId    String   @unique @map("order_id") @db.Uuid
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  student    User     @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Restrict)
+
+  @@unique([studentId, courseId])
+  @@index([studentId])
+  @@map("enrollments")
+}
+
+model Comment {
+  id        String    @id @default(uuid()) @db.Uuid
+  lessonId   String    @map("lesson_id") @db.Uuid
+  studentId String    @map("student_id") @db.Uuid
+  content   String
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+  lesson    Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  student   User      @relation(fields: [studentId], references: [id], onDelete: Restrict)
+
+  @@index([lessonId])
+  @@map("comments")
+}
+
+model LessonProgress {
+  id         String   @id @default(uuid()) @db.Uuid
+  studentId  String   @map("student_id") @db.Uuid
+  lessonId   String   @map("lesson_id") @db.Uuid
+  watchedAt  DateTime @default(now()) @map("watched_at") @db.Timestamptz(6)
+  student    User     @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  lesson     Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, lessonId])
+  @@map("lesson_progress")
+}
+
+model RefreshToken {
+  id         String    @id @default(uuid()) @db.Uuid
+  userId     String    @map("user_id") @db.Uuid
+  tokenHash  String    @unique @map("token_hash") @db.VarChar(255)
+  expiresAt  DateTime  @map("expires_at") @db.Timestamptz(6)
+  revokedAt  DateTime? @map("revoked_at") @db.Timestamptz(6)
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+model AuditLog {
+  id           String   @id @default(uuid()) @db.Uuid
+  adminId      String   @map("admin_id") @db.Uuid
+  actionType   String   @map("action_type") @db.VarChar(50)
+  targetEntity String   @map("target_entity") @db.VarChar(50)
+  targetId     String   @map("target_id") @db.Uuid
+  details      Json?
+  timestamp    DateTime @default(now()) @db.Timestamptz(6)
+  admin        User     @relation(fields: [adminId], references: [id], onDelete: Restrict)
+
+  @@map("audit_logs")
+}
