@@ -59,6 +59,7 @@ export function LessonPlayerPage() {
   const isNextLessonAccessible = nextLesson
     ? nextLesson.isFreePreview || enrollment.enrolled
     : false
+  const hasPlayableVideo = typeof lesson.videoUrl === 'string' && lesson.videoUrl.length > 0
 
   return (
     <>
@@ -108,13 +109,27 @@ export function LessonPlayerPage() {
 
             <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-surface-high">
               <div className="aspect-video bg-black">
-                <iframe
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="h-full w-full"
-                  src={lesson.videoUrl}
-                  title={lesson.title}
-                />
+                {hasPlayableVideo ? (
+                  <iframe
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="h-full w-full"
+                    src={lesson.videoUrl}
+                    title={lesson.title}
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center p-6">
+                    <EmptyState
+                      action={
+                        <Button onClick={() => void refetch()} type="button">
+                          {t('lesson.videoRetry')}
+                        </Button>
+                      }
+                      description={t('lesson.videoError')}
+                      title={t('common.error')}
+                    />
+                  </div>
+                )}
               </div>
               <div className="flex flex-col gap-4 border-t border-white/10 p-6 sm:flex-row-reverse sm:items-center sm:justify-between">
                 <div className="text-end">

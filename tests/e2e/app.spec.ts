@@ -4,6 +4,7 @@ const adminCredentials = {
   email: 'admin@youseflms.com',
   password: 'ChangeMe123!',
 }
+const apiBaseURL = process.env.PLAYWRIGHT_API_URL ?? 'http://localhost:3000'
 
 test.describe('public flows', () => {
   test('home page renders featured content from the API', async ({ page }) => {
@@ -60,7 +61,7 @@ test.describe('public flows', () => {
   test('course detail hides locked video URLs for anonymous visitors', async ({
     request,
   }) => {
-    const response = await request.get('http://localhost:3000/api/v1/courses/ai-ml-diploma')
+    const response = await request.get(`${apiBaseURL}/api/v1/courses/ai-ml-diploma`)
     expect(response.ok()).toBeTruthy()
 
     const payload = (await response.json()) as {
@@ -105,9 +106,7 @@ test.describe('public flows', () => {
   test('preview lesson page renders video and opens purchase modal for locked next lesson', async ({
     page,
   }) => {
-    const courseResponse = await page.request.get(
-      'http://localhost:3000/api/v1/courses/ai-ml-diploma',
-    )
+    const courseResponse = await page.request.get(`${apiBaseURL}/api/v1/courses/ai-ml-diploma`)
     expect(courseResponse.ok()).toBeTruthy()
 
     const coursePayload = (await courseResponse.json()) as {
@@ -153,9 +152,7 @@ test.describe('public flows', () => {
   test('locked lesson route returns the enrollment-required state for anonymous users', async ({
     page,
   }) => {
-    const courseResponse = await page.request.get(
-      'http://localhost:3000/api/v1/courses/ai-ml-diploma',
-    )
+    const courseResponse = await page.request.get(`${apiBaseURL}/api/v1/courses/ai-ml-diploma`)
     expect(courseResponse.ok()).toBeTruthy()
 
     const coursePayload = (await courseResponse.json()) as {
@@ -190,7 +187,7 @@ test.describe('admin flow', () => {
     page,
     request,
   }) => {
-    const response = await request.post('http://localhost:3000/api/v1/auth/login', {
+    const response = await request.post(`${apiBaseURL}/api/v1/auth/login`, {
       data: adminCredentials,
     })
     expect(response.ok()).toBeTruthy()
