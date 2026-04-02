@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export function PageShell({
   title,
@@ -9,11 +10,13 @@ export function PageShell({
   subtitle: string
   children: ReactNode
 }) {
+  const { t } = useTranslation()
+
   return (
     <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
       <header className="rounded-2xl border border-ghost bg-surface-high p-6 shadow-ambient">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-secondary">
-          Yousef LMS
+          {t('nav.brandName')}
         </p>
         <h1 className="mt-3 text-3xl font-black tracking-tight text-foreground">
           {title}

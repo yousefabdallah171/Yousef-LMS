@@ -78,12 +78,12 @@ export function CourseCatalogPage() {
             <label className="sr-only" htmlFor={searchId}>
               {t('catalog.searchLabel')}
             </label>
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-500">
+            <span className="pointer-events-none absolute end-4 top-1/2 -translate-y-1/2 text-slate-500">
               {t('catalog.searchIcon')}
             </span>
             <input
               id={searchId}
-              className="w-full rounded-xl border border-transparent bg-surface-high px-4 py-3 pr-12 text-foreground outline-none transition-all placeholder:text-slate-500 focus:border-secondary/40 focus:bg-surface-highest"
+              className="w-full rounded-xl border border-transparent bg-surface-high px-4 py-3 pe-12 text-foreground outline-none transition-all placeholder:text-slate-500 focus:border-secondary/40 focus:bg-surface-highest"
               onChange={(event) => setSearch(event.target.value)}
               placeholder={t('catalog.searchPlaceholder')}
               type="search"
@@ -98,7 +98,7 @@ export function CourseCatalogPage() {
 
             <div className="relative min-w-48">
               <select
-                className="w-full cursor-pointer appearance-none rounded-xl border border-transparent bg-surface-high px-4 py-3 pl-10 text-foreground outline-none transition-all focus:border-secondary/40 focus:bg-surface-highest"
+                className="w-full cursor-pointer appearance-none rounded-xl border border-transparent bg-surface-high px-4 py-3 ps-10 text-foreground outline-none transition-all focus:border-secondary/40 focus:bg-surface-highest"
                 onChange={(event) => setSort(event.target.value as SortOption)}
                 value={sort}
               >
@@ -106,8 +106,8 @@ export function CourseCatalogPage() {
                 <option value="title">{t('catalog.sort.title')}</option>
                 <option value="priceAsc">{t('catalog.sort.priceAsc')}</option>
               </select>
-              <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
-                ▾
+              <span className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-slate-500">
+                {'\u25BE'}
               </span>
             </div>
           </div>

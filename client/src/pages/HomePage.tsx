@@ -25,11 +25,31 @@ export function HomePage() {
   const { t } = useTranslation()
   const { data, isLoading, isError } = useCourses()
   const featuredCourses = (data?.courses ?? []).slice(0, 3)
+  const journeySteps = [
+    {
+      icon: '\u2315',
+      title: t('home.steps.browse.title'),
+      description: t('home.steps.browse.description'),
+      color: 'text-primary',
+    },
+    {
+      icon: '\u00A4',
+      title: t('home.steps.pay.title'),
+      description: t('home.steps.pay.description'),
+      color: 'text-secondary',
+    },
+    {
+      icon: '\u25CC',
+      title: t('home.steps.learn.title'),
+      description: t('home.steps.learn.description'),
+      color: 'text-white',
+    },
+  ]
 
   return (
     <main className="overflow-hidden pt-24">
       <section className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-8 py-20 lg:grid-cols-2">
-        <div className="text-right">
+        <div className="text-end">
           <h1 className="mb-8 text-6xl font-extrabold leading-tight tracking-tight md:text-7xl">
             {t('home.heroTitle')}
             <span className="mt-2 block text-primary">{t('home.heroHighlight')}</span>
@@ -52,8 +72,8 @@ export function HomePage() {
         </div>
 
         <div className="relative">
-          <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-primary/20 blur-[100px]" />
-          <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-secondary/10 blur-[100px]" />
+          <div className="absolute -start-20 -top-20 h-80 w-80 rounded-full bg-primary/20 blur-[100px]" />
+          <div className="absolute -bottom-20 -end-20 h-80 w-80 rounded-full bg-secondary/10 blur-[100px]" />
           <div className="relative overflow-hidden rounded-3xl border border-white/5 bg-surface-high/40 p-4 backdrop-blur-xl">
             <img
               alt={t('home.heroImageAlt')}
@@ -83,7 +103,7 @@ export function HomePage() {
               color: 'text-white',
             },
           ].map((stat) => (
-            <div className="text-center md:text-right" key={stat.label}>
+            <div className="text-center md:text-end" key={stat.label}>
               <div className={`text-4xl font-black ${stat.color}`}>{stat.value}</div>
               <div className="mt-1 text-sm tracking-widest text-muted">{stat.label}</div>
             </div>
@@ -95,7 +115,7 @@ export function HomePage() {
         <div className="mb-16 flex items-end justify-between">
           <ButtonLink className="gap-2 text-primary" to="/courses" variant="ghost">
             <span>{t('home.viewAllCourses')}</span>
-            <span aria-hidden="true">←</span>
+            <span aria-hidden="true">{'\u2190'}</span>
           </ButtonLink>
           <h2 className="text-4xl font-bold">{t('home.featuredTitle')}</h2>
         </div>
@@ -144,26 +164,7 @@ export function HomePage() {
             <p className="text-muted">{t('home.journeySubtitle')}</p>
           </div>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-            {[
-              {
-                icon: '⌕',
-                title: t('home.steps.browse.title'),
-                description: t('home.steps.browse.description'),
-                color: 'text-primary',
-              },
-              {
-                icon: '¤',
-                title: t('home.steps.pay.title'),
-                description: t('home.steps.pay.description'),
-                color: 'text-secondary',
-              },
-              {
-                icon: '◌',
-                title: t('home.steps.learn.title'),
-                description: t('home.steps.learn.description'),
-                color: 'text-white',
-              },
-            ].map((step) => (
+            {journeySteps.map((step) => (
               <div className="group text-center" key={step.title}>
                 <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full border border-white/5 bg-surface-highest text-4xl transition-colors group-hover:border-primary/40">
                   <span className={step.color}>{step.icon}</span>
@@ -179,14 +180,14 @@ export function HomePage() {
       <section className="mx-auto max-w-7xl px-8 py-32">
         <div className="grid grid-cols-1 items-center gap-16 rounded-[3rem] bg-surface-highest p-12 lg:grid-cols-2 lg:p-20">
           <div className="relative order-2 lg:order-1">
-            <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/20 blur-3xl" />
+            <div className="absolute -end-10 -top-10 h-40 w-40 rounded-full bg-primary/20 blur-3xl" />
             <img
               alt={t('home.instructor.imageAlt')}
               className="relative z-10 h-[500px] w-full rounded-3xl object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuATw39MfcCtsiH3KZSS84CLyb_cZ_VIFEhapXfqdYzKiIpuAmjRp_WJjtb7Y6XSrcs9ArHa3V1gUgt8cvjQBHqRXmXxqz2ibO8diElLEux28NQCcMQpzKLGj071dyROSxBP72_Pxk7Ac5tkYbWV4tpbID38zEMAUnFFU6wqIzfAcnh-Ue89q_0i-l8l6ro-t3OdakiVSlzIejsSL5UoJyqla1NA7loFw8X_1XAczs36x5yKlnIN5jglu_UUzZKENYQDn00ROhVAFR8y"
             />
           </div>
-          <div className="order-1 text-right lg:order-2">
+          <div className="order-1 text-end lg:order-2">
             <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-primary">
               {t('home.instructor.eyebrow')}
             </h4>
@@ -205,7 +206,7 @@ export function HomePage() {
               ))}
             </div>
             <div className="flex flex-row-reverse gap-8">
-              <div className="text-right">
+              <div className="text-end">
                 <div className="text-3xl font-bold text-white">
                   {t('home.instructor.trainingHoursValue')}
                 </div>
@@ -214,7 +215,7 @@ export function HomePage() {
                 </div>
               </div>
               <div className="h-10 w-px self-center bg-white/10" />
-              <div className="text-right">
+              <div className="text-end">
                 <div className="text-3xl font-bold text-white">
                   {t('home.instructor.consultingHoursValue')}
                 </div>
@@ -237,15 +238,15 @@ export function HomePage() {
               className="relative rounded-3xl border border-white/5 bg-surface-low p-10"
               key={key}
             >
-              <span className="absolute left-6 top-6 text-6xl text-primary/20">"</span>
-              <p className="relative z-10 mb-8 text-right leading-relaxed text-foreground">
+              <span className="absolute start-6 top-6 text-6xl text-primary/20">"</span>
+              <p className="relative z-10 mb-8 text-end leading-relaxed text-foreground">
                 {t(`home.testimonials.items.${key}.quote`)}
               </p>
               <div className="flex flex-row-reverse items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-highest text-sm font-bold text-primary">
                   {t(`home.testimonials.items.${key}.initials`)}
                 </div>
-                <div className="text-right">
+                <div className="text-end">
                   <div className="font-bold">
                     {t(`home.testimonials.items.${key}.name`)}
                   </div>

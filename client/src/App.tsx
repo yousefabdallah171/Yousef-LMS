@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next'
 import './App.css'
 import { AdminRoute } from './components/AdminRoute'
 import { CourseCatalogPage } from './pages/CourseCatalogPage'
+import { CourseDetailPage } from './pages/CourseDetailPage'
 import { HomePage } from './pages/HomePage'
+import { LessonPlayerPage } from './pages/LessonPlayerPage'
 import { Navigation } from './components/Navigation'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { AdminChrome } from './components/admin/AdminChrome'
@@ -27,26 +29,8 @@ function App() {
       <Route element={<PublicAppShell />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/courses" element={<CourseCatalogPage />} />
-        <Route
-          path="/courses/:slug"
-          element={
-            <PlaceholderPage
-              route="/courses/:slug"
-              subtitle={t('catalog.detailSubtitle')}
-              title={t('catalog.detail')}
-            />
-          }
-        />
-        <Route
-          path="/courses/:slug/lessons/:id"
-          element={
-            <PlaceholderPage
-              route="/courses/:slug/lessons/:id"
-              subtitle={t('catalog.lessonPlayerSubtitle')}
-              title={t('catalog.lessonPlayer')}
-            />
-          }
-        />
+        <Route path="/courses/:slug" element={<CourseDetailPage />} />
+        <Route path="/courses/:slug/lessons/:id" element={<LessonPlayerPage />} />
         <Route
           path="/register"
           element={

@@ -15,6 +15,7 @@ import {
   getRefreshToken,
   setAuthTokens,
 } from '../services/tokenStore'
+import { TOKEN_REFRESHED_EVENT } from '../services/apiClient'
 
 type UserRole = 'admin' | 'student'
 
@@ -127,6 +128,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .finally(() => {
         setIsLoading(false)
       })
+  }, [])
+
+  useEffect(() => {
+    function handleTokenRefresh(event: Event) {
+      const nextAccessToken = (event as CustomEvent<{ accessToken?: string }>).detail
+        ?.accessToken
+
+      setUser(getUserFromAccessToken(nextAccessToken || getAccessToken()))
+    }
+
+    window.addEventListener(TOKEN_REFRESHED_EVENT, handleTokenRefresh)
+
+    return () => {
+      window.removeEventListener(TOKEN_REFRESHED_EVENT, handleTokenRefresh)
+    }
   }, [])
 
   const value = useMemo<AuthContextValue>(
