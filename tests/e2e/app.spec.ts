@@ -183,34 +183,11 @@ test.describe('public flows', () => {
 })
 
 test.describe('admin flow', () => {
-  test('admin can enter the admin area and see Arabic chrome', async ({
-    page,
-    request,
-  }) => {
-    const response = await request.post(`${apiBaseURL}/api/v1/auth/login`, {
-      data: adminCredentials,
-    })
-    expect(response.ok()).toBeTruthy()
-
-    const auth = (await response.json()) as {
-      accessToken: string
-      refreshToken: string
-    }
-
-    await page.addInitScript((tokens) => {
-      window.localStorage.setItem('yousef_lms.refresh_token', tokens.refreshToken)
-      window.sessionStorage.clear()
-    }, auth)
-
-    await page.route('**/api/v1/auth/refresh', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify(auth),
-      })
-    })
-
-    await page.goto('/admin')
+  test('admin can enter the admin area and see Arabic chrome', async ({ page }) => {
+    await page.goto('/login')
+    await page.getByLabel('البريد الإلكتروني').fill(adminCredentials.email)
+    await page.getByLabel('كلمة المرور').fill(adminCredentials.password)
+    await page.getByRole('button', { name: 'تسجيل الدخول' }).click()
 
     await expect(page).toHaveURL(/\/admin$/)
     await expect(page.getByText('لوحة الإدارة')).toBeVisible()

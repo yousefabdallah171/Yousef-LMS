@@ -3,7 +3,7 @@ import { Router } from 'express'
 import { z } from 'zod'
 
 import { prisma } from '../lib/prisma.js'
-import { requireAuth } from '../middleware/auth.js'
+import { requireAuth, resolveRequestUser } from '../middleware/auth.js'
 import {
   cleanupExpiredTokens,
   getRefreshTokenHash,
@@ -146,13 +146,6 @@ authRouter.post('/refresh', validate(refreshTokenSchema), async (req, res) => {
     })
   }
 
-  if (payload.type !== 'refresh') {
-    return res.status(401).json({
-      code: ERROR_CODES.INVALID_REFRESH_TOKEN,
-      message: 'Refresh token is invalid or expired',
-    })
-  }
-
   const currentTokenHash = getRefreshTokenHash(refreshToken)
   const currentTokenRecord = await prisma.refreshToken.findUnique({
     where: {
@@ -186,12 +179,13 @@ authRouter.post('/refresh', validate(refreshTokenSchema), async (req, res) => {
   })
 })
 
-authRouter.post('/logout', requireAuth, async (req, res) => {
+authRouter.post('/logout', async (req, res) => {
+  req.user = resolveRequestUser(req) ?? undefined
   const refreshToken = req.body?.refreshToken
 
   if (typeof refreshToken === 'string' && refreshToken.length > 0) {
     await revokeRefreshToken(getRefreshTokenHash(refreshToken))
-  } else {
+  } else if (req.user) {
     const activeTokenHashes = await prisma.refreshToken.findMany({
       where: {
         userId: req.user!.id,
@@ -205,6 +199,11 @@ authRouter.post('/logout', requireAuth, async (req, res) => {
     await Promise.all(
       activeTokenHashes.map(({ tokenHash }) => revokeRefreshToken(tokenHash)),
     )
+  } else {
+    return res.status(400).json({
+      code: ERROR_CODES.INVALID_REFRESH_TOKEN,
+      message: 'Refresh token is required when access token is unavailable',
+    })
   }
 
   return res.status(200).json({

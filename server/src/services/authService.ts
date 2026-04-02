@@ -156,23 +156,30 @@ export async function rotateRefreshToken(
     user.email,
   )
 
-  await prisma.$transaction([
-    prisma.refreshToken.update({
+  await prisma.$transaction(async (tx) => {
+    const revokedTokens = await tx.refreshToken.updateMany({
       where: {
         tokenHash: oldTokenHash,
+        userId: user.id,
+        revokedAt: null,
       },
       data: {
         revokedAt: new Date(),
       },
-    }),
-    prisma.refreshToken.create({
+    })
+
+    if (revokedTokens.count !== 1) {
+      throw new Error('Refresh token rotation failed')
+    }
+
+    await tx.refreshToken.create({
       data: {
         userId: user.id,
         tokenHash: nextTokens.refreshTokenHash,
         expiresAt: nextTokens.refreshExpiresAt,
       },
-    }),
-  ])
+    })
+  })
 
   await Promise.all([
     deleteRefreshTokenMetadata(oldTokenHash),

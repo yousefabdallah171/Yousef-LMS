@@ -5,31 +5,11 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 
 import { useAuth } from '../context/AuthContext'
 import { Button } from '../components/ui/Button'
+import { getReturnUrl } from '../utils/auth'
 
 type LoginFormValues = {
   email: string
   password: string
-}
-
-function getReturnUrl(
-  searchParams: URLSearchParams,
-  locationState: unknown,
-  fallback = '/dashboard',
-) {
-  const searchReturnUrl = searchParams.get('returnUrl')
-
-  if (searchReturnUrl) {
-    return searchReturnUrl
-  }
-
-  const state = locationState as { from?: { pathname?: string; search?: string } } | null
-  const pathname = state?.from?.pathname
-
-  if (pathname) {
-    return `${pathname}${state.from?.search ?? ''}`
-  }
-
-  return fallback
 }
 
 export function LoginPage() {
@@ -63,7 +43,7 @@ export function LoginPage() {
       setSubmitError(
         code === 'INVALID_CREDENTIALS'
           ? t('auth.invalidCredentials')
-          : t('auth.sessionExpiredSubtitle'),
+          : t('common.error'),
       )
     }
   }
@@ -71,8 +51,8 @@ export function LoginPage() {
   return (
     <main className="flex min-h-screen w-full flex-col overflow-hidden lg:flex-row">
       <section className="relative hidden flex-1 flex-col justify-center overflow-hidden bg-surface-container-lowest p-16 lg:flex">
-        <div className="absolute -left-24 -top-24 size-96 rounded-full bg-primary/15 blur-[120px]" />
-        <div className="absolute -bottom-24 -right-24 size-96 rounded-full bg-secondary/10 blur-[120px]" />
+        <div className="absolute -start-24 -top-24 size-96 rounded-full bg-primary/15 blur-[120px]" />
+        <div className="absolute -bottom-24 -end-24 size-96 rounded-full bg-secondary/10 blur-[120px]" />
         <div className="relative z-10 max-w-2xl">
           <h1 className="mb-8 text-6xl font-black leading-tight tracking-tight text-white">
             {t('auth.loginHeroTitle')}
@@ -92,13 +72,13 @@ export function LoginPage() {
       </section>
 
       <section className="relative flex flex-1 items-center justify-center bg-surface px-6 py-12">
-        <div className="absolute left-8 right-8 top-8 flex items-center justify-between">
+        <div className="absolute start-8 end-8 top-8 flex items-center justify-between">
           <Link className="text-3xl font-black tracking-tighter text-foreground" to="/">
             {t('nav.brandName')}
           </Link>
         </div>
 
-        <div className="w-full max-w-[440px] rounded-2xl border border-white/10 bg-[#111827] p-10 shadow-2xl shadow-primary/5">
+        <div className="w-full max-w-[440px] rounded-2xl border border-outline-variant/30 bg-surface-high p-10 shadow-2xl shadow-primary/5">
           <div className="mb-10 text-center">
             <h2 className="mb-2 text-2xl font-bold text-white">{t('auth.loginTitle')}</h2>
             <p className="text-sm text-muted">{t('auth.loginSubtitleFull')}</p>
@@ -117,7 +97,7 @@ export function LoginPage() {
                     message: t('auth.emailInvalid'),
                   },
                 })}
-                className="h-12 w-full rounded-xl border border-[#1F2937] bg-surface-high px-4 text-start text-foreground outline-none transition-all placeholder:text-outline focus:border-secondary focus:ring-1 focus:ring-primary"
+                className="h-12 w-full rounded-xl border border-outline-variant/30 bg-surface px-4 text-start text-foreground outline-none transition-all placeholder:text-outline focus:border-secondary focus:ring-1 focus:ring-primary"
                 dir="ltr"
                 id="login-email"
                 placeholder="name@example.com"
@@ -141,7 +121,7 @@ export function LoginPage() {
                 {...register('password', {
                   required: t('auth.passwordRequired'),
                 })}
-                className="h-12 w-full rounded-xl border border-[#1F2937] bg-surface-high px-4 text-start text-foreground outline-none transition-all placeholder:text-outline focus:border-secondary focus:ring-1 focus:ring-primary"
+                className="h-12 w-full rounded-xl border border-outline-variant/30 bg-surface px-4 text-start text-foreground outline-none transition-all placeholder:text-outline focus:border-secondary focus:ring-1 focus:ring-primary"
                 dir="ltr"
                 id="login-password"
                 placeholder="••••••••"
@@ -163,7 +143,7 @@ export function LoginPage() {
             </Button>
           </form>
 
-          <div className="mt-10 border-t border-[#1F2937] pt-8 text-center text-sm text-muted">
+          <div className="mt-10 border-t border-outline-variant/30 pt-8 text-center text-sm text-muted">
             {t('auth.noAccount')}{' '}
             <Link
               className="font-bold text-secondary hover:underline"

@@ -12,8 +12,6 @@ type DashboardLocationState = {
   forbidden?: boolean
 }
 
-const forbiddenMessage = 'لا تملك صلاحية الوصول'
-
 export function DashboardPage() {
   const { t } = useTranslation()
   const location = useLocation()
@@ -47,7 +45,7 @@ export function DashboardPage() {
   return (
     <>
       {showForbiddenToast ? (
-        <div className="pointer-events-none fixed left-4 top-4 z-50 sm:left-6 sm:top-6">
+        <div className="pointer-events-none fixed start-4 top-4 z-50 sm:start-6 sm:top-6">
           <div
             aria-live="assertive"
             className="pointer-events-auto flex items-center gap-3 rounded-2xl border border-danger/25 bg-surface-high px-4 py-3 text-sm text-foreground shadow-ambient"
@@ -58,7 +56,7 @@ export function DashboardPage() {
             </span>
             <div className="space-y-1">
               <p className="font-semibold text-danger">{t('errors.forbidden')}</p>
-              <p className="text-muted">{forbiddenMessage}</p>
+              <p className="text-muted">{t('errors.forbiddenMessage')}</p>
             </div>
           </div>
         </div>

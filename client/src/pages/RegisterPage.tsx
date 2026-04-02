@@ -5,33 +5,13 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 
 import { Button } from '../components/ui/Button'
 import { useAuth } from '../context/AuthContext'
+import { getReturnUrl } from '../utils/auth'
 
 type RegisterFormValues = {
   name: string
   email: string
   password: string
   confirmPassword: string
-}
-
-function getReturnUrl(
-  searchParams: URLSearchParams,
-  locationState: unknown,
-  fallback = '/dashboard',
-) {
-  const searchReturnUrl = searchParams.get('returnUrl')
-
-  if (searchReturnUrl) {
-    return searchReturnUrl
-  }
-
-  const state = locationState as { from?: { pathname?: string; search?: string } } | null
-  const pathname = state?.from?.pathname
-
-  if (pathname) {
-    return `${pathname}${state.from?.search ?? ''}`
-  }
-
-  return fallback
 }
 
 export function RegisterPage() {
@@ -80,8 +60,8 @@ export function RegisterPage() {
   return (
     <main className="flex min-h-screen w-full flex-col overflow-hidden md:flex-row">
       <section className="relative hidden flex-1 flex-col justify-center overflow-hidden bg-surface-container-lowest px-16 lg:flex">
-        <div className="absolute -left-24 -top-24 size-96 rounded-full bg-primary/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 size-[32rem] rounded-full bg-secondary/5 blur-[150px]" />
+        <div className="absolute -start-24 -top-24 size-96 rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute bottom-0 end-0 size-[32rem] rounded-full bg-secondary/5 blur-[150px]" />
         <div className="relative z-10 max-w-xl">
           <h2 className="mb-6 text-5xl font-extrabold leading-tight tracking-tight text-white">
             {t('auth.registerHeroTitle')}{' '}
@@ -116,7 +96,7 @@ export function RegisterPage() {
                 {...register('name', {
                   required: t('auth.nameRequired'),
                   minLength: {
-                    value: 2,
+                    value: 1,
                     message: t('auth.nameRequired'),
                   },
                 })}
