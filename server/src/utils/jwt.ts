@@ -14,14 +14,22 @@ export type RefreshTokenPayload = {
   type: 'refresh'
 }
 
-function getJwtSecret() {
-  const secret = process.env.JWT_SECRET
+function getRequiredSecret(key: 'JWT_SECRET' | 'JWT_REFRESH_SECRET') {
+  const secret = process.env[key]
 
   if (!secret) {
-    throw new Error('JWT_SECRET is not configured')
+    throw new Error(`${key} is not configured`)
   }
 
   return secret
+}
+
+function getJwtSecret() {
+  return getRequiredSecret('JWT_SECRET')
+}
+
+function getJwtRefreshSecret() {
+  return getRequiredSecret('JWT_REFRESH_SECRET')
 }
 
 export function signAccessToken(
@@ -37,7 +45,7 @@ export function signAccessToken(
 }
 
 export function signRefreshToken(userId: string) {
-  return jwt.sign({ type: 'refresh' }, getJwtSecret(), {
+  return jwt.sign({ type: 'refresh' }, getJwtRefreshSecret(), {
     subject: userId,
     jwtid: randomUUID(),
     expiresIn: (process.env.JWT_REFRESH_EXPIRY || '7d') as SignOptions['expiresIn'],
@@ -50,6 +58,6 @@ export function verifyAccessToken(token: string) {
 }
 
 export function verifyRefreshToken(token: string) {
-  return jwt.verify(token, getJwtSecret()) as jwt.JwtPayload &
+  return jwt.verify(token, getJwtRefreshSecret()) as jwt.JwtPayload &
     RefreshTokenPayload
 }

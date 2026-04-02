@@ -42,6 +42,7 @@ services:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/yousef_lms_dev
       REDIS_URL: redis://redis:6379
       JWT_SECRET: development-secret-change-me
+      JWT_REFRESH_SECRET: development-refresh-secret-change-me
       JWT_ACCESS_EXPIRY: 15m
       JWT_REFRESH_EXPIRY: 7d
       CLOUDFLARE_ACCOUNT_ID: local-dev

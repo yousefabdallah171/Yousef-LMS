@@ -23,6 +23,8 @@ export interface CourseEntity {
   updatedAt?: string
 }
 
+export type Course = CourseEntity
+
 export interface SectionEntity {
   id: string
   courseId: string
@@ -30,6 +32,8 @@ export interface SectionEntity {
   orderIndex: number
   createdAt?: string
 }
+
+export type Section = SectionEntity
 
 export interface LessonEntity {
   id: string
@@ -41,6 +45,8 @@ export interface LessonEntity {
   isFreePreview: boolean
   createdAt?: string
 }
+
+export type Lesson = LessonEntity
 
 export interface OrderEntity {
   id: string
