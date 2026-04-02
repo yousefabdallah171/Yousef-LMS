@@ -13,7 +13,8 @@ export function ProtectedRoute() {
   }
 
   if (!user) {
-    return <Navigate to="/login" replace state={{ from: location }} />
+    const returnUrl = `${location.pathname}${location.search}`
+    return <Navigate to={`/login?returnUrl=${encodeURIComponent(returnUrl)}`} replace state={{ from: location }} />
   }
 
   return <Outlet />

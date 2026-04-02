@@ -1,17 +1,18 @@
-import crypto from 'node:crypto'
-
 import { Prisma } from '@prisma/client'
 import { Router } from 'express'
 import { z } from 'zod'
 
 import { prisma } from '../lib/prisma.js'
 import { requireAuth } from '../middleware/auth.js'
-import { validate } from '../middleware/validate.js'
 import {
-  signAccessToken,
-  signRefreshToken,
-  verifyRefreshToken,
-} from '../utils/jwt.js'
+  cleanupExpiredTokens,
+  getRefreshTokenHash,
+  issueTokens,
+  revokeRefreshToken,
+  rotateRefreshToken,
+} from '../services/authService.js'
+import { validate } from '../middleware/validate.js'
+import { verifyRefreshToken } from '../utils/jwt.js'
 import { hashPassword, verifyPassword } from '../utils/password.js'
 
 const authRouter = Router()
@@ -40,75 +41,6 @@ const refreshTokenSchema = z.object({
 type RegisterInput = z.infer<typeof registerSchema>
 type LoginInput = z.infer<typeof loginSchema>
 type RefreshInput = z.infer<typeof refreshTokenSchema>
-
-function toAppRole(role: 'ADMIN' | 'STUDENT'): 'admin' | 'student' {
-  return role === 'ADMIN' ? 'admin' : 'student'
-}
-
-function hashToken(token: string) {
-  return crypto.createHash('sha256').update(token).digest('hex')
-}
-
-function buildAccessToken(user: {
-  id: string
-  role: 'ADMIN' | 'STUDENT'
-  name: string
-  email: string
-}) {
-  return signAccessToken(user.id, toAppRole(user.role), user.name, user.email)
-}
-
-function buildAuthPayload(user: {
-  id: string
-  role: 'ADMIN' | 'STUDENT'
-  name: string
-  email: string
-}) {
-  const refreshToken = signRefreshToken(user.id)
-
-  return {
-    accessToken: buildAccessToken(user),
-    refreshToken,
-    refreshTokenHash: hashToken(refreshToken),
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: toAppRole(user.role),
-    },
-  }
-}
-
-function getRefreshExpiryDate(token: string) {
-  const payload = verifyRefreshToken(token)
-
-  if (payload.type !== 'refresh' || !payload.exp) {
-    return null
-  }
-
-  return new Date(payload.exp * 1000)
-}
-
-async function cleanupExpiredTokens() {
-  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
-
-  await prisma.refreshToken.deleteMany({
-    where: {
-      OR: [
-        {
-          expiresAt: {
-            lt: new Date(),
-          },
-        },
-        {
-          revokedAt: {
-            lt: thirtyDaysAgo,
-          },
-        },
-      ],
-    },
-  })
-}
 
 authRouter.post('/register', validate(registerSchema), async (req, res) => {
   const { email, name, password } = req.body as RegisterInput
@@ -152,20 +84,7 @@ authRouter.post('/register', validate(registerSchema), async (req, res) => {
     throw error
   }
 
-  const authPayload = buildAuthPayload(createdUser)
-  const refreshExpiresAt = getRefreshExpiryDate(authPayload.refreshToken)
-
-  if (!refreshExpiresAt) {
-    throw new Error('Failed to calculate refresh token expiry')
-  }
-
-  await prisma.refreshToken.create({
-    data: {
-      userId: createdUser.id,
-      tokenHash: authPayload.refreshTokenHash,
-      expiresAt: refreshExpiresAt,
-    },
-  })
+  const authPayload = await issueTokens(createdUser)
 
   return res.status(201).json({
     accessToken: authPayload.accessToken,
@@ -198,20 +117,7 @@ authRouter.post('/login', validate(loginSchema), async (req, res) => {
     })
   }
 
-  const authPayload = buildAuthPayload(user)
-  const refreshExpiresAt = getRefreshExpiryDate(authPayload.refreshToken)
-
-  if (!refreshExpiresAt) {
-    throw new Error('Failed to calculate refresh token expiry')
-  }
-
-  await prisma.refreshToken.create({
-    data: {
-      userId: user.id,
-      tokenHash: authPayload.refreshTokenHash,
-      expiresAt: refreshExpiresAt,
-    },
-  })
+  const authPayload = await issueTokens(user)
 
   return res.status(200).json({
     accessToken: authPayload.accessToken,
@@ -247,7 +153,7 @@ authRouter.post('/refresh', validate(refreshTokenSchema), async (req, res) => {
     })
   }
 
-  const currentTokenHash = hashToken(refreshToken)
+  const currentTokenHash = getRefreshTokenHash(refreshToken)
   const currentTokenRecord = await prisma.refreshToken.findUnique({
     where: {
       tokenHash: currentTokenHash,
@@ -269,47 +175,37 @@ authRouter.post('/refresh', validate(refreshTokenSchema), async (req, res) => {
     })
   }
 
-  const authPayload = buildAuthPayload(currentTokenRecord.user)
-  const refreshExpiresAt = getRefreshExpiryDate(authPayload.refreshToken)
-
-  if (!refreshExpiresAt) {
-    throw new Error('Failed to calculate refresh token expiry')
-  }
-
-  await prisma.$transaction([
-    prisma.refreshToken.update({
-      where: {
-        id: currentTokenRecord.id,
-      },
-      data: {
-        revokedAt: new Date(),
-      },
-    }),
-    prisma.refreshToken.create({
-      data: {
-        userId: currentTokenRecord.userId,
-        tokenHash: authPayload.refreshTokenHash,
-        expiresAt: refreshExpiresAt,
-      },
-    }),
-  ])
+  const nextTokens = await rotateRefreshToken(
+    currentTokenHash,
+    currentTokenRecord.user,
+  )
 
   return res.status(200).json({
-    accessToken: authPayload.accessToken,
-    refreshToken: authPayload.refreshToken,
+    accessToken: nextTokens.accessToken,
+    refreshToken: nextTokens.refreshToken,
   })
 })
 
 authRouter.post('/logout', requireAuth, async (req, res) => {
-  await prisma.refreshToken.updateMany({
-    where: {
-      userId: req.user!.id,
-      revokedAt: null,
-    },
-    data: {
-      revokedAt: new Date(),
-    },
-  })
+  const refreshToken = req.body?.refreshToken
+
+  if (typeof refreshToken === 'string' && refreshToken.length > 0) {
+    await revokeRefreshToken(getRefreshTokenHash(refreshToken))
+  } else {
+    const activeTokenHashes = await prisma.refreshToken.findMany({
+      where: {
+        userId: req.user!.id,
+        revokedAt: null,
+      },
+      select: {
+        tokenHash: true,
+      },
+    })
+
+    await Promise.all(
+      activeTokenHashes.map(({ tokenHash }) => revokeRefreshToken(tokenHash)),
+    )
+  }
 
   return res.status(200).json({
     message: 'Logged out successfully',

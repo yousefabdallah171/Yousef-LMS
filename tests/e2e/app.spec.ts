@@ -52,10 +52,10 @@ test.describe('public flows', () => {
 
   test('protected routes redirect unauthenticated users to login', async ({ page }) => {
     await page.goto('/dashboard')
-    await expect(page).toHaveURL(/\/login$/)
+    await expect(page).toHaveURL(/\/login\?returnUrl=%2Fdashboard$/)
 
     await page.goto('/admin')
-    await expect(page).toHaveURL(/\/login$/)
+    await expect(page).toHaveURL(/\/login\?returnUrl=%2Fadmin$/)
   })
 
   test('course detail hides locked video URLs for anonymous visitors', async ({

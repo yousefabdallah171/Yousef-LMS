@@ -5,10 +5,13 @@ import './App.css'
 import { AdminRoute } from './components/AdminRoute'
 import { CourseCatalogPage } from './pages/CourseCatalogPage'
 import { CourseDetailPage } from './pages/CourseDetailPage'
+import { DashboardPage } from './pages/DashboardPage'
 import { HomePage } from './pages/HomePage'
 import { LessonPlayerPage } from './pages/LessonPlayerPage'
+import { LoginPage } from './pages/LoginPage'
 import { Navigation } from './components/Navigation'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { RegisterPage } from './pages/RegisterPage'
 import { AdminChrome } from './components/admin/AdminChrome'
 import { NotFoundPlaceholder, PlaceholderPage } from './pages/PlaceholderPage'
 
@@ -31,26 +34,8 @@ function App() {
         <Route path="/courses" element={<CourseCatalogPage />} />
         <Route path="/courses/:slug" element={<CourseDetailPage />} />
         <Route path="/courses/:slug/lessons/:id" element={<LessonPlayerPage />} />
-        <Route
-          path="/register"
-          element={
-            <PlaceholderPage
-              route="/register"
-              subtitle={t('auth.registerSubtitle')}
-              title={t('auth.registerTitle')}
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PlaceholderPage
-              route="/login"
-              subtitle={t('auth.loginSubtitle')}
-              title={t('auth.loginTitle')}
-            />
-          }
-        />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/forgot-password"
           element={
@@ -130,18 +115,7 @@ function App() {
           }
         />
         <Route element={<ProtectedRoute />}>
-          <Route
-            path="/dashboard"
-            element={
-              <PlaceholderPage
-                route="/dashboard"
-                subtitle={t('dashboard.subtitle')}
-                title={t('dashboard.title')}
-                status={t('placeholder.statusAuthenticatedRoute')}
-                tone="success"
-              />
-            }
-          />
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
         <Route element={<AdminRoute />}>
           <Route element={<AdminChrome />}>
