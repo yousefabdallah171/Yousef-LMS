@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 import './App.css'
 import { AdminRoute } from './components/AdminRoute'
+import { AdminOrderDetailPage } from './pages/AdminOrderDetailPage'
+import { AdminOrdersPage } from './pages/AdminOrdersPage'
 import { CourseCatalogPage } from './pages/CourseCatalogPage'
 import { CourseDetailPage } from './pages/CourseDetailPage'
 import { DashboardPage } from './pages/DashboardPage'
@@ -137,7 +139,7 @@ function App() {
                 <PlaceholderPage
                   route="/admin/courses"
                   subtitle={t('admin.coursesSubtitle')}
-                  title={t('admin.courses')}
+                  title={t('admin.courses.title')}
                   status={t('placeholder.statusAdminRoute')}
                   tone="success"
                 />
@@ -145,15 +147,11 @@ function App() {
             />
             <Route
               path="/admin/orders"
-              element={
-                <PlaceholderPage
-                  route="/admin/orders"
-                  subtitle={t('admin.ordersSubtitle')}
-                  title={t('admin.orders')}
-                  status={t('placeholder.statusAdminRoute')}
-                  tone="success"
-                />
-              }
+              element={<AdminOrdersPage />}
+            />
+            <Route
+              path="/admin/orders/:id"
+              element={<AdminOrderDetailPage />}
             />
             <Route
               path="/admin/students"

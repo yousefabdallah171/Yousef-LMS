@@ -36,10 +36,10 @@ export function AdminChrome() {
             {t('admin.overview')}
           </NavLink>
           <NavLink className={adminLinkClassName} to="/admin/courses">
-            {t('admin.courses')}
+            {t('admin.courses.title')}
           </NavLink>
           <NavLink className={adminLinkClassName} to="/admin/orders">
-            {t('admin.orders')}
+            {t('admin.orders.title')}
           </NavLink>
           <NavLink className={adminLinkClassName} to="/admin/students">
             {t('admin.students')}
