@@ -3,7 +3,6 @@ type AuthTokens = {
   refreshToken: string | null
 }
 
-const ACCESS_TOKEN_KEY = 'yousef_lms.access_token'
 const REFRESH_TOKEN_KEY = 'yousef_lms.refresh_token'
 
 function readStoredToken(key: string) {
@@ -36,7 +35,7 @@ function writeStoredToken(key: string, value: string | null) {
 }
 
 let tokens: AuthTokens = {
-  accessToken: readStoredToken(ACCESS_TOKEN_KEY),
+  accessToken: null,
   refreshToken: readStoredToken(REFRESH_TOKEN_KEY),
 }
 
@@ -54,10 +53,6 @@ export function setAuthTokens(nextTokens: Partial<AuthTokens>) {
     ...nextTokens,
   }
 
-  if (Object.hasOwn(nextTokens, 'accessToken')) {
-    writeStoredToken(ACCESS_TOKEN_KEY, tokens.accessToken)
-  }
-
   if (Object.hasOwn(nextTokens, 'refreshToken')) {
     writeStoredToken(REFRESH_TOKEN_KEY, tokens.refreshToken)
   }
@@ -68,7 +63,5 @@ export function clearAuthTokens() {
     accessToken: null,
     refreshToken: null,
   }
-
-  writeStoredToken(ACCESS_TOKEN_KEY, null)
   writeStoredToken(REFRESH_TOKEN_KEY, null)
 }

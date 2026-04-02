@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
@@ -12,6 +13,7 @@ function navLinkClassName({ isActive }: { isActive: boolean }) {
 }
 
 export function Navigation() {
+  const { t } = useTranslation()
   const { user, logout } = useAuth()
   const { theme, toggleTheme } = useTheme()
 
@@ -23,44 +25,44 @@ export function Navigation() {
             Y
           </div>
           <div>
-            <div className="text-sm font-semibold text-secondary">Arabic-first LMS</div>
-            <div className="text-lg font-black text-foreground">Yousef LMS</div>
+            <div className="text-sm font-semibold text-secondary">{t('nav.brandTagline')}</div>
+            <div className="text-lg font-black text-foreground">{t('nav.brandName')}</div>
           </div>
         </div>
 
         <nav className="hidden items-center gap-2 md:flex">
           <NavLink className={navLinkClassName} to="/">
-            Home
+            {t('nav.home')}
           </NavLink>
           <NavLink className={navLinkClassName} to="/courses">
-            Courses
+            {t('nav.courses')}
           </NavLink>
           {user ? (
             <NavLink className={navLinkClassName} to="/dashboard">
-              Dashboard
+              {t('nav.dashboard')}
             </NavLink>
           ) : null}
           {user?.role === 'admin' ? (
             <NavLink className={navLinkClassName} to="/admin">
-              Admin
+              {t('nav.admin')}
             </NavLink>
           ) : null}
         </nav>
 
         <div className="flex items-center gap-3">
           <Button onClick={toggleTheme} type="button" variant="ghost">
-            {theme === 'dark' ? 'Light' : 'Dark'}
+            {theme === 'dark' ? t('nav.themeLight') : t('nav.themeDark')}
           </Button>
           {user ? (
             <Button onClick={() => void logout()} type="button" variant="secondary">
-              Logout
+              {t('nav.logout')}
             </Button>
           ) : (
             <>
               <ButtonLink to="/login" variant="ghost">
-                Login
+                {t('nav.login')}
               </ButtonLink>
-              <ButtonLink to="/register">Register</ButtonLink>
+              <ButtonLink to="/register">{t('nav.register')}</ButtonLink>
             </>
           )}
         </div>

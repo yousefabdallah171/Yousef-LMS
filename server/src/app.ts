@@ -8,6 +8,11 @@ import { apiRouter } from './routes/index.js'
 
 dotenv.config()
 
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',')
+  .map((value) => value.trim())
+  .filter(Boolean)
+
 export function createApp() {
   const app = express()
   const logger = pino()
@@ -18,7 +23,7 @@ export function createApp() {
   })
   app.use(
     cors({
-      origin: process.env.FRONTEND_URL || 'http://localhost:5173'
+      origin: allowedOrigins.length === 1 ? allowedOrigins[0] : allowedOrigins,
     })
   )
   app.use(express.json())

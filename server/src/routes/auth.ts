@@ -89,6 +89,27 @@ function getRefreshExpiryDate(token: string) {
   return new Date(payload.exp * 1000)
 }
 
+async function cleanupExpiredTokens() {
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+
+  await prisma.refreshToken.deleteMany({
+    where: {
+      OR: [
+        {
+          expiresAt: {
+            lt: new Date(),
+          },
+        },
+        {
+          revokedAt: {
+            lt: thirtyDaysAgo,
+          },
+        },
+      ],
+    },
+  })
+}
+
 authRouter.post('/register', validate(registerSchema), async (req, res) => {
   const { email, name, password } = req.body as RegisterInput
 
@@ -200,6 +221,12 @@ authRouter.post('/login', validate(loginSchema), async (req, res) => {
 })
 
 authRouter.post('/refresh', validate(refreshTokenSchema), async (req, res) => {
+  if (Math.random() < 0.01) {
+    void cleanupExpiredTokens().catch(() => {
+      // Ignore cleanup errors to keep refresh responsive.
+    })
+  }
+
   const { refreshToken } = req.body as RefreshInput
 
   let payload: ReturnType<typeof verifyRefreshToken>
