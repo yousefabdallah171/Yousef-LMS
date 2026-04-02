@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
+import { formatPrice } from '../utils/formatPrice'
+
 type CourseCardProps = {
   course: {
     id: string
@@ -10,15 +12,8 @@ type CourseCardProps = {
     thumbnailUrl: string
     price: number
     lessonsCount: number
+    freePreviewLessonsCount: number
   }
-}
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat('ar-EG', {
-    style: 'currency',
-    currency: 'EGP',
-    maximumFractionDigits: 0,
-  }).format(price)
 }
 
 export function CourseCard({ course }: CourseCardProps) {
@@ -32,17 +27,21 @@ export function CourseCard({ course }: CourseCardProps) {
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
           src={course.thumbnailUrl}
         />
-        <div className="absolute right-4 top-4 rounded-full bg-primary/90 px-3 py-1 text-xs font-bold text-white backdrop-blur-md">
-          {t('catalog.freePreview')}
-        </div>
+        {course.freePreviewLessonsCount > 0 ? (
+          <div className="absolute end-4 top-4 rounded-full bg-primary/90 px-3 py-1 text-xs font-bold text-white backdrop-blur-md">
+            {t('catalog.freePreview')}
+          </div>
+        ) : null}
       </div>
 
       <div className="p-6">
-        <div className="mb-3 flex items-center gap-2">
-          <span className="inline-block rounded bg-secondary/10 px-2 py-1 text-[10px] font-bold tracking-wider text-secondary">
-            {t('catalog.previewLessons')}
-          </span>
-        </div>
+        {course.freePreviewLessonsCount > 0 ? (
+          <div className="mb-3 flex items-center gap-2">
+            <span className="inline-block rounded bg-secondary/10 px-2 py-1 text-[10px] font-bold tracking-wider text-secondary">
+              {t('catalog.courseCount', { count: course.freePreviewLessonsCount })}
+            </span>
+          </div>
+        ) : null}
 
         <h3 className="mb-3 text-xl font-bold text-[#F9FAFB] transition-colors group-hover:text-secondary">
           {course.title}

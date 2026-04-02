@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
@@ -11,6 +12,7 @@ function adminLinkClassName({ isActive }: { isActive: boolean }) {
 }
 
 export function AdminChrome() {
+  const { t } = useTranslation()
   const { user } = useAuth()
   const { theme, toggleTheme } = useTheme()
 
@@ -19,31 +21,31 @@ export function AdminChrome() {
       <aside className="rounded-3xl border border-ghost bg-surface-high p-5 shadow-ambient">
         <div className="border-b border-ghost pb-5">
           <div className="text-xs uppercase tracking-[0.3em] text-secondary">
-            Admin panel
+            {t('admin.panel')}
           </div>
           <h2 className="mt-3 text-2xl font-black text-foreground">
-            {user?.name || 'Admin'}
+            {user?.name || t('admin.adminFallback')}
           </h2>
           <p className="mt-2 text-sm leading-7 text-muted">
-            Core navigation for course operations, order review, and student moderation.
+            {t('admin.navigationDescription')}
           </p>
         </div>
 
         <nav className="mt-5 space-y-2">
           <NavLink className={adminLinkClassName} to="/admin">
-            Overview
+            {t('admin.overview')}
           </NavLink>
           <NavLink className={adminLinkClassName} to="/admin/courses">
-            Courses
+            {t('admin.courses')}
           </NavLink>
           <NavLink className={adminLinkClassName} to="/admin/orders">
-            Orders
+            {t('admin.orders')}
           </NavLink>
           <NavLink className={adminLinkClassName} to="/admin/students">
-            Students
+            {t('admin.students')}
           </NavLink>
           <NavLink className={adminLinkClassName} to="/admin/comments">
-            Comments
+            {t('admin.comments')}
           </NavLink>
         </nav>
 
@@ -52,7 +54,7 @@ export function AdminChrome() {
           onClick={toggleTheme}
           type="button"
         >
-          Theme: {theme}
+          {theme === 'dark' ? t('nav.themeLight') : t('nav.themeDark')}
         </button>
       </aside>
 

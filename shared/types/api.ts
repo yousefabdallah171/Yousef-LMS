@@ -53,6 +53,7 @@ export interface CourseListItemDto {
   thumbnailUrl: string
   price: number
   lessonsCount: number
+  freePreviewLessonsCount: number
   createdAt: string
 }
 
@@ -62,10 +63,11 @@ export interface CourseListResponse {
 
 export interface LessonDto {
   id: string
+  sectionId?: string
   title: string
   orderIndex: number
   isFreePreview: boolean
-  videoUrl: string
+  videoUrl?: string
   description?: string | null
 }
 
@@ -89,6 +91,17 @@ export interface CourseDetailDto {
 
 export interface CourseDetailResponse {
   course: CourseDetailDto
+  enrollment: {
+    enrolled: boolean
+    enrollmentId: string | null
+  }
+}
+
+export interface CourseLessonResponse {
+  course: CourseDetailDto
+  lesson: LessonDto & {
+    sectionId: string
+  }
   enrollment: {
     enrolled: boolean
     enrollmentId: string | null

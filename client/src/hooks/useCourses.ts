@@ -10,6 +10,7 @@ type CourseListItem = {
   thumbnailUrl: string
   price: number
   lessonsCount: number
+  freePreviewLessonsCount: number
   createdAt: string
 }
 

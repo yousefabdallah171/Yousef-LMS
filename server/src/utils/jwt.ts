@@ -53,8 +53,18 @@ export function signRefreshToken(userId: string) {
 }
 
 export function verifyAccessToken(token: string) {
-  return jwt.verify(token, getJwtSecret()) as jwt.JwtPayload &
-    AccessTokenPayload
+  const payload = jwt.verify(token, getJwtSecret()) as jwt.JwtPayload &
+    AccessTokenPayload & { type?: string }
+
+  if (payload.type === 'refresh') {
+    throw new Error('Refresh token cannot be used as an access token')
+  }
+
+  if (!payload.sub || (payload.role !== 'admin' && payload.role !== 'student')) {
+    throw new Error('Invalid access token payload')
+  }
+
+  return payload
 }
 
 export function verifyRefreshToken(token: string) {

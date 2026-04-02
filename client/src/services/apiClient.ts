@@ -16,6 +16,8 @@ const apiClient = axios.create({
     : `/api/${apiVersion}`,
 })
 
+const TOKEN_REFRESHED_EVENT = 'auth:token-refreshed'
+
 let refreshRequest: Promise<string | null> | null = null
 
 apiClient.interceptors.request.use((config) => {
@@ -34,8 +36,16 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config as
       | (typeof error.config & { _retry?: boolean })
       | undefined
+    const requestUrl = originalRequest?.url ?? ''
 
     if (error.response?.status !== 401 || !originalRequest || originalRequest._retry) {
+      return Promise.reject(error)
+    }
+
+    // If refresh itself returns 401, the stored refresh token is invalid.
+    // Exit here to avoid re-entering the refresh path indefinitely.
+    if (requestUrl.includes('/auth/refresh')) {
+      clearAuthTokens()
       return Promise.reject(error)
     }
 
@@ -59,6 +69,11 @@ apiClient.interceptors.response.use(
             accessToken: nextAccessToken,
             refreshToken: nextRefreshToken,
           })
+          window.dispatchEvent(
+            new CustomEvent(TOKEN_REFRESHED_EVENT, {
+              detail: { accessToken: nextAccessToken },
+            }),
+          )
 
           return nextAccessToken
         })
@@ -82,4 +97,4 @@ apiClient.interceptors.response.use(
   },
 )
 
-export { apiClient }
+export { apiClient, TOKEN_REFRESHED_EVENT }
