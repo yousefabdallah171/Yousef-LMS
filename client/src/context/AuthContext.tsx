@@ -16,6 +16,7 @@ import {
   setAuthTokens,
 } from '../services/tokenStore'
 import { TOKEN_REFRESHED_EVENT } from '../services/apiClient'
+import { useNavigate } from 'react-router-dom'
 
 type UserRole = 'admin' | 'student'
 
@@ -91,6 +92,7 @@ function getUserFromAccessToken(token: string | null) {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const navigate = useNavigate()
   const [user, setUser] = useState<AuthUser | null>(() =>
     getUserFromAccessToken(getAccessToken()),
   )
@@ -174,15 +176,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return authUser
       },
       async logout() {
+        const refreshToken = getRefreshToken()
+
         try {
-          await apiClient.post('/auth/logout')
+          if (refreshToken) {
+            await apiClient.post('/auth/logout', {
+              refreshToken,
+            })
+          }
         } finally {
           clearAuthTokens()
           setUser(null)
+          navigate('/', { replace: true })
         }
       },
     }),
-    [isLoading, user],
+    [isLoading, navigate, user],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

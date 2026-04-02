@@ -3,40 +3,9 @@ type AuthTokens = {
   refreshToken: string | null
 }
 
-const REFRESH_TOKEN_KEY = 'yousef_lms.refresh_token'
-
-function readStoredToken(key: string) {
-  if (typeof window === 'undefined') {
-    return null
-  }
-
-  try {
-    return window.localStorage.getItem(key)
-  } catch {
-    return null
-  }
-}
-
-function writeStoredToken(key: string, value: string | null) {
-  if (typeof window === 'undefined') {
-    return
-  }
-
-  try {
-    if (value) {
-      window.localStorage.setItem(key, value)
-      return
-    }
-
-    window.localStorage.removeItem(key)
-  } catch {
-    // Ignore storage failures and keep the in-memory copy in sync.
-  }
-}
-
 let tokens: AuthTokens = {
   accessToken: null,
-  refreshToken: readStoredToken(REFRESH_TOKEN_KEY),
+  refreshToken: null,
 }
 
 export function getAccessToken() {
@@ -52,10 +21,6 @@ export function setAuthTokens(nextTokens: Partial<AuthTokens>) {
     ...tokens,
     ...nextTokens,
   }
-
-  if (Object.hasOwn(nextTokens, 'refreshToken')) {
-    writeStoredToken(REFRESH_TOKEN_KEY, tokens.refreshToken)
-  }
 }
 
 export function clearAuthTokens() {
@@ -63,5 +28,4 @@ export function clearAuthTokens() {
     accessToken: null,
     refreshToken: null,
   }
-  writeStoredToken(REFRESH_TOKEN_KEY, null)
 }

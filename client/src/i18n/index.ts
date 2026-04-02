@@ -5,6 +5,7 @@ import ar from './locales/ar.json'
 void i18n.use(initReactI18next).init({
   lng: 'ar',
   fallbackLng: 'ar',
+  showSupportNotice: false,
   resources: {
     ar: {
       translation: ar

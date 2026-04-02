@@ -68,6 +68,12 @@ export function verifyAccessToken(token: string) {
 }
 
 export function verifyRefreshToken(token: string) {
-  return jwt.verify(token, getJwtRefreshSecret()) as jwt.JwtPayload &
+  const payload = jwt.verify(token, getJwtRefreshSecret()) as jwt.JwtPayload &
     RefreshTokenPayload
+
+  if (payload.type !== 'refresh' || !payload.sub) {
+    throw new Error('Invalid refresh token payload')
+  }
+
+  return payload
 }
