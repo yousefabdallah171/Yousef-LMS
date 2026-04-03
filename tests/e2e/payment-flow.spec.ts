@@ -2,6 +2,8 @@ import path from 'node:path'
 
 import { expect, test } from '@playwright/test'
 
+const apiBaseURL = process.env.PLAYWRIGHT_API_URL ?? 'http://localhost:3000'
+
 test.describe('payment flow', () => {
   test('student can register, upload payment proof, and see a pending order on the dashboard', async ({
     page,
@@ -13,7 +15,7 @@ test.describe('payment flow', () => {
       .poll(
         async () => {
           try {
-            const courseResponse = await request.get('http://localhost:3000/api/v1/courses')
+            const courseResponse = await request.get(`${apiBaseURL}/api/v1/courses`)
 
             if (!courseResponse.ok()) {
               return null
@@ -33,7 +35,7 @@ test.describe('payment flow', () => {
           }
         },
         {
-          timeout: 60000,
+          timeout: 60_000,
         },
       )
       .not.toBeNull()
@@ -60,12 +62,17 @@ test.describe('payment flow', () => {
 
     await expect(
       page.getByRole('heading', { name: 'تم إرسال الطلب بنجاح' }),
-    ).toBeVisible({ timeout: 15000 })
+    ).toBeVisible({ timeout: 15_000 })
 
     await page.getByRole('main').getByRole('link', { name: 'لوحة التحكم' }).click()
     await expect(page).toHaveURL(/\/dashboard$/)
-    const orderCard = page.locator('div.rounded-2xl', { hasText: targetCourse!.title }).first()
+
+    const ordersSection = page.locator('section', {
+      has: page.getByRole('heading', { name: 'طلباتي' }),
+    })
+    const orderCard = ordersSection.locator('article', { hasText: targetCourse!.title }).first()
+
     await expect(orderCard).toBeVisible()
-    await expect(orderCard.getByText(/قيد المراجعة/i)).toBeVisible()
+    await expect(orderCard).toContainText('قيد المراجعة')
   })
 })

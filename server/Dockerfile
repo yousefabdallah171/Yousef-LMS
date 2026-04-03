@@ -30,6 +30,8 @@ COPY server/package.json ./server/package.json
 COPY server/prisma ./server/prisma
 COPY shared/package.json ./shared/package.json
 RUN npm install --omit=dev --workspace server
+COPY --from=build /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=build /app/server/dist ./server/dist
 USER appuser
 EXPOSE 3000

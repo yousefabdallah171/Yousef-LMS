@@ -28,8 +28,44 @@ export function PaymentInstructionsPage() {
   const pendingOrder = relatedOrders.find((order) => order.status === 'pending_review')
   const approvedOrder = relatedOrders.find((order) => order.status === 'approved')
 
+  function fallbackCopyValue(value: string) {
+    if (typeof document === 'undefined') {
+      return false
+    }
+
+    const textarea = document.createElement('textarea')
+    textarea.value = value
+    textarea.setAttribute('readonly', '')
+    textarea.style.position = 'absolute'
+    textarea.style.left = '-9999px'
+    document.body.appendChild(textarea)
+    textarea.select()
+
+    try {
+      return document.execCommand('copy')
+    } finally {
+      document.body.removeChild(textarea)
+    }
+  }
+
   async function copyValue(key: string, value: string) {
-    await navigator.clipboard.writeText(value)
+    let copied = false
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value)
+        copied = true
+      } else {
+        copied = fallbackCopyValue(value)
+      }
+    } catch {
+      copied = fallbackCopyValue(value)
+    }
+
+    if (!copied) {
+      return
+    }
+
     setCopiedKey(key)
     window.setTimeout(() => setCopiedKey((current) => (current === key ? null : current)), 2000)
   }
