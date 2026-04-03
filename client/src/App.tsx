@@ -12,6 +12,8 @@ import { HomePage } from './pages/HomePage'
 import { LessonPlayerPage } from './pages/LessonPlayerPage'
 import { LoginPage } from './pages/LoginPage'
 import { Navigation } from './components/Navigation'
+import { PaymentInstructionsPage } from './pages/PaymentInstructionsPage'
+import { PaymentProofUploadPage } from './pages/PaymentProofUploadPage'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { RegisterPage } from './pages/RegisterPage'
 import { AdminChrome } from './components/admin/AdminChrome'
@@ -55,16 +57,6 @@ function App() {
               route="/reset-password"
               subtitle={t('auth.resetPasswordSubtitle')}
               title={t('auth.resetPassword')}
-            />
-          }
-        />
-        <Route
-          path="/payment/:courseId"
-          element={
-            <PlaceholderPage
-              route="/payment/:courseId"
-              subtitle={t('placeholder.paymentSubtitle')}
-              title={t('placeholder.paymentTitle')}
             />
           }
         />
@@ -118,6 +110,8 @@ function App() {
         />
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/payment/:courseId" element={<PaymentInstructionsPage />} />
+          <Route path="/payment/:courseId/proof" element={<PaymentProofUploadPage />} />
         </Route>
         <Route element={<AdminRoute />}>
           <Route element={<AdminChrome />}>
