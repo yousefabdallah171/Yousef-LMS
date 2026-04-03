@@ -21,3 +21,5 @@ server/prisma/dev.db-journal
 .runtime/
 server/.runtime/
 test-results/
+playwright-report/
+tmp/

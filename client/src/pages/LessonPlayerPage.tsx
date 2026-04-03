@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 
@@ -7,12 +7,72 @@ import { PurchaseRequiredModal } from '../components/PurchaseRequiredModal'
 import { Button } from '../components/ui/Button'
 import { EmptyState } from '../components/ui/EmptyState'
 import { useCourseLesson } from '../hooks/useCourse'
+import { useMarkWatched } from '../hooks/useLessonProgress'
+
+const ESTIMATED_WATCH_THRESHOLD_MS = Number(
+  import.meta.env.VITE_LESSON_PROGRESS_DELAY_MS ?? 45_000,
+)
 
 export function LessonPlayerPage() {
   const { t } = useTranslation()
   const { slug, id } = useParams()
   const { data, isLoading, isError, refetch, error } = useCourseLesson(slug, id)
   const [lockedLessonTitle, setLockedLessonTitle] = useState<string | undefined>()
+  const [playerReady, setPlayerReady] = useState(false)
+  const [watchSessionStarted, setWatchSessionStarted] = useState(false)
+  const [progressRetryToken, setProgressRetryToken] = useState(0)
+  const markWatched = useMarkWatched()
+  const lastTrackedLessonId = useRef<string | null>(null)
+  const lessonId = data?.lesson.id
+  const hasPlayableVideo = Boolean(data?.lesson.videoUrl)
+  const isEnrolled = Boolean(data?.enrollment.enrolled)
+  const lessonWatchedAt = data?.lesson.watchedAt
+
+  useEffect(() => {
+    setPlayerReady(false)
+    setWatchSessionStarted(false)
+    setProgressRetryToken(0)
+  }, [lessonId])
+
+  useEffect(() => {
+    if (
+      !data ||
+      typeof lessonId !== 'string' ||
+      !isEnrolled ||
+      !hasPlayableVideo ||
+      !playerReady ||
+      !watchSessionStarted ||
+      lessonWatchedAt ||
+      lastTrackedLessonId.current === lessonId
+    ) {
+      return
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      markWatched.mutate(lessonId, {
+        onSuccess: () => {
+          lastTrackedLessonId.current = lessonId
+        },
+        onError: () => {
+          setProgressRetryToken((current) => current + 1)
+        },
+      })
+    }, ESTIMATED_WATCH_THRESHOLD_MS)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [
+    data,
+    hasPlayableVideo,
+    isEnrolled,
+    lessonId,
+    lessonWatchedAt,
+    markWatched,
+    playerReady,
+    progressRetryToken,
+    watchSessionStarted,
+  ])
 
   if (isLoading) {
     return (
@@ -42,11 +102,11 @@ export function LessonPlayerPage() {
             </Button>
           }
           description={
-            status === 403
+            status === 401 || status === 403
               ? t('catalog.lessonRequiresEnrollment')
               : t('lesson.videoError')
           }
-          title={status === 403 ? t('lesson.locked') : t('common.error')}
+          title={status === 401 || status === 403 ? t('lesson.locked') : t('common.error')}
         />
       </main>
     )
@@ -59,42 +119,16 @@ export function LessonPlayerPage() {
   const isNextLessonAccessible = nextLesson
     ? nextLesson.isFreePreview || enrollment.enrolled
     : false
-  const hasPlayableVideo = typeof lesson.videoUrl === 'string' && lesson.videoUrl.length > 0
+  const watchedLessonsCount = flattenedLessons.filter((entry) => entry.watchedAt).length
+  const progressPercent = flattenedLessons.length
+    ? Math.round((watchedLessonsCount / flattenedLessons.length) * 100)
+    : 0
 
   return (
     <>
       <main className="mx-auto max-w-[96rem] px-6 pb-20 pt-28 md:px-8">
         <div className="grid gap-8 lg:grid-cols-[20rem_minmax(0,1fr)]">
-          <aside className="rounded-[2rem] border border-white/10 bg-surface-high p-6 lg:sticky lg:top-28 lg:h-[calc(100dvh-9rem)] lg:overflow-auto">
-            <div className="mb-6 space-y-3 text-end">
-              <h2 className="text-2xl font-black text-balance">
-                {t('catalog.curriculumTitle')}
-              </h2>
-              <p className="text-sm text-muted">{course.title}</p>
-            </div>
-
-            <div className="space-y-5">
-              {course.sections.map((section) => (
-                <section key={section.id}>
-                  <h3 className="mb-3 text-sm font-semibold text-muted">{section.title}</h3>
-                  <div className="space-y-2">
-                    {section.lessons.map((entry) => (
-                      <LessonListItem
-                        courseSlug={course.slug}
-                        isAccessible={entry.isFreePreview || enrollment.enrolled}
-                        isActive={entry.id === lesson.id}
-                        key={entry.id}
-                        lesson={entry}
-                        onLockedClick={() => setLockedLessonTitle(entry.title)}
-                      />
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </aside>
-
-          <div className="space-y-8">
+          <div className="space-y-8 lg:order-2">
             <nav className="flex flex-wrap items-center justify-end gap-2 text-sm text-muted">
               <Link className="hover:text-primary" to="/courses">
                 {t('nav.courses')}
@@ -108,15 +142,29 @@ export function LessonPlayerPage() {
             </nav>
 
             <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-surface-high">
-              <div className="aspect-video bg-black">
+              <div className="relative aspect-video bg-black">
                 {hasPlayableVideo ? (
-                  <iframe
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="h-full w-full"
-                    src={lesson.videoUrl}
-                    title={lesson.title}
-                  />
+                  <>
+                    <iframe
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="h-full w-full"
+                      onLoad={() => setPlayerReady(true)}
+                      src={lesson.videoUrl}
+                      title={lesson.title}
+                    />
+                    {isEnrolled && !lesson.watchedAt && !watchSessionStarted ? (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/45 p-6">
+                        <Button
+                          className="px-6 py-4"
+                          onClick={() => setWatchSessionStarted(true)}
+                          type="button"
+                        >
+                          {t('lesson.startWatching')}
+                        </Button>
+                      </div>
+                    ) : null}
+                  </>
                 ) : (
                   <div className="flex h-full items-center justify-center p-6">
                     <EmptyState
@@ -132,11 +180,27 @@ export function LessonPlayerPage() {
                 )}
               </div>
               <div className="flex flex-col gap-4 border-t border-white/10 p-6 sm:flex-row-reverse sm:items-center sm:justify-between">
-                <div className="text-end">
+                <div className="space-y-3 text-end">
                   <div className="text-sm text-muted tabular-nums">
                     {t('catalog.lessonNumber', { count: lesson.orderIndex })}
                   </div>
                   <h1 className="mt-2 text-4xl font-black text-balance">{lesson.title}</h1>
+                  <div className="flex flex-wrap justify-end gap-2 text-xs font-semibold">
+                    <span className="rounded-full bg-surface-low px-3 py-1 text-muted">
+                      {t('lesson.courseProgress', {
+                        watched: watchedLessonsCount,
+                        total: flattenedLessons.length,
+                      })}
+                    </span>
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-primary">
+                      {t('lesson.progressPercent', { progress: progressPercent })}
+                    </span>
+                    {lesson.watchedAt ? (
+                      <span className="rounded-full bg-success/10 px-3 py-1 text-success">
+                        {t('lesson.watched')}
+                      </span>
+                    ) : null}
+                  </div>
                 </div>
                 {nextLesson && isNextLessonAccessible ? (
                   <Link
@@ -181,6 +245,36 @@ export function LessonPlayerPage() {
               </div>
             </section>
           </div>
+
+          <aside className="rounded-[2rem] border border-white/10 bg-surface-high p-6 lg:sticky lg:top-28 lg:order-1 lg:h-[calc(100dvh-9rem)] lg:overflow-auto">
+            <div className="mb-6 space-y-3 text-end">
+              <h2 className="text-2xl font-black text-balance">
+                {t('catalog.curriculumTitle')}
+              </h2>
+              <p className="text-sm text-muted">{course.title}</p>
+            </div>
+
+            <div className="space-y-5">
+              {course.sections.map((section) => (
+                <section key={section.id}>
+                  <h3 className="mb-3 text-sm font-semibold text-muted">{section.title}</h3>
+                  <div className="space-y-2">
+                    {section.lessons.map((entry) => (
+                      <LessonListItem
+                        courseSlug={course.slug}
+                        isAccessible={entry.isFreePreview || enrollment.enrolled}
+                        isActive={entry.id === lesson.id}
+                        isEnrolled={enrollment.enrolled}
+                        key={entry.id}
+                        lesson={entry}
+                        onLockedClick={() => setLockedLessonTitle(entry.title)}
+                      />
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </aside>
         </div>
       </main>
 

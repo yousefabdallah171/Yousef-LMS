@@ -1,15 +1,16 @@
 import { Router } from 'express'
 
 import { prisma } from '../lib/prisma.js'
-import { resolveRequestUser } from '../middleware/auth.js'
+import { requireAuth, resolveRequestUser } from '../middleware/auth.js'
 
 const coursesRouter = Router()
+const lessonsRouter = Router()
 
 function serializeCourseStatus(status: 'DRAFT' | 'PUBLISHED') {
   return status.toLowerCase() as 'draft' | 'published'
 }
 
-async function getPublishedCourseBySlug(slug: string) {
+async function getPublishedCourseBySlug(slug: string, studentId?: string) {
   return prisma.course.findFirst({
     where: {
       slug,
@@ -24,6 +25,18 @@ async function getPublishedCourseBySlug(slug: string) {
           lessons: {
             orderBy: {
               orderIndex: 'asc',
+            },
+            include: {
+              lessonProgress: studentId
+                ? {
+                    where: {
+                      studentId,
+                    },
+                    select: {
+                      watchedAt: true,
+                    },
+                  }
+                : false,
             },
           },
         },
@@ -63,11 +76,40 @@ function serializeCourseDetail(
         description: lesson.description,
         orderIndex: lesson.orderIndex,
         isFreePreview: lesson.isFreePreview,
+        watchedAt: lesson.lessonProgress?.[0]?.watchedAt.toISOString() ?? null,
         videoUrl:
           lesson.isFreePreview || includeLockedVideoUrls ? lesson.videoUrl : undefined,
       })),
     })),
   }
+}
+
+function serializeLessonDetail(
+  lesson: NonNullable<
+    Awaited<ReturnType<typeof getPublishedCourseBySlug>>
+  >['sections'][number]['lessons'][number],
+) {
+  return {
+    id: lesson.id,
+    sectionId: lesson.sectionId,
+    title: lesson.title,
+    description: lesson.description,
+    orderIndex: lesson.orderIndex,
+    isFreePreview: lesson.isFreePreview,
+    watchedAt: lesson.lessonProgress?.[0]?.watchedAt.toISOString() ?? null,
+    videoUrl: lesson.videoUrl,
+  }
+}
+
+async function getEnrollment(studentId: string, courseId: string) {
+  return prisma.enrollment.findUnique({
+    where: {
+      studentId_courseId: {
+        studentId,
+        courseId,
+      },
+    },
+  })
 }
 
 coursesRouter.get('/', async (_req, res) => {
@@ -117,7 +159,7 @@ coursesRouter.get('/', async (_req, res) => {
 coursesRouter.get('/:slug/lessons/:id', async (req, res) => {
   const { slug, id } = req.params
   const currentUser = resolveRequestUser(req)
-  const course = await getPublishedCourseBySlug(slug)
+  const course = await getPublishedCourseBySlug(slug, currentUser?.id)
 
   if (!course) {
     return res.status(404).json({
@@ -137,16 +179,14 @@ coursesRouter.get('/:slug/lessons/:id', async (req, res) => {
     })
   }
 
-  const enrollment = currentUser
-    ? await prisma.enrollment.findUnique({
-        where: {
-          studentId_courseId: {
-            studentId: currentUser.id,
-            courseId: course.id,
-          },
-        },
-      })
-    : null
+  const enrollment = currentUser ? await getEnrollment(currentUser.id, course.id) : null
+
+  if (!lesson.isFreePreview && !currentUser) {
+    return res.status(401).json({
+      code: 'UNAUTHORIZED',
+      message: 'Authentication required',
+    })
+  }
 
   if (!lesson.isFreePreview && !enrollment) {
     return res.status(403).json({
@@ -159,15 +199,7 @@ coursesRouter.get('/:slug/lessons/:id', async (req, res) => {
     course: serializeCourseDetail(course, {
       includeLockedVideoUrls: Boolean(enrollment),
     }),
-    lesson: {
-      id: lesson.id,
-      sectionId: lesson.sectionId,
-      title: lesson.title,
-      description: lesson.description,
-      orderIndex: lesson.orderIndex,
-      isFreePreview: lesson.isFreePreview,
-      videoUrl: lesson.videoUrl,
-    },
+    lesson: serializeLessonDetail(lesson),
     enrollment: {
       enrolled: Boolean(enrollment),
       enrollmentId: enrollment?.id ?? null,
@@ -178,7 +210,7 @@ coursesRouter.get('/:slug/lessons/:id', async (req, res) => {
 coursesRouter.get('/:slug', async (req, res) => {
   const { slug } = req.params
   const currentUser = resolveRequestUser(req)
-  const course = await getPublishedCourseBySlug(slug)
+  const course = await getPublishedCourseBySlug(slug, currentUser?.id)
 
   if (!course) {
     return res.status(404).json({
@@ -187,16 +219,7 @@ coursesRouter.get('/:slug', async (req, res) => {
     })
   }
 
-  const enrollment = currentUser
-    ? await prisma.enrollment.findUnique({
-        where: {
-          studentId_courseId: {
-            studentId: currentUser.id,
-            courseId: course.id,
-          },
-        },
-      })
-    : null
+  const enrollment = currentUser ? await getEnrollment(currentUser.id, course.id) : null
 
   return res.status(200).json({
     course: serializeCourseDetail(course, {
@@ -209,4 +232,68 @@ coursesRouter.get('/:slug', async (req, res) => {
   })
 })
 
-export { coursesRouter }
+lessonsRouter.post('/:id/progress', requireAuth, async (req, res) => {
+  const { id } = req.params
+  const studentId = req.user!.id
+
+  if (typeof id !== 'string') {
+    return res.status(400).json({
+      code: 'VALIDATION_ERROR',
+      message: 'Lesson id is invalid',
+    })
+  }
+
+  const lesson = await prisma.lesson.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      section: {
+        select: {
+          courseId: true,
+        },
+      },
+    },
+  })
+
+  if (!lesson) {
+    return res.status(404).json({
+      code: 'LESSON_NOT_FOUND',
+      message: 'Lesson not found',
+    })
+  }
+
+  const enrollment = await getEnrollment(studentId, lesson.section.courseId)
+
+  if (!enrollment) {
+    return res.status(403).json({
+      code: 'ENROLLMENT_REQUIRED',
+      message: 'Enrollment required to access this lesson',
+    })
+  }
+
+  const progress = await prisma.lessonProgress.upsert({
+    where: {
+      studentId_lessonId: {
+        studentId,
+        lessonId: id,
+      },
+    },
+    update: {
+      watchedAt: new Date(),
+    },
+    create: {
+      studentId,
+      lessonId: id,
+    },
+  })
+
+  return res.status(200).json({
+    progress: {
+      lessonId: id,
+      watchedAt: progress.watchedAt.toISOString(),
+    },
+  })
+})
+
+export { coursesRouter, lessonsRouter }

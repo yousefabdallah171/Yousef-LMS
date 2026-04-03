@@ -8,8 +8,10 @@ type LessonListItemProps = {
     title: string
     orderIndex: number
     isFreePreview: boolean
+    watchedAt?: string | null
   }
   isAccessible: boolean
+  isEnrolled?: boolean
   isActive?: boolean
   onLockedClick?: () => void
 }
@@ -18,6 +20,7 @@ export function LessonListItem({
   courseSlug,
   lesson,
   isAccessible,
+  isEnrolled = false,
   isActive = false,
   onLockedClick,
 }: LessonListItemProps) {
@@ -50,12 +53,22 @@ export function LessonListItem({
 
       <span
         className={`rounded-full px-3 py-1 text-xs font-bold ${
-          lesson.isFreePreview
-            ? 'bg-primary/10 text-primary'
-            : 'bg-surface-highest text-muted'
+          !isAccessible
+            ? 'bg-surface-highest text-muted'
+            : lesson.watchedAt
+              ? 'bg-success/10 text-success'
+              : lesson.isFreePreview && !isEnrolled
+                ? 'bg-primary/10 text-primary'
+                : 'bg-primary/10 text-primary'
         }`}
       >
-        {lesson.isFreePreview ? t('lesson.freePreview') : t('lesson.locked')}
+        {!isAccessible
+          ? t('lesson.locked')
+          : lesson.watchedAt
+            ? t('lesson.watched')
+            : lesson.isFreePreview && !isEnrolled
+              ? t('lesson.freePreview')
+              : t('lesson.available')}
       </span>
     </>
   )

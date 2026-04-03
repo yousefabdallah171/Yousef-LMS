@@ -24,7 +24,7 @@ const seedCourseSections = [
         title: 'تطبيقات عملية في السوق',
         videoUrl: 'https://example.com/videos/market-apps',
         orderIndex: 3,
-        isFreePreview: false,
+        isFreePreview: true,
       },
     ],
   },
@@ -35,13 +35,20 @@ const seedCourseSections = [
       {
         title: 'تجهيز بيئة العمل',
         videoUrl: 'https://example.com/videos/setup',
-        orderIndex: 1,
-        isFreePreview: false,
+        orderIndex: 4,
+        isFreePreview: true,
       },
       {
         title: 'التعامل مع البيانات باستخدام NumPy',
         videoUrl: 'https://example.com/videos/numpy',
-        orderIndex: 2,
+        orderIndex: 5,
+        isFreePreview: true,
+      },
+      {
+        title:
+          '\u0628\u0646\u0627\u0621 \u0623\u0648\u0644 \u0646\u0645\u0648\u0630\u062c \u062a\u0646\u0628\u0624\u064a',
+        videoUrl: 'https://example.com/videos/first-model',
+        orderIndex: 6,
         isFreePreview: false,
       },
     ],
