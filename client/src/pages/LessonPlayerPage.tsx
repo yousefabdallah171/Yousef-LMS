@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 
+import { CommentsSection } from '../components/CommentsSection'
 import { LessonListItem } from '../components/LessonListItem'
 import { PurchaseRequiredModal } from '../components/PurchaseRequiredModal'
 import { Button } from '../components/ui/Button'
@@ -231,19 +232,7 @@ export function LessonPlayerPage() {
               </p>
             </section>
 
-            <section className="rounded-[2rem] border border-white/10 bg-surface-low p-8 text-end">
-              <div className="flex items-center justify-between gap-4">
-                <span className="rounded-full bg-surface-high px-4 py-2 text-sm tabular-nums text-muted">
-                  0
-                </span>
-                <h2 className="text-2xl font-black">{t('catalog.commentsTitle')}</h2>
-              </div>
-              <div className="mt-6 rounded-[1.5rem] border border-dashed border-white/10 bg-surface-high p-6">
-                <p className="text-sm leading-7 text-muted text-pretty">
-                  {t('catalog.commentsComingSoon')}
-                </p>
-              </div>
-            </section>
+            <CommentsSection enrolled={enrollment.enrolled} lessonId={lesson.id} />
           </div>
 
           <aside className="rounded-[2rem] border border-white/10 bg-surface-high p-6 lg:sticky lg:top-28 lg:order-1 lg:h-[calc(100dvh-9rem)] lg:overflow-auto">

@@ -234,6 +234,26 @@ export interface CreateCommentResponse {
   comment: CommentDto
 }
 
+export interface DeleteCommentResponse {
+  message: string
+}
+
+export interface AdminCommentDto {
+  id: string
+  studentName: string
+  studentEmail: string
+  courseTitle: string
+  courseSlug: string
+  lessonTitle: string
+  content: string
+  createdAt: string
+}
+
+export interface AdminCommentsResponse {
+  comments: AdminCommentDto[]
+  pagination: PaginationDto
+}
+
 export interface AdminStudentListItemDto {
   id: string
   name: string
@@ -255,9 +275,98 @@ export interface AdminStudentDetailResponse {
     joinedAt: string
     enrollments: Array<{
       courseId: string
+      courseSlug: string
       courseName: string
+      courseThumbnail: string
       enrolledAt: string
       lessonsWatched: number
     }>
   }
+}
+
+export interface AdminCourseLessonDto {
+  id: string
+  sectionId: string
+  title: string
+  videoUrl: string
+  description: string | null
+  orderIndex: number
+  isFreePreview: boolean
+  createdAt: string
+}
+
+export interface AdminCourseSectionDto {
+  id: string
+  courseId: string
+  title: string
+  orderIndex: number
+  createdAt: string
+  lessons: AdminCourseLessonDto[]
+}
+
+export interface AdminCourseListItemDto {
+  id: string
+  slug: string
+  title: string
+  description: string
+  thumbnailUrl: string
+  price: number
+  status: 'draft' | 'published'
+  sectionsCount: number
+  lessonsCount: number
+  enrollmentsCount: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface AdminCoursesResponse {
+  courses: AdminCourseListItemDto[]
+  summary: {
+    total: number
+    published: number
+    draft: number
+  }
+  pagination: PaginationDto
+}
+
+export interface AdminCourseDetailDto {
+  id: string
+  slug: string
+  title: string
+  description: string
+  thumbnailUrl: string
+  price: number
+  status: 'draft' | 'published'
+  createdAt: string
+  updatedAt: string
+  sectionsCount: number
+  lessonsCount: number
+  enrollmentsCount: number
+  sections: AdminCourseSectionDto[]
+}
+
+export interface AdminCourseDetailResponse {
+  course: AdminCourseDetailDto
+}
+
+export interface AdminCourseRequest {
+  title: string
+  description: string
+  thumbnailUrl: string
+  price: number
+}
+
+export interface AdminSectionRequest {
+  title: string
+  orderIndex: number
+}
+
+export interface AdminLessonRequest {
+  title: string
+  videoUrl: string
+  description?: string
+}
+
+export interface DeleteCourseResponse {
+  message: string
 }

@@ -36,6 +36,10 @@ test.describe('admin orders flow', () => {
 
     await detailLinks.first().click()
     await expect(page).toHaveURL(new RegExp(`${firstHref}.*$`))
-    await expect(page.locator('a[href="/admin/orders"]')).toHaveCount(1)
+    await expect(
+      page.getByRole('button', {
+        name: /العودة إلى القائمة/i,
+      }),
+    ).toBeVisible()
   })
 })
