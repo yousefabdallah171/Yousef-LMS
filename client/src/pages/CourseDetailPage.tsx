@@ -68,7 +68,7 @@ export function CourseDetailPage() {
     <>
       <main className="mx-auto max-w-7xl px-6 pb-20 pt-32 md:px-8">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_24rem]">
-          <div className="space-y-10">
+          <div className="order-2 space-y-10 lg:order-1">
             <nav className="flex flex-wrap items-center justify-end gap-2 text-sm text-muted">
               <Link className="hover:text-primary" to="/">
                 {t('nav.home')}
@@ -143,6 +143,7 @@ export function CourseDetailPage() {
                         <LessonListItem
                           courseSlug={course.slug}
                           isAccessible={lesson.isFreePreview || enrollment.enrolled}
+                          isEnrolled={enrollment.enrolled}
                           key={lesson.id}
                           lesson={lesson}
                           onLockedClick={() => setLockedLessonTitle(lesson.title)}
@@ -155,7 +156,7 @@ export function CourseDetailPage() {
             </section>
           </div>
 
-          <aside className="lg:sticky lg:top-28 lg:self-start">
+          <aside className="order-1 lg:sticky lg:top-28 lg:order-2 lg:self-start">
             <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-surface-high shadow-2xl">
               <div className="relative aspect-video overflow-hidden">
                 <img

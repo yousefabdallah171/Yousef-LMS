@@ -10,6 +10,7 @@ export type CourseLesson = {
   orderIndex: number
   isFreePreview: boolean
   videoUrl?: string
+  watchedAt?: string | null
 }
 
 export type CourseSection = {
@@ -51,7 +52,7 @@ function shouldRetryCourseRequest(failureCount: number, error: unknown) {
   const status = (error as { response?: { status?: number } } | undefined)?.response
     ?.status
 
-  if (status === 403 || status === 404) {
+  if (status === 401 || status === 403 || status === 404) {
     return false
   }
 
@@ -89,6 +90,6 @@ export function useCourseLesson(
     queryKey: ['course-lesson', slug, lessonId],
     queryFn: () => fetchLesson(slug!, lessonId!),
     enabled: Boolean(slug && lessonId),
-    retry: shouldRetryCourseRequest,
+    retry: false,
   })
 }

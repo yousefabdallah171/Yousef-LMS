@@ -69,6 +69,7 @@ export interface LessonDto {
   isFreePreview: boolean
   videoUrl?: string
   description?: string | null
+  watchedAt?: string | null
 }
 
 export interface SectionDto {
@@ -105,6 +106,13 @@ export interface CourseLessonResponse {
   enrollment: {
     enrolled: boolean
     enrollmentId: string | null
+  }
+}
+
+export interface LessonProgressResponse {
+  progress: {
+    lessonId: string
+    watchedAt: string
   }
 }
 

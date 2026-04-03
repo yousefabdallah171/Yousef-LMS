@@ -231,11 +231,16 @@
   },
   "lesson": {
     "freePreview": "مجاني",
+    "available": "متاح",
     "locked": "مقفل",
+    "watched": "تمت المشاهدة",
+    "startWatching": "ابدأ المشاهدة",
     "purchaseRequired": "الدروس المدفوعة",
     "videoError": "تعذر تحميل الفيديو أو بيانات الدرس حالياً. حاول مرة أخرى.",
     "videoRetry": "إعادة تحميل الدرس",
     "lessonDescription": "وصف الدرس",
+    "courseProgress": "{{watched}} من {{total}} درس",
+    "progressPercent": "{{progress}}% من الدورة",
     "buyNow": "الاستمرار إلى الدفع",
     "register": "إنشاء حساب",
     "login": "تسجيل الدخول"
