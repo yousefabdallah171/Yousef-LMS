@@ -35,7 +35,7 @@ services:
       context: .
       dockerfile: server/Dockerfile
       target: dev
-    command: npm run dev --workspace server
+    command: sh server/scripts/docker-dev-entrypoint.sh
     ports:
       - '3000:3000'
     environment:

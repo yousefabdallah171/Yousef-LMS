@@ -1,8 +1,96 @@
 import bcrypt from 'bcrypt'
-import { PrismaClient } from '@prisma/client'
-import { Prisma } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
+
+const seedCourseSections = [
+  {
+    title: 'مقدمة في الذكاء الاصطناعي',
+    orderIndex: 1,
+    lessons: [
+      {
+        title: 'ما هو الذكاء الاصطناعي؟',
+        videoUrl: 'https://example.com/videos/intro-ai',
+        orderIndex: 1,
+        isFreePreview: true,
+      },
+      {
+        title: 'أنواع التعلم الآلي',
+        videoUrl: 'https://example.com/videos/ml-types',
+        orderIndex: 2,
+        isFreePreview: true,
+      },
+      {
+        title: 'تطبيقات عملية في السوق',
+        videoUrl: 'https://example.com/videos/market-apps',
+        orderIndex: 3,
+        isFreePreview: false,
+      },
+    ],
+  },
+  {
+    title: 'أساسيات بايثون للذكاء الاصطناعي',
+    orderIndex: 2,
+    lessons: [
+      {
+        title: 'تجهيز بيئة العمل',
+        videoUrl: 'https://example.com/videos/setup',
+        orderIndex: 1,
+        isFreePreview: false,
+      },
+      {
+        title: 'التعامل مع البيانات باستخدام NumPy',
+        videoUrl: 'https://example.com/videos/numpy',
+        orderIndex: 2,
+        isFreePreview: false,
+      },
+    ],
+  },
+] as const
+
+async function ensureSeedCourseContent(courseId: string) {
+  for (const sectionDefinition of seedCourseSections) {
+    const section = await prisma.section.upsert({
+      where: {
+        courseId_orderIndex: {
+          courseId,
+          orderIndex: sectionDefinition.orderIndex,
+        },
+      },
+      update: {
+        title: sectionDefinition.title,
+      },
+      create: {
+        courseId,
+        title: sectionDefinition.title,
+        orderIndex: sectionDefinition.orderIndex,
+      },
+    })
+
+    for (const lessonDefinition of sectionDefinition.lessons) {
+      await prisma.lesson.upsert({
+        where: {
+          sectionId_orderIndex: {
+            sectionId: section.id,
+            orderIndex: lessonDefinition.orderIndex,
+          },
+        },
+        update: {
+          title: lessonDefinition.title,
+          videoUrl: lessonDefinition.videoUrl,
+          isFreePreview: lessonDefinition.isFreePreview,
+        },
+        create: {
+          sectionId: section.id,
+          title: lessonDefinition.title,
+          videoUrl: lessonDefinition.videoUrl,
+          orderIndex: lessonDefinition.orderIndex,
+          isFreePreview: lessonDefinition.isFreePreview,
+        },
+      })
+    }
+  }
+}
 
 async function main() {
   const passwordHash = await bcrypt.hash(
@@ -27,7 +115,7 @@ async function main() {
     },
   })
 
-  await prisma.course.upsert({
+  const course = await prisma.course.upsert({
     where: {
       slug: 'ai-ml-diploma',
     },
@@ -39,57 +127,6 @@ async function main() {
         'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
       price: new Prisma.Decimal(199),
       status: 'PUBLISHED',
-      sections: {
-        deleteMany: {},
-        create: [
-          {
-            title: 'مقدمة في الذكاء الاصطناعي',
-            orderIndex: 1,
-            lessons: {
-              create: [
-                {
-                  title: 'ما هو الذكاء الاصطناعي؟',
-                  videoUrl: 'https://example.com/videos/intro-ai',
-                  orderIndex: 1,
-                  isFreePreview: true,
-                },
-                {
-                  title: 'أنواع التعلم الآلي',
-                  videoUrl: 'https://example.com/videos/ml-types',
-                  orderIndex: 2,
-                  isFreePreview: true,
-                },
-                {
-                  title: 'تطبيقات عملية في السوق',
-                  videoUrl: 'https://example.com/videos/market-apps',
-                  orderIndex: 3,
-                  isFreePreview: false,
-                },
-              ],
-            },
-          },
-          {
-            title: 'أساسيات بايثون للذكاء الاصطناعي',
-            orderIndex: 2,
-            lessons: {
-              create: [
-                {
-                  title: 'تجهيز بيئة العمل',
-                  videoUrl: 'https://example.com/videos/setup',
-                  orderIndex: 1,
-                  isFreePreview: false,
-                },
-                {
-                  title: 'التعامل مع البيانات باستخدام NumPy',
-                  videoUrl: 'https://example.com/videos/numpy',
-                  orderIndex: 2,
-                  isFreePreview: false,
-                },
-              ],
-            },
-          },
-        ],
-      },
     },
     create: {
       slug: 'ai-ml-diploma',
@@ -100,58 +137,10 @@ async function main() {
         'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
       price: new Prisma.Decimal(199),
       status: 'PUBLISHED',
-      sections: {
-        create: [
-          {
-            title: 'مقدمة في الذكاء الاصطناعي',
-            orderIndex: 1,
-            lessons: {
-              create: [
-                {
-                  title: 'ما هو الذكاء الاصطناعي؟',
-                  videoUrl: 'https://example.com/videos/intro-ai',
-                  orderIndex: 1,
-                  isFreePreview: true,
-                },
-                {
-                  title: 'أنواع التعلم الآلي',
-                  videoUrl: 'https://example.com/videos/ml-types',
-                  orderIndex: 2,
-                  isFreePreview: true,
-                },
-                {
-                  title: 'تطبيقات عملية في السوق',
-                  videoUrl: 'https://example.com/videos/market-apps',
-                  orderIndex: 3,
-                  isFreePreview: false,
-                },
-              ],
-            },
-          },
-          {
-            title: 'أساسيات بايثون للذكاء الاصطناعي',
-            orderIndex: 2,
-            lessons: {
-              create: [
-                {
-                  title: 'تجهيز بيئة العمل',
-                  videoUrl: 'https://example.com/videos/setup',
-                  orderIndex: 1,
-                  isFreePreview: false,
-                },
-                {
-                  title: 'التعامل مع البيانات باستخدام NumPy',
-                  videoUrl: 'https://example.com/videos/numpy',
-                  orderIndex: 2,
-                  isFreePreview: false,
-                },
-              ],
-            },
-          },
-        ],
-      },
     },
   })
+
+  await ensureSeedCourseContent(course.id)
 }
 
 main()

@@ -6,6 +6,7 @@ const apiBaseURL = process.env.PLAYWRIGHT_API_URL ?? 'http://localhost:3000'
 export default defineConfig({
   testDir: './tests/e2e',
   timeout: 30_000,
+  workers: 2,
   expect: {
     timeout: 5_000,
   },

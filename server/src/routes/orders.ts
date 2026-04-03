@@ -1,15 +1,25 @@
+import { randomUUID } from 'node:crypto'
+
 import { OrderStatus, Prisma } from '@prisma/client'
 import { Router } from 'express'
 import { z } from 'zod'
 
 import { prisma } from '../lib/prisma.js'
 import { requireAdmin, requireAuth } from '../middleware/auth.js'
+import {
+  handleProofUploadErrors,
+  proofUploadMiddleware,
+  validateProofFile,
+} from '../middleware/upload.js'
 import { validate } from '../middleware/validate.js'
 import { sendApprovalEmail, sendRejectionEmail } from '../email/emailService.js'
-import { getSignedProofUrl } from '../storage/proofStorage.js'
+import { deleteProofFile, generateSignedUrl, uploadProofFile } from '../storage/r2.js'
 
 const ordersRouter = Router()
 const adminOrdersRouter = Router()
+const createOrderSchema = z.object({
+  courseId: z.string().uuid(),
+})
 const reviewSchema = z.object({
   reason: z.string().trim().max(500).optional(),
 })
@@ -45,7 +55,7 @@ async function serializeOrder(order: {
     courseId: order.courseId,
     courseName: order.course.title,
     status: toApiStatus(order.status),
-    proofUrl: await getSignedProofUrl(order.proofUrl),
+    proofUrl: await generateSignedUrl(order.proofUrl),
     rejectionReason: order.rejectionReason,
     createdAt: order.createdAt.toISOString(),
     reviewedAt: order.reviewedAt?.toISOString() ?? null,
@@ -108,6 +118,119 @@ async function getAdminOrderSummary() {
     },
   )
 }
+
+ordersRouter.post(
+  '/',
+  requireAuth,
+  (req, res, next) => proofUploadMiddleware(req, res, (error) => handleProofUploadErrors(error, req, res, next)),
+  validateProofFile,
+  async (req, res) => {
+    const parsed = createOrderSchema.safeParse(req.body)
+
+    if (!parsed.success) {
+      return res.status(422).json({
+        code: 'VALIDATION_ERROR',
+        message: 'Request validation failed',
+        details: {
+          fields: Object.fromEntries(
+            parsed.error.issues.map((issue) => [issue.path.join('.') || 'root', issue.message]),
+          ),
+        },
+      })
+    }
+
+    const { courseId } = parsed.data
+    const studentId = req.user!.id
+    const file = req.file!
+
+    const [course, pendingOrder, enrollment] = await Promise.all([
+      prisma.course.findFirst({
+        where: {
+          id: courseId,
+          status: 'PUBLISHED',
+        },
+      }),
+      prisma.order.findFirst({
+        where: {
+          studentId,
+          courseId,
+          status: 'PENDING_REVIEW',
+        },
+      }),
+      prisma.enrollment.findUnique({
+        where: {
+          studentId_courseId: {
+            studentId,
+            courseId,
+          },
+        },
+      }),
+    ])
+
+    if (!course) {
+      return res.status(404).json({
+        code: 'COURSE_NOT_FOUND',
+        message: 'Course not found or not published',
+      })
+    }
+
+    if (pendingOrder) {
+      return res.status(409).json({
+        code: 'ORDER_ALREADY_EXISTS',
+        message: 'A pending order already exists for this course',
+        details: {},
+      })
+    }
+
+    if (enrollment) {
+      return res.status(409).json({
+        code: 'ALREADY_ENROLLED',
+        message: 'You are already enrolled in this course',
+      })
+    }
+
+    const orderId = randomUUID()
+    const proofUrl = await uploadProofFile(file, orderId)
+
+    try {
+      const order = await prisma.order.create({
+        data: {
+          id: orderId,
+          studentId,
+          courseId,
+          proofUrl,
+          status: 'PENDING_REVIEW',
+        },
+      })
+
+      return res.status(201).json({
+        order: {
+          id: order.id,
+          courseId: order.courseId,
+          status: toApiStatus(order.status),
+          createdAt: order.createdAt.toISOString(),
+        },
+      })
+    } catch (error) {
+      await deleteProofFile(proofUrl).catch(() => {
+        // Ignore cleanup failures here and surface the original write error.
+      })
+
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        return res.status(409).json({
+          code: 'ORDER_ALREADY_EXISTS',
+          message: 'A pending order already exists for this course',
+          details: {},
+        })
+      }
+
+      throw error
+    }
+  },
+)
 
 ordersRouter.get('/my', requireAuth, async (req, res) => {
   const orders = await prisma.order.findMany({

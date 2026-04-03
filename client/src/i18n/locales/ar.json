@@ -209,7 +209,18 @@
   },
   "dashboard": {
     "title": "لوحة التحكم",
-    "subtitle": "مسار لوحة الطالب محمي وجاهز لربط بيانات التسجيلات والطلبات."
+    "subtitle": "تابع طلباتك وحالة التفعيل من مكان واحد داخل المنصة.",
+    "myOrders": "طلباتي",
+    "ordersSubtitle": "تظهر هنا جميع طلبات الدفع وحالة مراجعتها.",
+    "totalOrders": "إجمالي الطلبات",
+    "noOrders": "لا توجد طلبات حتى الآن",
+    "noOrdersDescription": "ابدأ شراء أول دورة وسيظهر طلب الدفع هنا مباشرة.",
+    "pendingStatus": "قيد المراجعة",
+    "approvedStatus": "مقبول",
+    "rejectedStatus": "مرفوض",
+    "rejectionReason": "سبب الرفض",
+    "orderDate": "تاريخ الطلب",
+    "loadError": "تعذر تحميل بيانات الطلبات حالياً. حاول مرة أخرى."
   },
   "lesson": {
     "freePreview": "مجاني",
@@ -303,6 +314,73 @@
     "ordersSubtitle": "مسار مراجعة الطلبات محمي وجاهز لتنفيذ سير العمل.",
     "studentsSubtitle": "مسار قائمة الطلاب محمي وجاهز لربط البيانات.",
     "commentsSubtitle": "مسار الإشراف على التعليقات محمي وجاهز لعمليات الإدارة."
+  },
+  "payment": {
+    "paymentInstructions": "إرشادات الدفع",
+    "instructionsDescription": "يرجى اتباع الخطوات التالية لإتمام عملية الشراء ورفع إثبات الدفع بنجاح.",
+    "bankDetails": "اسم البنك",
+    "bankValue": "البنك التجاري الدولي (CIB)",
+    "mobileWalletDetails": "رقم المحفظة / الحساب",
+    "walletValue": "100045982312",
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "secureTransferTitle": "بيانات التحويل الآمنة",
+    "subscriptionFeatures": "مميزات الاشتراك",
+    "securedTransferBadge": "تشفير بيانات بنسبة 100%",
+    "uploadProof": "رفع إثبات الدفع",
+    "uploadProofTitle": "تأكيد عملية الدفع",
+    "uploadProofDescription": "يرجى رفع لقطة شاشة أو ملف PDF يوضح نجاح عملية التحويل.",
+    "uploadButton": "اختيار الملف",
+    "submitOrder": "إرسال الطلب",
+    "submitting": "يتم الرفع...",
+    "dragAndDrop": "اسحب الملف هنا أو اضغط للاختيار",
+    "uploadFormats": "JPG, PNG, PDF (الحد الأقصى 5 ميجابايت)",
+    "fileTooLarge": "حجم الملف يتجاوز الحد الأقصى المسموح وهو 5 ميجابايت.",
+    "invalidFileType": "يسمح فقط بملفات JPG وPNG وPDF.",
+    "proofRequired": "يرجى اختيار ملف إثبات الدفع أولاً.",
+    "orderSubmitted": "تم إرسال الطلب بنجاح",
+    "orderSubmittedDescription": "تم حفظ طلبك بحالة قيد المراجعة وسيظهر الآن داخل لوحة التحكم.",
+    "pendingOrderExists": "لديك طلب قيد المراجعة لهذه الدورة بالفعل.",
+    "pendingOrderDescription": "يراجع فريق العمل إثبات الدفع الحالي. لا تحتاج إلى رفع ملف جديد الآن.",
+    "pendingReview": "قيد المراجعة",
+    "approvedStatus": "تم التفعيل",
+    "alreadyEnrolled": "أنت مسجل في هذه الدورة بالفعل.",
+    "alreadyEnrolledDescription": "تم تفعيل اشتراكك مسبقاً ويمكنك متابعة التعلم من لوحة التحكم أو صفحة الدورة.",
+    "awaitingProof": "بانتظار الإيصال",
+    "manualReviewNotice": "يتم التحقق من عملية الدفع يدوياً. ستصلك رسالة تأكيد عبر البريد الإلكتروني فور تفعيل الدورة خلال 24 ساعة.",
+    "reviewTimeNotice": "تستغرق عملية المراجعة اليدوية للطلب ما بين 12 إلى 24 ساعة عمل.",
+    "progressLabel": "{{progress}}% مكتمل",
+    "backToCourse": "العودة إلى الدورة",
+    "backToInstructions": "العودة إلى التعليمات",
+    "cartStep": "سلة المشتريات",
+    "paymentStep": "الدفع",
+    "uploadStepTitle": "رفع إيصال الدفع",
+    "loadError": "تعذر تحميل بيانات الدفع حالياً. حاول مرة أخرى.",
+    "courseNotFoundTitle": "تعذر العثور على الدورة",
+    "courseNotFoundDescription": "ربما لم تعد هذه الدورة منشورة أو أن الرابط غير صالح.",
+    "steps": {
+      "transferStep": {
+        "title": "تحويل المبلغ",
+        "description": "قم بتحويل قيمة الدورة عبر الحساب البنكي أو المحفظة الإلكترونية."
+      },
+      "receiptStep": {
+        "title": "تصوير الإيصال",
+        "description": "التقط صورة واضحة أو جهز ملف PDF يوضح نجاح عملية التحويل."
+      },
+      "uploadStep": {
+        "title": "رفع إثبات الدفع",
+        "description": "انتقل إلى خطوة الرفع وأرسل الملف لمراجعته من فريق العمل."
+      },
+      "activationStep": {
+        "title": "تفعيل الاشتراك",
+        "description": "سيتم تفعيل الاشتراك خلال 24 ساعة كحد أقصى بعد مراجعة الطلب."
+      }
+    },
+    "features": {
+      "lifetime": "وصول مدى الحياة للمحتوى",
+      "certificate": "شهادة إتمام معتمدة",
+      "resources": "تحميل جميع الملفات والموارد"
+    }
   },
   "errors": {
     "notFound": "الصفحة غير موجودة",
