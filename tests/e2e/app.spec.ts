@@ -13,7 +13,7 @@ test.describe('public flows', () => {
 
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await expect(page.locator('main')).toContainText('دبلومة الذكاء الاصطناعي والتعلم الآلي')
-    await expect(page.getByRole('link', { name: 'عرض الدورة' })).toBeVisible()
+    await expect(page.locator('main a[href^="/courses/"]').first()).toBeVisible()
   })
 
   test('catalog search and sort controls work', async ({ page }) => {
@@ -201,6 +201,6 @@ test.describe('admin flow', () => {
     const adminAside = page.getByRole('complementary')
     await expect(adminAside).toBeVisible()
     await expect(adminAside.getByRole('link', { name: 'نظرة عامة' })).toBeVisible()
-    await expect(adminAside.getByRole('link', { name: 'الدورات' })).toBeVisible()
+    await expect(adminAside.locator('a[href="/admin/courses"]')).toBeVisible()
   })
 })

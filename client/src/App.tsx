@@ -4,7 +4,12 @@ import { useTranslation } from 'react-i18next'
 import './App.css'
 import { AdminRoute } from './components/AdminRoute'
 import { AdminOrderDetailPage } from './pages/AdminOrderDetailPage'
+import { AdminCommentsPage } from './pages/AdminCommentsPage'
+import { AdminCourseEditorPage } from './pages/AdminCourseEditorPage'
+import { AdminCoursesPage } from './pages/AdminCoursesPage'
 import { AdminOrdersPage } from './pages/AdminOrdersPage'
+import { AdminStudentDetailPage } from './pages/AdminStudentDetailPage'
+import { AdminStudentsPage } from './pages/AdminStudentsPage'
 import { CourseCatalogPage } from './pages/CourseCatalogPage'
 import { CourseDetailPage } from './pages/CourseDetailPage'
 import { DashboardPage } from './pages/DashboardPage'
@@ -113,10 +118,10 @@ function App() {
           <Route path="/payment/:courseId" element={<PaymentInstructionsPage />} />
           <Route path="/payment/:courseId/proof" element={<PaymentProofUploadPage />} />
         </Route>
-        <Route element={<AdminRoute />}>
+        <Route element={<AdminRoute />} path="/admin">
           <Route element={<AdminChrome />}>
             <Route
-              path="/admin"
+              index
               element={
                 <PlaceholderPage
                   route="/admin"
@@ -127,50 +132,14 @@ function App() {
                 />
               }
             />
-            <Route
-              path="/admin/courses"
-              element={
-                <PlaceholderPage
-                  route="/admin/courses"
-                  subtitle={t('admin.coursesSubtitle')}
-                  title={t('admin.courses.title')}
-                  status={t('placeholder.statusAdminRoute')}
-                  tone="success"
-                />
-              }
-            />
-            <Route
-              path="/admin/orders"
-              element={<AdminOrdersPage />}
-            />
-            <Route
-              path="/admin/orders/:id"
-              element={<AdminOrderDetailPage />}
-            />
-            <Route
-              path="/admin/students"
-              element={
-                <PlaceholderPage
-                  route="/admin/students"
-                  subtitle={t('admin.studentsSubtitle')}
-                  title={t('admin.students')}
-                  status={t('placeholder.statusAdminRoute')}
-                  tone="success"
-                />
-              }
-            />
-            <Route
-              path="/admin/comments"
-              element={
-                <PlaceholderPage
-                  route="/admin/comments"
-                  subtitle={t('admin.commentsSubtitle')}
-                  title={t('admin.comments')}
-                  status={t('placeholder.statusAdminRoute')}
-                  tone="success"
-                />
-              }
-            />
+            <Route path="courses" element={<AdminCoursesPage />} />
+            <Route path="courses/new" element={<AdminCourseEditorPage />} />
+            <Route path="courses/:id/edit" element={<AdminCourseEditorPage />} />
+            <Route path="orders" element={<AdminOrdersPage />} />
+            <Route path="orders/:id" element={<AdminOrderDetailPage />} />
+            <Route path="students" element={<AdminStudentsPage />} />
+            <Route path="students/:id" element={<AdminStudentDetailPage />} />
+            <Route path="comments" element={<AdminCommentsPage />} />
           </Route>
         </Route>
         <Route path="/404" element={<NotFoundPlaceholder />} />
