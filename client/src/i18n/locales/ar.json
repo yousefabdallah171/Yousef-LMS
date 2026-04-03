@@ -210,6 +210,12 @@
   "dashboard": {
     "title": "لوحة التحكم",
     "subtitle": "تابع طلباتك وحالة التفعيل من مكان واحد داخل المنصة.",
+    "myCourses": "دوراتي",
+    "coursesSubtitle": "كل الدورات التي تم تفعيلها لك تظهر هنا مع رابط متابعة التعلم.",
+    "continueLearning": "متابعة التعلم",
+    "completedLessons": "الدروس المكتملة",
+    "noEnrollments": "لم تنضم إلى أي دورة بعد",
+    "noEnrollmentsDescription": "ابدأ من مكتبة الدورات واختر الدورة المناسبة لتظهر هنا فور تفعيلها.",
     "myOrders": "طلباتي",
     "ordersSubtitle": "تظهر هنا جميع طلبات الدفع وحالة مراجعتها.",
     "totalOrders": "إجمالي الطلبات",
@@ -219,6 +225,7 @@
     "approvedStatus": "مقبول",
     "rejectedStatus": "مرفوض",
     "rejectionReason": "سبب الرفض",
+    "resubmitProof": "إعادة إرسال الإثبات",
     "orderDate": "تاريخ الطلب",
     "loadError": "تعذر تحميل بيانات الطلبات حالياً. حاول مرة أخرى."
   },

@@ -65,7 +65,18 @@ function getLocalProofUrl(relativePath: string) {
 }
 
 function getProofSigningSecret() {
-  return process.env.PROOF_URL_SECRET?.trim() || process.env.JWT_SECRET?.trim() || 'local-proof-secret'
+  const proofSecret = process.env.PROOF_URL_SECRET?.trim() || process.env.JWT_SECRET?.trim()
+
+  if (!proofSecret) {
+    throw new Error('Missing proof signing secret')
+  }
+
+  return proofSecret
+}
+
+function getSafeContentDispositionFilename(filename: string) {
+  const normalizedFilename = path.basename(filename).replace(/[\r\n"]/g, '_').replace(/[\\]/g, '_')
+  return normalizedFilename || 'proof'
 }
 
 function signLocalProofPath(relativePath: string, expiresAt: string) {
@@ -135,7 +146,7 @@ export async function uploadProofFile(file: UploadableProofFile, orderId: string
       Key: objectKey,
       Body: file.buffer,
       ContentType: file.mimetype,
-      ContentDisposition: `inline; filename="${file.originalname}"`,
+      ContentDisposition: `inline; filename="${getSafeContentDispositionFilename(file.originalname)}"`,
     }),
   )
 

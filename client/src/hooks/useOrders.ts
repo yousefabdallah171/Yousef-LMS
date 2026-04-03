@@ -55,9 +55,6 @@ export function useCreateOrder() {
       formData.append('proofFile', proofFile)
 
       const response = await apiClient.post<CreateOrderResponse>('/orders', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
         onUploadProgress: (event) => {
           if (!onProgress || !event.total) {
             return

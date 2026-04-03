@@ -136,12 +136,14 @@ export interface StudentOrdersResponse {
 export interface EnrollmentDto {
   id: string
   courseId: string
+  courseSlug: string
   courseName: string
   courseThumbnail: string
   price: number
   enrolledAt: string
   lessonsCount: number
   lessonsWatched: number
+  continueLessonId: string | null
 }
 
 export interface EnrollmentResponse {
